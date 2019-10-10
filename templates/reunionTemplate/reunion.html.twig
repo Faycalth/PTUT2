@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %} <link rel="stylesheet" href="historiqueReunion.css">{% endblock %}
+
+{% block body %}
+
+
+<section class ="articles">
+        <h1>Historique de vos réunions</h1>
+    {% for reunion in reunions %}
+        <article>
+            <h2>{{ reunion.titre }}</h2>
+                <div class="metadata">Ecrit le {{ reunion.createAt | date('d/m/Y') }} à {{ reunion.createAt | date('H:i') }}</div>
+                <div class="content">
+                    <a href="{{ path('reunion_show', {'id': reunion.id }) }}" class="btn btn-primary">Lire la suite</a>
+                </div>
+        <article>
+    {% endfor %}
+
+</section>
+
+<section>
+<article>
+    <div class="content">
+    <br>
+        <a href="{{ path('Ajout_reunion') }}" class="btn btn-primary">Ajouter une réunion</a>
+    </div>
+</article>
+</section>
+
+{% endblock %}

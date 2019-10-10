@@ -3,10 +3,50 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.css">
         {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">MyPTUT</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="navbar-nav mr-auto">
+                        
+                        {% if not app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login')}}">Etudiant</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login')}}">Professeur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login')}}">Admin</a>
+                        </li>
+
+                        {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('myproject')}}">Mon Projet</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="">Mes Réunions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_logout')}}">Déconnexion</a>
+                        </li>
+
+
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
