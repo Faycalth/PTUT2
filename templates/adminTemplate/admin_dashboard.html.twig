@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <div class="jumbotron text-center">
+        <h1>Le dashboard de l'administrateur</h1>
+    </div>
+    
+
+    <hr style = "border: 10px solid white;">
+
+        <div class="row">
+            <div class="col-md-4"><a href="{{ path('admin_liste_etudiant') }}" class="btn btn-primary">Liste des étudiants</a></div>
+            <div class="col-md-4"><a href="{{ path('admin_liste_tuteur') }}" class="btn btn-primary">Liste des tuteurs</a></div>
+            <div class="col-md-4"><a href="{{ path('admin_liste_groupe') }}" class="btn btn-primary">Liste des groupes</a></div>
+        </div>
+
+    <hr style = "border: 10px solid white;">
+
+</div>
+
+{% endblock %}

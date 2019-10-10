@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container mt-4">
+
+    <div class="jumbotron text-center">
+        <h1>Modifier un tuteur</h1>
+    </div>
+
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-4">{{ form_row(form.username) }}</div>
+            <div class="col-md-4">{{ form_row(form.email) }}</div>
+            <div class="col-md-4">{{ form_row(form.password) }}</div>
+
+        </div>
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Editer</button>
+        
+    {{ form_end(form) }}
+
+
+</div>
+
+{% endblock %}

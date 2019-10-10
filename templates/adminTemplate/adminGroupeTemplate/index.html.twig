@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title 'La liste des groupes' %}
+
+{% block body %}
+    <div class="container mt-4">
+
+    <div class="jumbotron text-center">
+        <h1> La liste des groupes</h1>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class = "alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        {% for groupes in groupe %}
+            <tr>
+                <td> {{ groupes.sujet }} </td>
+                <td> 
+                    <a href="{{ path('admin_edit_groupe', {id: groupes.id}) }}" class="btn btn-secondary">Editer</a>
+                    
+                    <form method="post" action =" {{ path ('admin_delete_groupe', {id: groupes.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un groupe !')">
+                        <input type = "hidden" name = "_method" value = "DELETE">
+                        <input type = "hidden" name = "_token" value = "{{ csrf_token('delete' ~ groupes.id) }}">
+                        <button class = "btn btn-danger"> Supprimer </button>
+                    </form>
+
+                </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+        <div class = "text-right">
+            <a href = "{{ path('fos_user_registration_register') }}" class="btn btn-primary" > Créer un groupe </a>
+        </div>
+
+    </div>
+    
+{% endblock %}

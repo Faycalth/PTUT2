@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les étudiants' %}
+
+{% block body %}
+    <div class="container mt-4">
+
+    <div class="jumbotron text-center">
+        <h1>Gérer les étudiants</h1>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class = "alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Groupe</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        {% for etudiant in etudiants %}
+            <tr>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.email }}</td>
+                <td>{{ etudiant.groupe }}</td>
+                <td> 
+                    <a href="{{ path('admin_edit_etudiant', {id: etudiant.id}) }}" class="btn btn-secondary">Editer</a>
+                    
+                    <form method="post" action =" {{ path ('admin_delete_etudiant', {id: etudiant.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un étudiant !')">
+                        <input type = "hidden" name = "_method" value = "DELETE">
+                        <input type = "hidden" name = "_token" value = "{{ csrf_token('delete' ~ etudiant.id) }}">
+                        <button class = "btn btn-danger"> Supprimer </button>
+                    </form>
+
+                </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+        <div class = "text-right">
+            <a href = "{{ path('fos_user_registration_register') }}" class="btn btn-primary" >Créer un étudiant </a>
+        </div>
+
+    </div>
+    
+{% endblock %}
