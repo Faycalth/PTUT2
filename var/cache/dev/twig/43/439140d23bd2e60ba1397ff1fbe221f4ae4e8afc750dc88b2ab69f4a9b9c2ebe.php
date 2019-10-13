@@ -66,7 +66,8 @@ class __TwigTemplate_b93d75538a4454f6781cf6b025cd85d75d341f56355afbf140ee447b354
 
         // line 4
         echo "
-<h1>Bienvenue sur la page d'accueil</h1>
+
+<h1>Bienvenue sur MyPTUT</h1>
 
 ";
         
@@ -98,7 +99,8 @@ class __TwigTemplate_b93d75538a4454f6781cf6b025cd85d75d341f56355afbf140ee447b354
 
 {% block body %}
 
-<h1>Bienvenue sur la page d'accueil</h1>
+
+<h1>Bienvenue sur MyPTUT</h1>
 
 {% endblock %}", "accueilTemplate/home.html.twig", "C:\\wamp64\\www\\PTUT2\\templates\\accueilTemplate\\home.html.twig");
     }

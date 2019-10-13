@@ -176,7 +176,7 @@ class __TwigTemplate_3fe046e3aae3d907f156cdb41e7b5ff6c4ed15130d0a9b8385e00880be6
         <div class = \"text-right\">
             <a href = \"";
         // line 51
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_inscription_etudiant");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_registration_register");
         echo "\" class=\"btn btn-primary\" >Créer un étudiant </a>
         </div>
 
@@ -258,7 +258,7 @@ class __TwigTemplate_3fe046e3aae3d907f156cdb41e7b5ff6c4ed15130d0a9b8385e00880be6
         </table>
 
         <div class = \"text-right\">
-            <a href = \"{{ path('admin_inscription_etudiant') }}\" class=\"btn btn-primary\" >Créer un étudiant </a>
+            <a href = \"{{ path('fos_user_registration_register') }}\" class=\"btn btn-primary\" >Créer un étudiant </a>
         </div>
 
     </div>

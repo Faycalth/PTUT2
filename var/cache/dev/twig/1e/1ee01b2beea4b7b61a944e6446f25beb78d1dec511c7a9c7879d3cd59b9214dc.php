@@ -69,6 +69,34 @@ class __TwigTemplate_58a71d750253bd1c7b901887c66eaa835c4ad523c5f3c267b31dab4e396
 <h1>Bienvenue sur la page groupe</h1>
 
 ";
+        // line 7
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 7, $this->source); })()), 'form_start');
+        echo "
+    <div class=\"form-group\">
+       ";
+        // line 9
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), "sujet", [], "any", false, false, false, 9), 'row', ["label" => "sujet"]);
+        echo "
+    </div>
+  
+    <div class=\"form-group\">
+       ";
+        // line 13
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), "professeur_id", [], "any", false, false, false, 13), 'row', ["label" => "Professeur"]);
+        echo "
+    </div>
+  
+
+        <button type=\"submit\" class=\"btn btn-success\">Creer</button>
+
+   
+     ";
+        // line 20
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_end');
+        echo "
+   
+
+";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -89,7 +117,7 @@ class __TwigTemplate_58a71d750253bd1c7b901887c66eaa835c4ad523c5f3c267b31dab4e396
 
     public function getDebugInfo()
     {
-        return array (  68 => 4,  58 => 3,  35 => 1,);
+        return array (  95 => 20,  85 => 13,  78 => 9,  73 => 7,  68 => 4,  58 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -99,6 +127,22 @@ class __TwigTemplate_58a71d750253bd1c7b901887c66eaa835c4ad523c5f3c267b31dab4e396
 {% block body %}
 
 <h1>Bienvenue sur la page groupe</h1>
+
+{{ form_start(form) }}
+    <div class=\"form-group\">
+       {{ form_row(form.sujet, {'label':'sujet'}) }}
+    </div>
+  
+    <div class=\"form-group\">
+       {{ form_row(form.professeur_id, {'label':'Professeur'}) }}
+    </div>
+  
+
+        <button type=\"submit\" class=\"btn btn-success\">Creer</button>
+
+   
+     {{ form_end(form) }}
+   
 
 {% endblock %}", "groupeTemplate/groupe_home.html.twig", "C:\\wamp64\\www\\PTUT2\\templates\\groupeTemplate\\groupe_home.html.twig");
     }

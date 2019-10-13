@@ -79,46 +79,81 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_security_login");
             echo "\">Connexion</a>
                         </li>
-
                         ";
         } else {
+            // line 25
+            echo "                        <li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"";
             // line 26
-            echo "                        <li class=\"nav-item active\">
-                            <a class=\"nav-link\" href=\"";
-            // line 27
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("monprojet");
-            echo "\">Mon Projet</a>
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("notification");
+            echo "\">Notification</a>
                         </li>
-                        <li class=\"nav-item active\">
-                            <a class=\"nav-link\" href=\"";
-            // line 30
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
-            echo "\">Mes Réunions</a>
-                        </li>
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"";
-            // line 33
+                            ";
+            // line 28
+            if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+                // line 29
+                echo "                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 30
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_promotion");
+                echo "\">Promote</a>
+                                </li>
+                            ";
+            } elseif ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ETUDIANT")) {
+                // line 33
+                echo "                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 34
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("monprojet");
+                echo "\">Mon Projet</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 37
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
+                echo "\">Mes Réunions</a>
+                                </li>
+                            ";
+            } elseif ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_TUTEUR")) {
+                // line 40
+                echo "                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 41
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mesgroupes");
+                echo "\">Mes groupes</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 44
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
+                echo "\">Mes Réunions</a>
+                                </li>
+                            ";
+            }
+            // line 47
+            echo "                            
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"";
+            // line 49
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_security_logout");
             echo "\">Déconnexion</a>
-                        </li>
-
-
+                            </li>
                         ";
         }
-        // line 38
+        // line 52
         echo "                    </ul>
                 </div>
             </nav>
         <div class=\"container\">
         ";
-        // line 42
+        // line 56
         $this->displayBlock('body', $context, $blocks);
-        // line 43
+        // line 57
         echo "        </div>
         ";
-        // line 44
+        // line 58
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 45
+        // line 59
         echo "    </body>
 </html>
 ";
@@ -167,7 +202,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     }
 
-    // line 42
+    // line 56
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -185,7 +220,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     }
 
-    // line 44
+    // line 58
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -215,7 +250,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     public function getDebugInfo()
     {
-        return array (  189 => 44,  171 => 42,  153 => 7,  134 => 5,  122 => 45,  120 => 44,  117 => 43,  115 => 42,  109 => 38,  101 => 33,  95 => 30,  89 => 27,  86 => 26,  79 => 22,  76 => 21,  74 => 20,  60 => 8,  58 => 7,  53 => 5,  47 => 1,);
+        return array (  224 => 58,  206 => 56,  188 => 7,  169 => 5,  157 => 59,  155 => 58,  152 => 57,  150 => 56,  144 => 52,  138 => 49,  134 => 47,  128 => 44,  122 => 41,  119 => 40,  113 => 37,  107 => 34,  104 => 33,  98 => 30,  95 => 29,  93 => 28,  88 => 26,  85 => 25,  79 => 22,  76 => 21,  74 => 20,  60 => 8,  58 => 7,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -243,19 +278,33 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"{{ path('fos_user_security_login')}}\">Connexion</a>
                         </li>
-
                         {% else %}
-                        <li class=\"nav-item active\">
-                            <a class=\"nav-link\" href=\"{{ path('monprojet')}}\">Mon Projet</a>
-                        </li>
-                        <li class=\"nav-item active\">
-                            <a class=\"nav-link\" href=\"{{ path('reunion_historique')}}\">Mes Réunions</a>
-                        </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"{{ path('fos_user_security_logout')}}\">Déconnexion</a>
+                            <a class=\"nav-link\" href=\"{{ path('notification')}}\">Notification</a>
                         </li>
-
-
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('admin_promotion')}}\">Promote</a>
+                                </li>
+                            {% elseif is_granted('ROLE_ETUDIANT') %}
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('monprojet')}}\">Mon Projet</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('reunion_historique')}}\">Mes Réunions</a>
+                                </li>
+                            {% elseif is_granted('ROLE_TUTEUR') %}
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('mesgroupes')}}\">Mes groupes</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('reunion_historique')}}\">Mes Réunions</a>
+                                </li>
+                            {% endif %}
+                            
+                            <li class=\"nav-item\">
+                                <a class=\"nav-link\" href=\"{{ path('fos_user_security_logout')}}\">Déconnexion</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>

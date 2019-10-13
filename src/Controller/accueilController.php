@@ -17,4 +17,12 @@ class accueilController extends AbstractController
         return $this->render('accueilTemplate/home.html.twig');
     }
 
+    /**
+    * @Route("/notification", name="notification")
+    */
+    public function notification()
+    {
+        return $this->render('accueilTemplate/notification.html.twig');
+    }
+
 }

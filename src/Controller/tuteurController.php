@@ -19,4 +19,12 @@ class tuteurController extends AbstractController
         return $this->render('tuteurTemplate/tuteur_home.html.twig');
     }
 
+    /**
+    * @Route("/tuteur/mesgroupes", name="mesgroupes")
+    */
+    public function mesgroupes()
+    {
+        return $this->render('tuteurTemplate/tuteur_mesgroupes.html.twig');
+    }
+
 }

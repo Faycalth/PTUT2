@@ -21,19 +21,33 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('fos_user_security_login')}}">Connexion</a>
                         </li>
-
                         {% else %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('fos_user_security_logout')}}">Déconnexion</a>
+                            <a class="nav-link" href="{{ path('notification')}}">Notification</a>
                         </li>
-
-
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('admin_promotion')}}">Promote</a>
+                                </li>
+                            {% elseif is_granted('ROLE_ETUDIANT') %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
+                                </li>
+                            {% elseif is_granted('ROLE_TUTEUR') %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('mesgroupes')}}">Mes groupes</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
+                                </li>
+                            {% endif %}
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('fos_user_security_logout')}}">Déconnexion</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>

@@ -26,6 +26,29 @@ class adminController extends AbstractController
     }
 
     /**
+    * @Route("/admin/promotion", name="admin_promotion")
+    */
+    public function promotion(){
+        $etudiants = $this->etudiant_repository->findAll();
+        return $this->render('adminTemplate/admin_promotion.html.twig', compact('etudiants'));
+    } 
+
+    /**
+    * @Route("/admin/promotionAction", name="promotionAction")
+    */
+    public function promotionAction(Etudiant $etudiant){
+
+        $user = $etudiant;
+    
+        $userManager = $this->get('fos_user.user_manager');    
+        $user->addRole('ROLE_TUTEUR');
+        $userManager->updateUser($user);
+    
+        return $this->render('adminTemplate/admin_promotion.html.twig');
+    } 
+    
+
+    /**
      * @var EtudiantRepository;
      */
     private $repository;
