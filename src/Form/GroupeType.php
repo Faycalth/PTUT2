@@ -3,10 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Groupe;
+use App\Entity\Professeur;
+use App\Form\TuteurType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class GroupeType extends AbstractType
@@ -15,7 +19,10 @@ class GroupeType extends AbstractType
     {
         $builder
             ->add('sujet')
-            ->add('profeseur_id')
+            ->add('professeur_id',EntityType::class,[
+                'class'=> Professeur::class,
+                'choice_label'=> 'username'
+            ])
         ;
     }
 

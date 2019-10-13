@@ -29,7 +29,7 @@ return [
     'admin_delete_groupe' => [['id'], ['_controller' => 'App\\Controller\\adminController::delete_groupe'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/admin/groupe']], [], []],
     'etudiant_home' => [[], ['_controller' => 'App\\Controller\\etudiantController::home'], [], [['text', '/etudiant/home']], [], []],
     'myproject' => [[], ['_controller' => 'App\\Controller\\etudiantController::myproject'], [], [['text', '/myproject']], [], []],
-    'groupe_home' => [[], ['_controller' => 'App\\Controller\\groupeController::home'], [], [['text', '/groupe/home']], [], []],
+    'groupe_creation' => [[], ['_controller' => 'App\\Controller\\groupeController::creation'], [], [['text', '/groupe/creation']], [], []],
     'monprojet' => [[], ['_controller' => 'App\\Controller\\reunionController::myproject'], [], [['text', '/monprojet']], [], []],
     'reunion_historique' => [[], ['_controller' => 'App\\Controller\\reunionController::reunion'], [], [['text', '/reunion_historique']], [], []],
     'Ajout_reunion' => [[], ['_controller' => 'App\\Controller\\reunionController::ajoutReunion'], [], [['text', '/reunion_ajoutReunion']], [], []],

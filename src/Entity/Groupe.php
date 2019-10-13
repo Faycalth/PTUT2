@@ -96,12 +96,12 @@ class Groupe
         return $this;
     }
 
-    public function getProfesseur(): ?Professeur
+    public function getProfesseurId(): ?Professeur
     {
         return $this->professeur;
     }
 
-    public function setProfesseur(?Professeur $professeur): self
+    public function setProfesseurId(?Professeur $professeur): self
     {
         $this->professeur = $professeur;
 
