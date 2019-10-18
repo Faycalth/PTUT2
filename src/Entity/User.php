@@ -19,9 +19,48 @@
              */
             protected $id;
 
+            /**
+             * @ORM\Column(type="string")
+             */
+            protected $nom;
+
+            /**
+             * @ORM\Column(type="string")
+             */
+            protected $prenom;
+
             public function __construct()
             {
                 parent::__construct();
                 // your own logic
+            }
+
+            public function getId(): ?int
+            {
+                return $this->id;
+            }
+
+            public function getNom(): ?string
+            {
+                return $this->nom;
+            }
+
+            public function setNom(string $nom): self
+            {
+                $this->nom = $nom;
+
+                return $this;
+            }
+
+            public function getPrenom(): ?string
+            {
+                return $this->prenom;
+            }
+
+            public function setPrenom(string $prenom): self
+            {
+                $this->prenom = $prenom;
+
+                return $this;
             }
         }

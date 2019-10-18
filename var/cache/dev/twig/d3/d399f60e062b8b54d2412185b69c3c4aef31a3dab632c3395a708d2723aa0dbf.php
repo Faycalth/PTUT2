@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* FOSUserBundle:Security:login_content.html.twig */
+/* @FOSUser/Security/login_content.html.twig */
 class __TwigTemplate_cfef481be132ec54399efd32af1f161e48d60639a1f9e8bb5c8a43d3899e8951 extends \Twig\Template
 {
     private $source;
@@ -34,10 +34,10 @@ class __TwigTemplate_cfef481be132ec54399efd32af1f161e48d60639a1f9e8bb5c8a43d3899
     {
         $macros = $this->macros;
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "FOSUserBundle:Security:login_content.html.twig"));
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@FOSUser/Security/login_content.html.twig"));
 
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "FOSUserBundle:Security:login_content.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@FOSUser/Security/login_content.html.twig"));
 
         // line 2
         echo "
@@ -92,8 +92,7 @@ class __TwigTemplate_cfef481be132ec54399efd32af1f161e48d60639a1f9e8bb5c8a43d3899
         // line 21
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("security.login.submit", [], "FOSUserBundle"), "html", null, true);
         echo "\" />
-</form>
-";
+</form>";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
@@ -104,7 +103,7 @@ class __TwigTemplate_cfef481be132ec54399efd32af1f161e48d60639a1f9e8bb5c8a43d3899
 
     public function getTemplateName()
     {
-        return "FOSUserBundle:Security:login_content.html.twig";
+        return "@FOSUser/Security/login_content.html.twig";
     }
 
     public function isTraitable()
@@ -140,7 +139,6 @@ class __TwigTemplate_cfef481be132ec54399efd32af1f161e48d60639a1f9e8bb5c8a43d3899
     <label for=\"remember_me\">{{ 'security.login.remember_me'|trans }}</label>
 
     <input type=\"submit\" id=\"_submit\" name=\"_submit\" value=\"{{ 'security.login.submit'|trans }}\" />
-</form>
-", "FOSUserBundle:Security:login_content.html.twig", "C:\\wamp64\\www\\PTUT2\\vendor\\friendsofsymfony\\user-bundle\\Resources\\views\\Security\\login_content.html.twig");
+</form>", "@FOSUser/Security/login_content.html.twig", "C:\\wamp64\\www\\PTUT2\\vendor\\friendsofsymfony\\user-bundle\\Resources\\views\\Security\\login_content.html.twig");
     }
 }

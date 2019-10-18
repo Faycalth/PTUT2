@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* FrameworkBundle:Form:form_label.html.php */
+/* @Framework/Form/form_label.html.php */
 class __TwigTemplate_d4348ea94d341c8425cbd99a34682337667c0983837e225e32e2c1e55dc1dff1 extends \Twig\Template
 {
     private $source;
@@ -34,10 +34,10 @@ class __TwigTemplate_d4348ea94d341c8425cbd99a34682337667c0983837e225e32e2c1e55dc
     {
         $macros = $this->macros;
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "FrameworkBundle:Form:form_label.html.php"));
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Framework/Form/form_label.html.php"));
 
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "FrameworkBundle:Form:form_label.html.php"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Framework/Form/form_label.html.php"));
 
         // line 1
         echo "<?php if (false !== \$label): ?>
@@ -59,7 +59,7 @@ class __TwigTemplate_d4348ea94d341c8425cbd99a34682337667c0983837e225e32e2c1e55dc
 
     public function getTemplateName()
     {
-        return "FrameworkBundle:Form:form_label.html.php";
+        return "@Framework/Form/form_label.html.php";
     }
 
     public function getDebugInfo()
@@ -77,6 +77,6 @@ class __TwigTemplate_d4348ea94d341c8425cbd99a34682337667c0983837e225e32e2c1e55dc
     : \$view['form']->humanize(\$name); } ?>
 <label<?php if (\$label_attr) { echo ' '.\$view['form']->block(\$form, 'attributes', ['attr' => \$label_attr]); } ?>><?php echo \$view->escape(false !== \$translation_domain ? \$view['translator']->trans(\$label, \$label_translation_parameters, \$translation_domain) : \$label) ?></label>
 <?php endif ?>
-", "FrameworkBundle:Form:form_label.html.php", "C:\\wamp64\\www\\PTUT2\\vendor\\symfony\\framework-bundle\\Resources\\views\\Form\\form_label.html.php");
+", "@Framework/Form/form_label.html.php", "C:\\wamp64\\www\\PTUT2\\vendor\\symfony\\framework-bundle\\Resources\\views\\Form\\form_label.html.php");
     }
 }

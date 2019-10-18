@@ -162,7 +162,7 @@ class __TwigTemplate_fbb82a74709b25c41c9516187c8c20b0997b6236e30a294e2b3d8316abe
         <div class = \"text-right\">
             <a href = \"";
         // line 46
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("register");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_registration_register");
         echo "\" class=\"btn btn-primary\" > Créer un groupe </a>
         </div>
 
@@ -239,7 +239,7 @@ class __TwigTemplate_fbb82a74709b25c41c9516187c8c20b0997b6236e30a294e2b3d8316abe
         </table>
 
         <div class = \"text-right\">
-            <a href = \"{{ path('register') }}\" class=\"btn btn-primary\" > Créer un groupe </a>
+            <a href = \"{{ path('fos_user_registration_register') }}\" class=\"btn btn-primary\" > Créer un groupe </a>
         </div>
 
     </div>

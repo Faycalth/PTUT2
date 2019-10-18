@@ -106,7 +106,7 @@ abstract class User implements UserInterface, GroupableInterface
     public function __construct()
     {
         $this->enabled = false;
-        $this->roles = array();
+        $this->roles = ['ROLE_USER'];
     }
 
     /**
@@ -493,12 +493,17 @@ abstract class User implements UserInterface, GroupableInterface
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
-
-        foreach ($roles as $role) {
-            $this->addRole($role);
+        if (!in_array('ROLE_USER', $roles))
+        {
+            $roles[] = 'ROLE_USER';
         }
-
+        foreach ($roles as $role)
+        {
+            if(substr($role, 0, 5) !== 'ROLE_') {
+                throw new InvalidArgumentException("Chaque rôle doit commencer par 'ROLE_'");
+            }
+        }
+        $this->roles = $roles;
         return $this;
     }
 

@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* WebProfilerBundle:Collector:time.html.twig */
+/* @WebProfiler/Collector/time.html.twig */
 class __TwigTemplate_4a7f88b66c4a547362411da9d850f98ca775bd6ec8b092e6eceac83d7ea11903 extends \Twig\Template
 {
     private $source;
@@ -42,17 +42,17 @@ class __TwigTemplate_4a7f88b66c4a547362411da9d850f98ca775bd6ec8b092e6eceac83d7ea
     {
         $macros = $this->macros;
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "WebProfilerBundle:Collector:time.html.twig"));
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/time.html.twig"));
 
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "WebProfilerBundle:Collector:time.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/time.html.twig"));
 
         // line 3
         $macros["helper"] = $this->macros["helper"] = $this;
         // line 5
         $context["classnames"] = ["default" => "timeline-category-default", "section" => "timeline-category-section", "event_listener" => "timeline-category-event-listener", "template" => "timeline-category-template", "doctrine" => "timeline-category-doctrine", "messenger.middleware" => "timeline-category-messenger-middleware", "controller.argument_value_resolver" => "timeline-category-controller-argument-value-resolver"];
         // line 1
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "WebProfilerBundle:Collector:time.html.twig", 1);
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/time.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -421,13 +421,13 @@ class __TwigTemplate_4a7f88b66c4a547362411da9d850f98ca775bd6ec8b092e6eceac83d7ea
 <style type=\"text/css\">
 ";
         // line 157
-        $this->loadTemplate("@WebProfiler/Collector/time.css.twig", "WebProfilerBundle:Collector:time.html.twig", 157)->display(twig_array_merge($context, (isset($context["classnames"]) || array_key_exists("classnames", $context) ? $context["classnames"] : (function () { throw new RuntimeError('Variable "classnames" does not exist.', 157, $this->source); })())));
+        $this->loadTemplate("@WebProfiler/Collector/time.css.twig", "@WebProfiler/Collector/time.html.twig", 157)->display(twig_array_merge($context, (isset($context["classnames"]) || array_key_exists("classnames", $context) ? $context["classnames"] : (function () { throw new RuntimeError('Variable "classnames" does not exist.', 157, $this->source); })())));
         // line 158
         echo "</style>
 <script>
 ";
         // line 160
-        $this->loadTemplate("@WebProfiler/Collector/time.js", "WebProfilerBundle:Collector:time.html.twig", 160)->display($context);
+        $this->loadTemplate("@WebProfiler/Collector/time.js", "@WebProfiler/Collector/time.html.twig", 160)->display($context);
         // line 161
         echo "</script>
 ";
@@ -673,7 +673,7 @@ class __TwigTemplate_4a7f88b66c4a547362411da9d850f98ca775bd6ec8b092e6eceac83d7ea
 
     public function getTemplateName()
     {
-        return "WebProfilerBundle:Collector:time.html.twig";
+        return "@WebProfiler/Collector/time.html.twig";
     }
 
     public function isTraitable()
@@ -909,6 +909,6 @@ class __TwigTemplate_4a7f88b66c4a547362411da9d850f98ca775bd6ec8b092e6eceac83d7ea
         {% endautoescape %}</script>
     </div>
 {% endmacro %}
-", "WebProfilerBundle:Collector:time.html.twig", "C:\\wamp64\\www\\PTUT2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
+", "@WebProfiler/Collector/time.html.twig", "C:\\wamp64\\www\\PTUT2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
     }
 }
