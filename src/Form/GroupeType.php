@@ -18,6 +18,7 @@ class GroupeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nom')
             ->add('sujet')
             ->add('professeur_id',EntityType::class,[
                 'class'=> Professeur::class,

@@ -21,6 +21,11 @@ class Groupe
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $sujet;
 
     /**
@@ -147,6 +152,18 @@ class Groupe
     public function setProfesseur(?Professeur $professeur): self
     {
         $this->professeur = $professeur;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
