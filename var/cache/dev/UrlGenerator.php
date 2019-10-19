@@ -33,6 +33,7 @@ return [
     'etudiant_home' => [[], ['_controller' => 'App\\Controller\\etudiantController::home'], [], [['text', '/etudiant/home']], [], []],
     'myproject' => [[], ['_controller' => 'App\\Controller\\etudiantController::myproject'], [], [['text', '/myproject']], [], []],
     'groupe_creation' => [[], ['_controller' => 'App\\Controller\\groupeController::creation'], [], [['text', '/groupe/creation']], [], []],
+    'groupe_liste' => [[], ['_controller' => 'App\\Controller\\groupeController::listeGroupe'], [], [['text', '/groupe/liste']], [], []],
     'monprojet' => [[], ['_controller' => 'App\\Controller\\reunionController::myproject'], [], [['text', '/monprojet']], [], []],
     'reunion_historique' => [[], ['_controller' => 'App\\Controller\\reunionController::reunion'], [], [['text', '/reunion_historique']], [], []],
     'Ajout_reunion' => [[], ['_controller' => 'App\\Controller\\reunionController::ajoutReunion'], [], [['text', '/reunion_ajoutReunion']], [], []],

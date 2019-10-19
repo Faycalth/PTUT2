@@ -25,6 +25,7 @@ return [
         '/etudiant/home' => [[['_route' => 'etudiant_home', '_controller' => 'App\\Controller\\etudiantController::home'], null, null, null, false, false, null]],
         '/myproject' => [[['_route' => 'myproject', '_controller' => 'App\\Controller\\etudiantController::myproject'], null, null, null, false, false, null]],
         '/groupe/creation' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\groupeController::creation'], null, null, null, false, false, null]],
+        '/groupe/liste' => [[['_route' => 'groupe_liste', '_controller' => 'App\\Controller\\groupeController::listeGroupe'], null, null, null, false, false, null]],
         '/monprojet' => [[['_route' => 'monprojet', '_controller' => 'App\\Controller\\reunionController::myproject'], null, null, null, false, false, null]],
         '/reunion_historique' => [[['_route' => 'reunion_historique', '_controller' => 'App\\Controller\\reunionController::reunion'], null, null, null, false, false, null]],
         '/reunion_ajoutReunion' => [[['_route' => 'Ajout_reunion', '_controller' => 'App\\Controller\\reunionController::ajoutReunion'], null, null, null, false, false, null]],

@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les étudiants' %}
+
+{% block body %}
+    <div class="container mt-4">
+
+    <div class="jumbotron text-center">
+        <h1>Rejoindre un groupe</h1>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Sujet</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        {% for groupe in groupes %}
+            <tr>
+                <td>{{ id.groupe }}</td>
+                <td>{{ sujet.groupe }}</td>
+                <td> 
+                    <a href="" class="btn btn-secondary">Rejoindre</a>
+                </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+        <div class = "text-right">
+            <a href = "{{ path('groupe_creation') }}" class="btn btn-primary" >Créer son propre groupe</a>
+        </div>
+
+    </div>
+    
+{% endblock %}
