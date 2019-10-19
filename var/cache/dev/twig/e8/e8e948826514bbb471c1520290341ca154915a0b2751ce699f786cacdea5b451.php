@@ -104,8 +104,8 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
                 echo "                                <li class=\"nav-item active\">
                                     <a class=\"nav-link\" href=\"";
                 // line 34
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("monprojet");
-                echo "\">Mon Projet</a>
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("groupe_liste");
+                echo "\">Rejoindre</a>
                                 </li>
                                 <li class=\"nav-item active\">
                                     <a class=\"nav-link\" href=\"";
@@ -113,47 +113,59 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
                 echo "\">Mes Réunions</a>
                                 </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 40
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("monprojet");
+                echo "\">Mon Projet</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"";
+                // line 43
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
+                echo "\">Mes Réunions</a>
+                                </li>
                             ";
             } elseif ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_TUTEUR")) {
-                // line 40
+                // line 46
                 echo "                                <li class=\"nav-item active\">
                                     <a class=\"nav-link\" href=\"";
-                // line 41
+                // line 47
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mesgroupes");
                 echo "\">Mes groupes</a>
                                 </li>
                                 <li class=\"nav-item active\">
                                     <a class=\"nav-link\" href=\"";
-                // line 44
+                // line 50
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("reunion_historique");
                 echo "\">Mes Réunions</a>
                                 </li>
                             ";
             }
-            // line 47
+            // line 53
             echo "                            
                             <li class=\"nav-item\">
                                 <a class=\"nav-link\" href=\"";
-            // line 49
+            // line 55
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_user_security_logout");
             echo "\">Déconnexion</a>
                             </li>
                         ";
         }
-        // line 52
+        // line 58
         echo "                    </ul>
                 </div>
             </nav>
         <div class=\"container\">
         ";
-        // line 56
+        // line 62
         $this->displayBlock('body', $context, $blocks);
-        // line 57
+        // line 63
         echo "        </div>
         ";
-        // line 58
+        // line 64
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 59
+        // line 65
         echo "    </body>
 </html>
 ";
@@ -202,7 +214,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     }
 
-    // line 56
+    // line 62
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -220,7 +232,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     }
 
-    // line 58
+    // line 64
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -250,7 +262,7 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
 
     public function getDebugInfo()
     {
-        return array (  224 => 58,  206 => 56,  188 => 7,  169 => 5,  157 => 59,  155 => 58,  152 => 57,  150 => 56,  144 => 52,  138 => 49,  134 => 47,  128 => 44,  122 => 41,  119 => 40,  113 => 37,  107 => 34,  104 => 33,  98 => 30,  95 => 29,  93 => 28,  88 => 26,  85 => 25,  79 => 22,  76 => 21,  74 => 20,  60 => 8,  58 => 7,  53 => 5,  47 => 1,);
+        return array (  236 => 64,  218 => 62,  200 => 7,  181 => 5,  169 => 65,  167 => 64,  164 => 63,  162 => 62,  156 => 58,  150 => 55,  146 => 53,  140 => 50,  134 => 47,  131 => 46,  125 => 43,  119 => 40,  113 => 37,  107 => 34,  104 => 33,  98 => 30,  95 => 29,  93 => 28,  88 => 26,  85 => 25,  79 => 22,  76 => 21,  74 => 20,  60 => 8,  58 => 7,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -287,6 +299,12 @@ class __TwigTemplate_715889c2b910890dff123952dc5fc0782b8dff4fa39be090fc5ba3ba1e2
                                     <a class=\"nav-link\" href=\"{{ path('admin_promotion')}}\">Promote</a>
                                 </li>
                             {% elseif is_granted('ROLE_ETUDIANT') %}
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('groupe_liste')}}\">Rejoindre</a>
+                                </li>
+                                <li class=\"nav-item active\">
+                                    <a class=\"nav-link\" href=\"{{ path('reunion_historique')}}\">Mes Réunions</a>
+                                </li>
                                 <li class=\"nav-item active\">
                                     <a class=\"nav-link\" href=\"{{ path('monprojet')}}\">Mon Projet</a>
                                 </li>

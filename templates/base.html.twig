@@ -31,6 +31,12 @@
                                 </li>
                             {% elseif is_granted('ROLE_ETUDIANT') %}
                                 <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
+                                </li>
+                                <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
                                 </li>
                                 <li class="nav-item active">

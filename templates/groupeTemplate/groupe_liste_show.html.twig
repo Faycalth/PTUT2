@@ -12,6 +12,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Numero</th>
             <th>Nom</th>
             <th>Sujet</th>
         </tr>
@@ -20,8 +21,9 @@
         
         {% for groupe in groupes %}
             <tr>
-                <td>{{ id.groupe }}</td>
-                <td>{{ sujet.groupe }}</td>
+                <td>{{ groupe.id }}</td>
+                <td>{{ groupe.nom }}</td>
+                <td>{{ groupe.sujet }}</td>
                 <td> 
                     <a href="" class="btn btn-secondary">Rejoindre</a>
                 </td>
