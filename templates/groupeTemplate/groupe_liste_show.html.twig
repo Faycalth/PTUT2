@@ -1,3 +1,5 @@
+
+
 {% extends "base.html.twig" %}
 
 {% block title 'Gérer les étudiants' %}
@@ -21,11 +23,10 @@
         
         {% for groupe in groupes %}
             <tr>
-                <td>{{ groupe.id }}</td>
                 <td>{{ groupe.nom }}</td>
                 <td>{{ groupe.sujet }}</td>
                 <td> 
-                    <a href="" class="btn btn-secondary">Rejoindre</a>
+                    <a href="{{ path('groupe_rejoindre', {'id':groupe.id} ) }}" class="btn btn-secondary">Rejoindre</a>
                 </td>
                 </tr>
         {% endfor %}

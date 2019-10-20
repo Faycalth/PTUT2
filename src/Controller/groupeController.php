@@ -20,8 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class groupeController extends AbstractController
 {
 
-
-    /**
+   /**
     * @Route("/groupe/creation", name="groupe_creation")
     */
     public function creation(Request $request, ObjectManager $manager,EtudiantRepository $repository)
@@ -37,7 +36,8 @@ class groupeController extends AbstractController
             $idapp=$user->getId();
             $repository = $this->getDoctrine()->getRepository(Etudiant::class);
             $etudiant = $repository->find($idapp);
-
+            
+            $groupe->addEtudiant($etudiant);
             $etudiant->setGroupe($groupe);
             $manager->persist($groupe);
             $manager->flush();
@@ -70,5 +70,27 @@ class groupeController extends AbstractController
         $groupes = $this->groupe_repository->findAll();
         return $this->render('groupeTemplate/groupe_liste_show.html.twig', compact('groupes'));
     }
+
+    /**
+     * @route("/groupe/rejoindre/{id}", name="groupe_rejoindre")
+     */
+     public function rejoindreGroupe(Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager)
+     {
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $etudiant = $repository->find($idapp);
+        
+        $groupe->addEtudiant($etudiant);
+        $etudiant->setGroupe($groupe);
+        $manager->persist($groupe);
+        $manager->flush();
+
+        return $this->render('accueilTemplate/home.html.twig');
+     }
+
+
 
 }

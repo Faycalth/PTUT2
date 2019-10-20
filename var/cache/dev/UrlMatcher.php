@@ -72,13 +72,14 @@ return [
                         .'|(*:250)'
                     .')'
                 .')'
+                .'|/groupe/rejoindre/([^/]++)(*:286)'
                 .'|/re(?'
                     .'|union/(?'
-                        .'|([^/]++)(*:283)'
-                        .'|taches(*:297)'
+                        .'|([^/]++)(*:317)'
+                        .'|taches(*:331)'
                     .')'
-                    .'|gister/confirm/([^/]++)(*:329)'
-                    .'|setting/reset/([^/]++)(*:359)'
+                    .'|gister/confirm/([^/]++)(*:363)'
+                    .'|setting/reset/([^/]++)(*:393)'
                 .')'
             .')/?$}sDu',
     ],
@@ -102,10 +103,11 @@ return [
             [['_route' => 'admin_edit_groupe', '_controller' => 'App\\Controller\\adminController::edit_groupe'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [['_route' => 'admin_delete_groupe', '_controller' => 'App\\Controller\\adminController::delete_groupe'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        283 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        297 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        329 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        359 => [
+        286 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['id'], null, null, false, true, null]],
+        317 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        331 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
+        363 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        393 => [
             [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
