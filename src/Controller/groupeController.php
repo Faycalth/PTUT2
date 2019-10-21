@@ -65,14 +65,14 @@ class groupeController extends AbstractController
     /**
      * @Route("/groupe/liste", name="groupe_liste")
      */
-    public function listeGroupe()
+    public function listeGroupe(GroupeRepository $groupe_repository)
     {
-        $groupes = $this->groupe_repository->findAll();
+        $groupes = $groupe_repository->findAll();
         return $this->render('groupeTemplate/groupe_liste_show.html.twig', compact('groupes'));
     }
 
     /**
-     * @route("/groupe/rejoindre/{id}", name="groupe_rejoindre")
+     * @route("/groupe/rejoindre/{nom}", name="groupe_rejoindre")
      */
      public function rejoindreGroupe(Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager)
      {

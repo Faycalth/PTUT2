@@ -2532,14 +2532,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.exception</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
@@ -5755,6 +5747,12 @@
         <argument key="repository" type="service" id="App\Repository\EtudiantRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.j4N6oGJ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="groupe_repository" type="service" id="App\Repository\GroupeRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.C.X7GiZ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5782,7 +5780,7 @@
         <argument key="reunion" type="service" id=".errored..service_locator.ltb0tYQ.App\Entity\Reunion"/>
       </argument>
     </service>
-    <service id=".service_locator.V4cWpUb" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.q2DmEf7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\adminController::delete_etudiant" type="service" id=".service_locator.ddtE.O9"/>
@@ -5793,6 +5791,7 @@
         <argument key="App\Controller\adminController::edit_tuteur" type="service" id=".service_locator.p_ki21R"/>
         <argument key="App\Controller\adminController::promotionAction" type="service" id=".service_locator.ddtE.O9"/>
         <argument key="App\Controller\groupeController::creation" type="service" id=".service_locator.F8hr6V6"/>
+        <argument key="App\Controller\groupeController::listeGroupe" type="service" id=".service_locator.j4N6oGJ"/>
         <argument key="App\Controller\groupeController::rejoindreGroupe" type="service" id=".service_locator.C.X7GiZ"/>
         <argument key="App\Controller\reunionController::ajoutReunion" type="service" id=".service_locator.Txvqv4R"/>
         <argument key="App\Controller\reunionController::reunion" type="service" id=".service_locator.3iyKRwz"/>
@@ -5805,6 +5804,7 @@
         <argument key="App\Controller\adminController:edit_tuteur" type="service" id=".service_locator.p_ki21R"/>
         <argument key="App\Controller\adminController:promotionAction" type="service" id=".service_locator.ddtE.O9"/>
         <argument key="App\Controller\groupeController:creation" type="service" id=".service_locator.F8hr6V6"/>
+        <argument key="App\Controller\groupeController:listeGroupe" type="service" id=".service_locator.j4N6oGJ"/>
         <argument key="App\Controller\groupeController:rejoindreGroupe" type="service" id=".service_locator.C.X7GiZ"/>
         <argument key="App\Controller\reunionController:ajoutReunion" type="service" id=".service_locator.Txvqv4R"/>
         <argument key="App\Controller\reunionController:reunion" type="service" id=".service_locator.3iyKRwz"/>
@@ -6243,12 +6243,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.V4cWpUb"/>
+      <argument type="service" id=".service_locator.q2DmEf7"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.V4cWpUb"/>
+      <argument type="service" id=".service_locator.q2DmEf7"/>
     </service>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6658,7 +6658,7 @@
     <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
     <service id="fos_user.mailer" alias="fos_user.mailer.default"/>
     <service id="fos_user.session" alias="session" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.V4cWpUb"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.q2DmEf7"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>

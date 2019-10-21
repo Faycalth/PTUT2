@@ -1,5 +1,6 @@
 
 
+
 {% extends "base.html.twig" %}
 
 {% block title 'Gérer les étudiants' %}
@@ -14,7 +15,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Numero</th>
+  
             <th>Nom</th>
             <th>Sujet</th>
         </tr>
@@ -26,11 +27,13 @@
                 <td>{{ groupe.nom }}</td>
                 <td>{{ groupe.sujet }}</td>
                 <td> 
-                    <a href="{{ path('groupe_rejoindre', {'id':groupe.id} ) }}" class="btn btn-secondary">Rejoindre</a>
+                    <a href="{{ path('groupe_rejoindre', {'nom':groupe.nom} ) }}" class="btn btn-secondary">Rejoindre</a>
                 </td>
                 </tr>
+               
         {% endfor %}
         </tbody>
+
         </table>
 
         <div class = "text-right">
