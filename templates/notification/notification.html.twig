@@ -19,8 +19,8 @@
           {% if notif.type=="Demande" %}
                 <tr>
                     <td>{{notif.nom_source_etudiant}} veut rejoindre votre groupe</td>
-                    <td> <a href="{{ path('accepter_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-success">Accepter</a> 
-                     <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; ">Refuser</a> </td>
+                    <td> <a href="{{ path('accepter_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-success"  onclick="if(!confirm('Voulez vous accepter cette demande ?' )) { return false; }">Accepter</a> 
+                     <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
  
                 </tr>
 
