@@ -43,10 +43,22 @@ class Groupe
      */
     private $reunions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="source_groupe")
+     */
+    private $source_groupe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="dest_groupe")
+     */
+    private $dest_groupe;
+
     public function __construct()
     {
         $this->etudiant = new ArrayCollection();
         $this->reunions = new ArrayCollection();
+        $this->source_groupe = new ArrayCollection();
+        $this->dest_groupe = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +176,68 @@ class Groupe
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getSourceGroupe(): Collection
+    {
+        return $this->source_groupe;
+    }
+
+    public function addSourceGroupe(Notification $sourceGroupe): self
+    {
+        if (!$this->source_groupe->contains($sourceGroupe)) {
+            $this->source_groupe[] = $sourceGroupe;
+            $sourceGroupe->setSourceGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSourceGroupe(Notification $sourceGroupe): self
+    {
+        if ($this->source_groupe->contains($sourceGroupe)) {
+            $this->source_groupe->removeElement($sourceGroupe);
+            // set the owning side to null (unless already changed)
+            if ($sourceGroupe->getSourceGroupe() === $this) {
+                $sourceGroupe->setSourceGroupe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getDestGroupe(): Collection
+    {
+        return $this->dest_groupe;
+    }
+
+    public function addDestGroupe(Notification $destGroupe): self
+    {
+        if (!$this->dest_groupe->contains($destGroupe)) {
+            $this->dest_groupe[] = $destGroupe;
+            $destGroupe->setDestGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDestGroupe(Notification $destGroupe): self
+    {
+        if ($this->dest_groupe->contains($destGroupe)) {
+            $this->dest_groupe->removeElement($destGroupe);
+            // set the owning side to null (unless already changed)
+            if ($destGroupe->getDestGroupe() === $this) {
+                $destGroupe->setDestGroupe(null);
+            }
+        }
 
         return $this;
     }

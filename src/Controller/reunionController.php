@@ -2,6 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Etudiant;
+use App\Entity\Groupe;
+use App\Form\GroupeType;
+use App\Entity\Professeur;
+use App\Repository\EtudiantRepository;
+use App\Repository\GroupeRepository;
+use App\Repository\ProfesseurRepository;
+use App\Form\InviterEtudiantType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +24,36 @@ class reunionController extends AbstractController
     /**
      * @Route("/monprojet", name="monprojet")
      */
-    public function myproject()
-    {
-        return $this->render('reunionTemplate/myproject.html.twig');
+    public function myproject(Request $request, EtudiantRepository $etu_repository,ObjectManager $manager)
+    { 
+        
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $etu_repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $etudiant = $etu_repository->find($idapp);
+        
+        $etu_groupe=$etudiant->getGroupe();
+        
+        $conn =$manager->getConnection();
+
+        $sql = '
+            SELECT * FROM Etudiant etu
+            WHERE etu.groupe_id=:etu_groupe 
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['etu_groupe' => $etu_groupe]);
+
+        $etudiants =$stmt->fetchAll();
+
+        
+  
+
+
+
+        return $this->render('reunionTemplate/myproject.html.twig',compact('etudiants')
+    );
     }
 
 

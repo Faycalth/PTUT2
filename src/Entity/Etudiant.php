@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,6 +50,22 @@ class Etudiant implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Groupe", inversedBy="etudiant")
      */
     private $groupe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="source_etudiant")
+     */
+    private $source_etudiant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="dest_etudiant")
+     */
+    private $dest_etudiant;
+
+    public function __construct()
+    {
+        $this->source_etudiant = new ArrayCollection();
+        $this->dest_etudiant = new ArrayCollection();
+    }
 
     public function getUsername(){}
 
@@ -122,5 +140,67 @@ class Etudiant implements UserInterface
 
     public function getRoles(){
             return ['ROLE_USER'];
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getSourceEtudiant(): Collection
+    {
+        return $this->source_etudiant;
+    }
+
+    public function addSourceEtudiant(Notification $sourceEtudiant): self
+    {
+        if (!$this->source_etudiant->contains($sourceEtudiant)) {
+            $this->source_etudiant[] = $sourceEtudiant;
+            $sourceEtudiant->setSourceEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSourceEtudiant(Notification $sourceEtudiant): self
+    {
+        if ($this->source_etudiant->contains($sourceEtudiant)) {
+            $this->source_etudiant->removeElement($sourceEtudiant);
+            // set the owning side to null (unless already changed)
+            if ($sourceEtudiant->getSourceEtudiant() === $this) {
+                $sourceEtudiant->setSourceEtudiant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getDestEtudiant(): Collection
+    {
+        return $this->dest_etudiant;
+    }
+
+    public function addDestEtudiant(Notification $destEtudiant): self
+    {
+        if (!$this->dest_etudiant->contains($destEtudiant)) {
+            $this->dest_etudiant[] = $destEtudiant;
+            $destEtudiant->setDestEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDestEtudiant(Notification $destEtudiant): self
+    {
+        if ($this->dest_etudiant->contains($destEtudiant)) {
+            $this->dest_etudiant->removeElement($destEtudiant);
+            // set the owning side to null (unless already changed)
+            if ($destEtudiant->getDestEtudiant() === $this) {
+                $destEtudiant->setDestEtudiant(null);
+            }
+        }
+
+        return $this;
     }
 }

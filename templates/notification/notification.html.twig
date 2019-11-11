@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}   
+   
+    <div class="jumbotron text-center">
+        <h1>Vos notifications</h1>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Messages</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        {% for notif in notification %}
+          
+          {% if notif.type=="Demande" %}
+                <tr>
+                    <td>{{notif.nom_source_etudiant}} veut rejoindre votre groupe</td>
+                    <td> <a href="{{ path('accepter_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-success">Accepter</a> 
+                     <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; ">Refuser</a> </td>
+ 
+                </tr>
+
+          {% elseif notif.type=="Accepter"%}
+                 <tr>
+                    <td colspan=1>Le groupe {{notif.nom_groupe}} a accepté ta demande </td>
+                     <td> <a href="#" class="btn btn-secondary">X</a> 
+                </tr>
+          {% elseif notif.type=="Refuser"%}
+                <tr>
+                    <td colspan=2 style="color:red">Le groupe {{notif.nom_groupe}} a refusé ta demande </td>
+                </tr>
+
+
+          {% endif %}
+           
+               
+        {% endfor %}
+
+        </tbody>
+        </table>
+
+    
+     
+
+    </div>
+    
+{% endblock %}

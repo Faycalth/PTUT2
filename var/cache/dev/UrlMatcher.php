@@ -13,8 +13,8 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/notification' => [[['_route' => 'notification', '_controller' => 'App\\Controller\\NotificationController::notification'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\accueilController::home'], null, null, null, false, false, null]],
-        '/notification' => [[['_route' => 'notification', '_controller' => 'App\\Controller\\accueilController::notification'], null, null, null, false, false, null]],
         '/admin/home' => [[['_route' => 'admin_home', '_controller' => 'App\\Controller\\adminController::home'], null, null, null, false, false, null]],
         '/admin/promotion' => [[['_route' => 'admin_promotion', '_controller' => 'App\\Controller\\adminController::promotion'], null, null, null, false, false, null]],
         '/admin/promotionAction' => [[['_route' => 'promotionAction', '_controller' => 'App\\Controller\\adminController::promotionAction'], null, null, null, false, false, null]],
@@ -72,14 +72,20 @@ return [
                         .'|(*:250)'
                     .')'
                 .')'
-                .'|/groupe/rejoindre/([^/]++)(*:286)'
+                .'|/groupe/(?'
+                    .'|re(?'
+                        .'|joindre/([^/]++)(*:292)'
+                        .'|fuser/([^/]++)/([^/]++)(*:323)'
+                    .')'
+                    .'|accepter/([^/]++)/([^/]++)(*:358)'
+                .')'
                 .'|/re(?'
                     .'|union/(?'
-                        .'|([^/]++)(*:317)'
-                        .'|taches(*:331)'
+                        .'|([^/]++)(*:390)'
+                        .'|taches(*:404)'
                     .')'
-                    .'|gister/confirm/([^/]++)(*:363)'
-                    .'|setting/reset/([^/]++)(*:393)'
+                    .'|gister/confirm/([^/]++)(*:436)'
+                    .'|setting/reset/([^/]++)(*:466)'
                 .')'
             .')/?$}sDu',
     ],
@@ -103,11 +109,13 @@ return [
             [['_route' => 'admin_edit_groupe', '_controller' => 'App\\Controller\\adminController::edit_groupe'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [['_route' => 'admin_delete_groupe', '_controller' => 'App\\Controller\\adminController::delete_groupe'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        286 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
-        317 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        331 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        363 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        393 => [
+        292 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
+        323 => [[['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\groupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
+        358 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\groupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
+        390 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        404 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
+        436 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        466 => [
             [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

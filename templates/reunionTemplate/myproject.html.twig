@@ -5,6 +5,43 @@
 {% block stylesheets %} <link rel="stylesheet" href="myproject.css">{% endblock %}
 
 {% block body %}
+<div> hello boy </div>
+
+<div class="col-md-3" >
+ 
+ <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1">Liste des étudiants</a>
+ 
+ <div id="collapse1" class="panel-collapse collapse">
+ {% for etudiant in etudiants %}
+        <div class="panel-body">{{etudiant.prenom}} {{etudiant.nom}}</div>
+    
+  {% endfor %}
+  </div>
+
+</div>
+
+<div class="col-md-3" >
+ 
+  <a  class="btn btn-primary" data-toggle="collapse" href="#collapse2">Inviter un etudiant</a> 
+ 
+ <div id="collapse2" class="panel-collapse collapse">
+
+        
+    
+ 
+  </div>
+
+</div>
+
+
+
+<div class="text-right" >
+  <a class="btn btn-danger"> Quitter le groupe  </a>
+
+</div>
+
+
+
 <div class="table">
   <h2 class="heading">
     À faire

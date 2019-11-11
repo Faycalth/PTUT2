@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html style="font-size:100%">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}MyPTUT{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         {% block stylesheets %}{% endblock %}
     </head>
 
@@ -32,9 +35,6 @@
                             {% elseif is_granted('ROLE_ETUDIANT') %}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
