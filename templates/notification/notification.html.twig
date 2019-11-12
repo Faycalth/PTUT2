@@ -21,17 +21,24 @@
                     <td>{{notif.nom_source_etudiant}} veut rejoindre votre groupe</td>
                     <td> <a href="{{ path('accepter_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-success"  onclick="if(!confirm('Voulez vous accepter cette demande ?' )) { return false; }">Accepter</a> 
                      <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_etudiant', {'id':notif.source_etudiant_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
+                     
  
                 </tr>
 
           {% elseif notif.type=="Accepter"%}
                  <tr>
-                    <td colspan=1>Le groupe {{notif.nom_groupe}} a accepté ta demande </td>
-                     <td> <a href="#" class="btn btn-secondary">X</a> 
+                    <td colspan=2>Le groupe {{notif.nom_groupe}} a accepté ta demande </td>
+                     <td> <a href={{ path('remove_notification', {'id':notif.id} ) }} class="btn btn-secondary">X</a> 
                 </tr>
           {% elseif notif.type=="Refuser"%}
                 <tr>
                     <td colspan=2 style="color:red">Le groupe {{notif.nom_groupe}} a refusé ta demande </td>
+                    <td> <a href={{ path('remove_notification', {'id':notif.id} ) }} class="btn btn-secondary">X</a>
+                </tr>
+          {% elseif notif.type=="Quitter"%}
+                <tr>
+                    <td colspan=2 style="color:red">{{notif.nom_source_etudiant }} a quitté le groupe </td>
+                    <td> <a href={{ path('remove_notification', {'id':notif.id} ) }} class="btn btn-secondary">X</a>
                 </tr>
 
 

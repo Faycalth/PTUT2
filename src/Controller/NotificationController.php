@@ -48,4 +48,32 @@ class NotificationController extends AbstractController
        $notification =$stmt->fetchAll();
         return $this->render('notification/notification.html.twig',compact('notification'));
     }
+
+     /**
+     * @Route("/notification/remove/{id}", name="remove_notification")
+     */
+    public function removeNotif($id,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    {
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $user = $repository->find($idapp);
+        $groupe=$user->getGroupe();
+        
+       
+
+       $not_repository = $this->getDoctrine()->getRepository(Notification::class);
+       $notifsup = $not_repository->find($id);
+       
+       $manager->remove($notifsup);        
+       
+      
+        $manager->flush();
+
+        return $this->redirectToRoute('notification');
+    }
+
+
 }

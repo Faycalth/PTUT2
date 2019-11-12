@@ -104,7 +104,7 @@ class groupeController extends AbstractController
        $manager->persist($notification);
        $manager->flush();
 
-       return $this->render('accueilTemplate/home.html.twig');
+       return $this->redirectToRoute('groupe_liste');
     }
 
  /**
@@ -182,6 +182,40 @@ class groupeController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('notification');
+    }
+
+       
+ /**
+     * @route("/groupe/quitter", name="quitter_groupe")
+     */
+    public function quitterGroupe(EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    {
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $etudiant = $repository->find($idapp);
+        $groupe=$etudiant->getGroupe();
+        $etudiant->setGroupe(null);
+
+        $notification=new Notification();
+        $nom_groupe=$groupe->getNom();
+       $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();    
+
+       $notification->setNomSourceEtudiant($nom_etudiant);
+       $notification->setNomGroupe($nom_groupe);
+       $notification->setSourceGroupe($groupe);
+       $notification->setSourceEtudiant($etudiant);
+       $notification->setDestGroupe($groupe);
+       $notification->setType("Quitter");
+       $notification->setCreatedAt(new \DateTime());
+       
+       $manager->persist($notification);
+       $manager->flush();
+        
+       return $this->redirectToRoute('home');
+
     }
 
         

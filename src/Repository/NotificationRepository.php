@@ -35,6 +35,19 @@ class NotificationRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+public function getNBNotif(int  $idapp ,int $etu_groupe)
+    {
+        return $this->createQueryBuilder('notif')
+            ->addSelect('count(notif.id) as nb')
+            ->where('notif.dest_groupe=:etu_groupe')
+            ->orWhere('notif.dest_etudiant=:idapp')
+            ->setParameter('etu_groupe','idapp',$etu_groupe,$idapp)
+            ->groupBy('notif.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Notification
