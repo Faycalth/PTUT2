@@ -13,37 +13,32 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\AccueilController::home'], null, null, null, false, false, null]],
+        '/admin/home' => [[['_route' => 'admin_home', '_controller' => 'App\\Controller\\AdminController::home'], null, null, null, false, false, null]],
+        '/admin/promotion' => [[['_route' => 'admin_promotion', '_controller' => 'App\\Controller\\AdminController::promotion'], null, null, null, false, false, null]],
+        '/admin/promotionAction' => [[['_route' => 'promotionAction', '_controller' => 'App\\Controller\\AdminController::promotionAction'], null, null, null, false, false, null]],
+        '/admin/dashboard' => [[['_route' => 'admin_dashboard', '_controller' => 'App\\Controller\\AdminController::index'], null, null, null, false, false, null]],
+        '/admin/choix' => [[['_route' => 'admin_liste_etudiant', '_controller' => 'App\\Controller\\AdminController::listeEtudiant'], null, null, null, false, false, null]],
+        '/admin/liste_tuteur' => [[['_route' => 'admin_liste_tuteur', '_controller' => 'App\\Controller\\AdminController::listeTuteur'], null, null, null, false, false, null]],
+        '/admin/liste_groupe' => [[['_route' => 'admin_liste_groupe', '_controller' => 'App\\Controller\\AdminController::listeGroupe'], null, null, null, false, false, null]],
+        '/default' => [[['_route' => 'default', '_controller' => 'App\\Controller\\DefaultController::index'], null, null, null, false, false, null]],
+        '/etudiant/home' => [[['_route' => 'etudiant_home', '_controller' => 'App\\Controller\\EtudiantController::home'], null, null, null, false, false, null]],
+        '/myproject' => [[['_route' => 'myproject', '_controller' => 'App\\Controller\\EtudiantController::myproject'], null, null, null, false, false, null]],
+        '/groupe/creation' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\GroupeController::creation'], null, null, null, false, false, null]],
+        '/groupe/liste' => [[['_route' => 'groupe_liste', '_controller' => 'App\\Controller\\GroupeController::listeGroupe'], null, null, null, false, false, null]],
+        '/groupe/quitter' => [[['_route' => 'quitter_groupe', '_controller' => 'App\\Controller\\GroupeController::quitterGroupe'], null, null, null, false, false, null]],
         '/notification' => [[['_route' => 'notification', '_controller' => 'App\\Controller\\NotificationController::notification'], null, null, null, false, false, null]],
-        '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\accueilController::home'], null, null, null, false, false, null]],
-        '/admin/home' => [[['_route' => 'admin_home', '_controller' => 'App\\Controller\\adminController::home'], null, null, null, false, false, null]],
-        '/admin/promotion' => [[['_route' => 'admin_promotion', '_controller' => 'App\\Controller\\adminController::promotion'], null, null, null, false, false, null]],
-        '/admin/promotionAction' => [[['_route' => 'promotionAction', '_controller' => 'App\\Controller\\adminController::promotionAction'], null, null, null, false, false, null]],
-        '/admin/dashboard' => [[['_route' => 'admin_dashboard', '_controller' => 'App\\Controller\\adminController::index'], null, null, null, false, false, null]],
-        '/admin/choix' => [[['_route' => 'admin_liste_etudiant', '_controller' => 'App\\Controller\\adminController::listeEtudiant'], null, null, null, false, false, null]],
-        '/admin/liste_tuteur' => [[['_route' => 'admin_liste_tuteur', '_controller' => 'App\\Controller\\adminController::listeTuteur'], null, null, null, false, false, null]],
-        '/admin/liste_groupe' => [[['_route' => 'admin_liste_groupe', '_controller' => 'App\\Controller\\adminController::listeGroupe'], null, null, null, false, false, null]],
-        '/etudiant/home' => [[['_route' => 'etudiant_home', '_controller' => 'App\\Controller\\etudiantController::home'], null, null, null, false, false, null]],
-        '/myproject' => [[['_route' => 'myproject', '_controller' => 'App\\Controller\\etudiantController::myproject'], null, null, null, false, false, null]],
-        '/groupe/creation' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\groupeController::creation'], null, null, null, false, false, null]],
-        '/groupe/liste' => [[['_route' => 'groupe_liste', '_controller' => 'App\\Controller\\groupeController::listeGroupe'], null, null, null, false, false, null]],
-        '/groupe/quitter' => [[['_route' => 'quitter_groupe', '_controller' => 'App\\Controller\\groupeController::quitterGroupe'], null, null, null, false, false, null]],
-        '/monprojet' => [[['_route' => 'monprojet', '_controller' => 'App\\Controller\\reunionController::myproject'], null, null, null, false, false, null]],
-        '/reunion_historique' => [[['_route' => 'reunion_historique', '_controller' => 'App\\Controller\\reunionController::reunion'], null, null, null, false, false, null]],
-        '/reunion_ajoutReunion' => [[['_route' => 'Ajout_reunion', '_controller' => 'App\\Controller\\reunionController::ajoutReunion'], null, null, null, false, false, null]],
-        '/tuteur/home' => [[['_route' => 'tuteur_home', '_controller' => 'App\\Controller\\tuteurController::home'], null, null, null, false, false, null]],
-        '/tuteur/mesgroupes' => [[['_route' => 'mesgroupes', '_controller' => 'App\\Controller\\tuteurController::mesgroupes'], null, null, null, false, false, null]],
-        '/login' => [[['_route' => 'fos_user_security_login', '_controller' => 'fos_user.security.controller:loginAction'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/login_check' => [[['_route' => 'fos_user_security_check', '_controller' => 'fos_user.security.controller:checkAction'], null, ['POST' => 0], null, false, false, null]],
-        '/logout' => [[['_route' => 'fos_user_security_logout', '_controller' => 'fos_user.security.controller:logoutAction'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/profile' => [[['_route' => 'fos_user_profile_show', '_controller' => 'fos_user.profile.controller:showAction'], null, ['GET' => 0], null, true, false, null]],
-        '/profile/edit' => [[['_route' => 'fos_user_profile_edit', '_controller' => 'fos_user.profile.controller:editAction'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/register' => [[['_route' => 'fos_user_registration_register', '_controller' => 'fos_user.registration.controller:registerAction'], null, ['GET' => 0, 'POST' => 1], null, true, false, null]],
-        '/register/check-email' => [[['_route' => 'fos_user_registration_check_email', '_controller' => 'fos_user.registration.controller:checkEmailAction'], null, ['GET' => 0], null, false, false, null]],
-        '/register/confirmed' => [[['_route' => 'fos_user_registration_confirmed', '_controller' => 'fos_user.registration.controller:confirmedAction'], null, ['GET' => 0], null, false, false, null]],
-        '/resetting/request' => [[['_route' => 'fos_user_resetting_request', '_controller' => 'fos_user.resetting.controller:requestAction'], null, ['GET' => 0], null, false, false, null]],
-        '/resetting/send-email' => [[['_route' => 'fos_user_resetting_send_email', '_controller' => 'fos_user.resetting.controller:sendEmailAction'], null, ['POST' => 0], null, false, false, null]],
-        '/resetting/check-email' => [[['_route' => 'fos_user_resetting_check_email', '_controller' => 'fos_user.resetting.controller:checkEmailAction'], null, ['GET' => 0], null, false, false, null]],
-        '/profile/change-password' => [[['_route' => 'fos_user_change_password', '_controller' => 'fos_user.change_password.controller:changePasswordAction'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/inscription_etudiant' => [[['_route' => 'app_register_etudiant', '_controller' => 'App\\Controller\\RegistrationController::registerEtudiant'], null, null, null, false, false, null]],
+        '/inscription_tuteur' => [[['_route' => 'app_register_tuteur', '_controller' => 'App\\Controller\\RegistrationController::registerTuteur'], null, null, null, false, false, null]],
+        '/monprojet' => [[['_route' => 'monprojet', '_controller' => 'App\\Controller\\ReunionController::myproject'], null, null, null, false, false, null]],
+        '/reunion_historique' => [[['_route' => 'reunion_historique', '_controller' => 'App\\Controller\\ReunionController::reunion'], null, null, null, false, false, null]],
+        '/reunion_ajoutReunion' => [[['_route' => 'Ajout_reunion', '_controller' => 'App\\Controller\\ReunionController::ajoutReunion'], null, null, null, false, false, null]],
+        '/security' => [[['_route' => 'security', '_controller' => 'App\\Controller\\SecurityController::index'], null, null, null, false, false, null]],
+        '/login' => [[['_route' => 'security_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
+        '/logout' => [[['_route' => 'security_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
+        '/forgotten_password' => [[['_route' => 'app_forgotten_password', '_controller' => 'App\\Controller\\SecurityController::forgottenPassword'], null, null, null, false, false, null]],
+        '/tuteur/home' => [[['_route' => 'tuteur_home', '_controller' => 'App\\Controller\\TuteurController::home'], null, null, null, false, false, null]],
+        '/tuteur/mesgroupes' => [[['_route' => 'mesgroupes', '_controller' => 'App\\Controller\\TuteurController::mesgroupes'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -62,32 +57,31 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/notification/remove/([^/]++)(*:198)'
                 .'|/admin/(?'
                     .'|etudiant([^/]++)(?'
-                        .'|(*:235)'
+                        .'|(*:198)'
                     .')'
                     .'|tuteur([^/]++)(?'
-                        .'|(*:261)'
+                        .'|(*:224)'
                     .')'
                     .'|groupe([^/]++)(?'
-                        .'|(*:287)'
+                        .'|(*:250)'
                     .')'
                 .')'
                 .'|/groupe/(?'
                     .'|re(?'
-                        .'|joindre/([^/]++)(*:329)'
-                        .'|fuser/([^/]++)/([^/]++)(*:360)'
+                        .'|joindre/([^/]++)(*:292)'
+                        .'|fuser/([^/]++)/([^/]++)(*:323)'
                     .')'
-                    .'|accepter/([^/]++)/([^/]++)(*:395)'
+                    .'|accepter/([^/]++)/([^/]++)(*:358)'
                 .')'
+                .'|/notification/remove/([^/]++)(*:396)'
                 .'|/re(?'
                     .'|union/(?'
                         .'|([^/]++)(*:427)'
                         .'|taches(*:441)'
                     .')'
-                    .'|gister/confirm/([^/]++)(*:473)'
-                    .'|setting/reset/([^/]++)(*:503)'
+                    .'|set_password/([^/]++)(*:471)'
                 .')'
             .')/?$}sDu',
     ],
@@ -99,27 +93,26 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        198 => [[['_route' => 'remove_notification', '_controller' => 'App\\Controller\\NotificationController::removeNotif'], ['id'], null, null, false, true, null]],
-        235 => [
-            [['_route' => 'admin_edit_etudiant', '_controller' => 'App\\Controller\\adminController::edit_etudiant'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
-            [['_route' => 'admin_delete_etudiant', '_controller' => 'App\\Controller\\adminController::delete_etudiant'], ['id'], ['DELETE' => 0], null, false, true, null],
+        198 => [
+            [['_route' => 'admin_edit_etudiant', '_controller' => 'App\\Controller\\AdminController::edit_etudiant'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
+            [['_route' => 'admin_delete_etudiant', '_controller' => 'App\\Controller\\AdminController::delete_etudiant'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        261 => [
-            [['_route' => 'admin_edit_tuteur', '_controller' => 'App\\Controller\\adminController::edit_tuteur'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
-            [['_route' => 'admin_delete_tuteur', '_controller' => 'App\\Controller\\adminController::delete_tuteur'], ['id'], ['DELETE' => 0], null, false, true, null],
+        224 => [
+            [['_route' => 'admin_edit_tuteur', '_controller' => 'App\\Controller\\AdminController::edit_tuteur'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
+            [['_route' => 'admin_delete_tuteur', '_controller' => 'App\\Controller\\AdminController::delete_tuteur'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        287 => [
-            [['_route' => 'admin_edit_groupe', '_controller' => 'App\\Controller\\adminController::edit_groupe'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
-            [['_route' => 'admin_delete_groupe', '_controller' => 'App\\Controller\\adminController::delete_groupe'], ['id'], ['DELETE' => 0], null, false, true, null],
+        250 => [
+            [['_route' => 'admin_edit_groupe', '_controller' => 'App\\Controller\\AdminController::edit_groupe'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
+            [['_route' => 'admin_delete_groupe', '_controller' => 'App\\Controller\\AdminController::delete_groupe'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        329 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
-        360 => [[['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\groupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
-        395 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\groupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
-        427 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        441 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        473 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        503 => [
-            [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
+        292 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\GroupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
+        323 => [[['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\GroupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
+        358 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\GroupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
+        396 => [[['_route' => 'remove_notification', '_controller' => 'App\\Controller\\NotificationController::removeNotif'], ['id'], null, null, false, true, null]],
+        427 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\ReunionController::show'], ['id'], null, null, false, true, null]],
+        441 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\ReunionController::tache'], [], null, null, false, false, null]],
+        471 => [
+            [['_route' => 'app_reset_password', '_controller' => 'App\\Controller\\SecurityController::resetPassword'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

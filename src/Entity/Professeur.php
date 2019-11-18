@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *  fields={"email"},
  *  message="L'email que vous avez indiqué est déjà utilisé")
  */
-class Professeur implements UserInterface
+class Professeur extends User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -22,80 +22,37 @@ class Professeur implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
-
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Le mot de passe contient moins de 8 caractères")
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+    /**
+     * @var string Le mot de passe crypté
+     * @ORM\Column(type="string")
      */
     private $password;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomComplet;
+    /**
+     * @var string le token qui servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $resetToken;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Groupe", mappedBy="professeur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Groupe", mappedBy="Professeur")
      */
     private $groupes;
-
-
-
-
-
-
-
 
     public function __construct()
     {
         $this->groupes = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -127,21 +84,6 @@ class Professeur implements UserInterface
         }
 
         return $this;
-    }
-
-    public function eraseCredentials(){}
-
-    public function getSalt(){}
-    
-    public function getRoles(){
-        if (empty($this->roles)) {
-            return ['ROLE_USER'];
-        }
-        return $this->roles;
-    }
-
-    function addRole($role) {
-        $this->roles[] = $role;
     }
 
 }
