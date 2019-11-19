@@ -1,128 +1,66 @@
 <?php
-namespace App\Entity;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
-class User implements UserInterface
-{
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $roles;
-    /**
-     * @var string Le mot de passe crypté
-     * @ORM\Column(type="string")
-     */
-    private $password;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nomComplet;
-    /**
-     * @var string le token qui servira lors de l'oubli de mot de passe
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $resetToken;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Groupe", inversedBy="etudiant")
-     */
-    private $groupe;
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-    /**
-     * Returns the roles granted to the user.
-     * 
-     * @return Role[] The user roles
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-    public function setRoles(string $roles): self
-    {
-        $this->roles = $roles;
-        return $this;
-    }
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return (string) $this->password;
-    }
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-        return $this;
-    }
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-    public function getNomComplet(): ?string
-    {
-        return $this->nomComplet;
-    }
-    public function setNomComplet(string $nomComplet): self
-    {
-        $this->nomComplet = $nomComplet;
-        return $this;
-    }
-    /**
-     * @return string
-     */
-    public function getResetToken(): string
-    {
-        return $this->resetToken;
-    }
-    /**
-     * @param string $resetToken
-     */
-    public function setResetToken(?string $resetToken): void
-    {
-        $this->resetToken = $resetToken;
-    }
-}
+        // src/AppBundle/Entity/User.php
+
+        namespace App\Entity;
+
+        use FOS\UserBundle\Model\User as BaseUser;
+        use Doctrine\ORM\Mapping as ORM;
+
+        /**
+         * @ORM\Entity
+         * @ORM\Table(name="fos_user")
+         */
+        class User extends BaseUser
+        {
+            /**
+             * @ORM\Id
+             * @ORM\Column(type="integer")
+             * @ORM\GeneratedValue(strategy="AUTO")
+             */
+            protected $id;
+
+            /**
+             * @ORM\Column(type="string")
+             */
+            protected $nom;
+
+            /**
+             * @ORM\Column(type="string")
+             */
+            protected $prenom;
+
+            public function __construct()
+            {
+                parent::__construct();
+                // your own logic
+            }
+
+            public function getId(): ?int
+            {
+                return $this->id;
+            }
+
+            public function getNom(): ?string
+            {
+                return $this->nom;
+            }
+
+            public function setNom(string $nom): self
+            {
+                $this->nom = $nom;
+
+                return $this;
+            }
+
+            public function getPrenom(): ?string
+            {
+                return $this->prenom;
+            }
+
+            public function setPrenom(string $prenom): self
+            {
+                $this->prenom = $prenom;
+
+                return $this;
+            }
+        }

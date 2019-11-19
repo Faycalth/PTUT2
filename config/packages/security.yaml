@@ -1,42 +1,33 @@
 security:
     encoders:
-        App\Entity\User:
-            algorithm: auto
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_ETUDIANT: ROLE_GROUPE
+        ROLE_TUTEUR: ROLE_ETUDIANT
+        ROLE_USER: ROLE_ETUDIANT
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     providers:
-        in_memory: { memory: ~ }
-        in_database:
-            entity:
-                class: App\Entity\User
-                property: email
-
-
-
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
         main:
-            anonymous: true
-
-            provider: in_database
-
+            pattern: ^/
+            user_checker: security.user_checker
             form_login:
-                login_path: security_login
-                check_path: security_login
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+           
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
 
             logout:
-                path: security_logout
-                target: home
-
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 2592000 # 30 jours
-
-
-    
+                path: fos_user_security_logout
+                target: /
+            anonymous:    true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
