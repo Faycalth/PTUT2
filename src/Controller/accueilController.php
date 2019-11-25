@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +16,7 @@ class accueilController extends AbstractController
      */
     public function home()
     {
-        
+   
         return $this->render('accueilTemplate/home.html.twig');
     }
 

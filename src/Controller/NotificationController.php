@@ -35,6 +35,7 @@ class NotificationController extends AbstractController
           
           $etu_groupe=$etudiant->getGroupe();
           
+        
           $conn =$manager->getConnection();
 
           $sql = '
@@ -44,7 +45,9 @@ class NotificationController extends AbstractController
               ';
           $stmt = $conn->prepare($sql);
           $stmt->execute(['etu_groupe' => $etu_groupe, 'idapp'=>$idapp]);
-
+        
+               
+         
        $notification =$stmt->fetchAll();
         return $this->render('notification/notification.html.twig',compact('notification'));
     }

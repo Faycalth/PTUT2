@@ -63,6 +63,12 @@ class Etudiant implements UserInterface
 
     public function __construct()
     {
+        $this->id=$id;
+        $this->nom=$nom;
+        $this->prenom=$prenom;
+        $this->email=$email;
+        $this->password=$password;
+        $this->groupe=$groupe;
         $this->source_etudiant = new ArrayCollection();
         $this->dest_etudiant = new ArrayCollection();
     }

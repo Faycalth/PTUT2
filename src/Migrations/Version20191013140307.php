@@ -36,8 +36,8 @@ final class Version20191013140307 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE etudiant DROP FOREIGN KEY FK_717E22E37A45358C');
-        $this->addSql('ALTER TABLE groupe DROP FOREIGN KEY FK_4B98C21BAB22EE9');
-        $this->addSql('ALTER TABLE reunion DROP FOREIGN KEY FK_5B00A4823256915B');
+       // $this->addSql('ALTER TABLE etudiant DROP FOREIGN KEY FK_717E22E37A45358C');
+       // $this->addSql('ALTER TABLE groupe DROP FOREIGN KEY FK_4B98C21BAB22EE9');
+        //$this->addSql('ALTER TABLE reunion DROP FOREIGN KEY FK_5B00A4823256915B');
     }
 }

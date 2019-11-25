@@ -67,15 +67,23 @@ class groupeController extends AbstractController
     /**
      * @Route("/groupe/liste", name="groupe_liste")
      */
-    public function listeGroupe(GroupeRepository $groupe_repository)
+    public function listeGroupe(ObjectManager $manager)
     {
-        $groupes = $groupe_repository->findAll();
+       
+        $conn =$manager->getConnection();
+
+        $sql = '
+           SELECT * FROM `groupe` where id in (SELECT g.id FROM `etudiant` e, `groupe` g WHERE e.groupe_id=g.id group by g.id having count(g.id)<7)';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $groupes =$stmt->fetchAll();
+      
         return $this->render('groupeTemplate/groupe_liste_show.html.twig', compact('groupes'));
     }
 
  /**
      * @route("/groupe/rejoindre/{nom}", name="groupe_rejoindre")
-     */
+     */ 
     public function rejoindreGroupe(Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager)
     {
        $token = $this->get('security.token_storage')->getToken();
@@ -217,6 +225,83 @@ class groupeController extends AbstractController
        return $this->redirectToRoute('home');
 
     }
+
+
+    /**
+     * @route("/groupe/accepter_groupe/{id}/{id_notif}", name="refuser_etudiant")
+     */
+    public function accepterGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    {
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $etudiant = $repository->find($idapp);
+         
+        $etudiant->setGroupe($groupe);
+
+        $notification=new Notification();
+
+        $nom_groupe=$groupe->getNom();
+        $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
+
+        $notification->setNomSourceEtudiant($nom_etudiant);
+       $notification->setNomGroupe($nom_groupe);
+       $notification->setSourceGroupe($groupe);
+       $notification->setSourceEtudiant($etudiant);
+       $notification->setDestGroupe($groupe);
+       $notification->setType("Accepter_groupe");
+       $notification->setCreatedAt(new \DateTime());
+
+       $not_repository = $this->getDoctrine()->getRepository(Notification::class);
+       $notifsup = $not_repository->find($id_notif);
+       
+       $manager->remove($notifsup);        
+       $manager->persist($notification);
+        $manager->persist($etudiant);
+        $manager->flush();
+
+        return $this->redirectToRoute('notification');
+    }
+    
+    /**
+     * @route("/groupe/refuser_groupe/{id}/{id_notif}", name="refuser_groupe")
+     */
+    public function refuserGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    {
+        $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        
+        $idapp=$user->getId();
+        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+        $etudiant = $repository->find($idapp);
+         
+
+        $notification=new Notification();
+
+        $nom_groupe=$groupe->getNom();
+        $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
+
+        $notification->setNomSourceEtudiant($nom_etudiant);
+       $notification->setNomGroupe($nom_groupe);
+       $notification->setSourceGroupe($groupe);
+       $notification->setSourceEtudiant($etudiant);
+       $notification->setDestGroupe($groupe);
+       $notification->setType("Refuser_groupe");
+       $notification->setCreatedAt(new \DateTime());
+
+       $not_repository = $this->getDoctrine()->getRepository(Notification::class);
+       $notifsup = $not_repository->find($id_notif);
+       
+       $manager->remove($notifsup);        
+       $manager->persist($notification);
+        $manager->persist($etudiant);
+        $manager->flush();
+
+        return $this->redirectToRoute('notification');
+    }
+        
 
         
 }

@@ -33,6 +33,9 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('admin_promotion')}}">Promote</a>
                                 </li>
+                        <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('admin_dashboard')}}">Dashboard</a>
+                       </li>
                             {% elseif is_granted('ROLE_ETUDIANT') %}
                                {% if groupe.StatutGroupe ==null %}
                                     <li class="nav-item active">

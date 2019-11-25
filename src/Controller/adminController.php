@@ -80,9 +80,41 @@ class adminController extends AbstractController
      * @Route("/admin/choix", name = "admin_liste_etudiant")
      */
     public function listeEtudiant()
-    {
+    {   
+        
         $etudiants = $this->etudiant_repository->findAll();
-        return $this->render('adminTemplate/adminEtudiantTemplate/index.html.twig', compact('etudiants'));
+
+           // pour importer les etudiants
+           $message=null;
+           if (isset($_POST["import"])) {
+       
+               $fileName = $_FILES["file"]["tmp_name"];
+               
+               if ($_FILES["file"]["size"] > 0) {
+                 
+                 $file = fopen($fileName, "r");
+                 $column = fgetcsv($file, 10000, ";");
+                 while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
+                   $sql = "INSERT into personne (nom,prenom)
+                        values ('" . $column[0] . "','" . $column[1] . "')";
+                   $conn=$this->getDoctrine()->getManager()->getConnection();
+                   
+                   $stmt = $conn->prepare($sql);
+                  $result= $stmt->execute();
+                   
+                   if (! empty($result)) {
+                     $type = "success";
+                     $message = "Les Données sont importées dans la base de données";
+                   } else {
+                     $type = "error";
+                     $message = "Problème lors de l'importation de données CSV";
+                   }
+                 }
+               }
+             }
+   
+           //fin import etudiant
+        return $this->render('adminTemplate/adminEtudiantTemplate/index.html.twig', ['etudiants'=>$etudiants, 'message'=>$message]);
     }
 
     /**
@@ -100,6 +132,8 @@ class adminController extends AbstractController
     public function listeGroupe()
     {
         $groupe = $this->groupe_repository->findAll();
+     
+
         return $this->render('adminTemplate/adminGroupeTemplate/index.html.twig', compact('groupe'));
     }
 

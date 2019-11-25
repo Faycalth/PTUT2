@@ -9,13 +9,15 @@
 
 <div class="col-md-3" >
  
- <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1">Liste des étudiants</a>
+ <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Liste des étudiants</a>
  
- <div id="collapse1" class="panel-collapse collapse">
- {% for etudiant in etudiants %}
-        <div class="panel-body">{{etudiant.prenom}} {{etudiant.nom}}</div>
-    
-  {% endfor %}
+ <div id="collapse1" class="panel-collapse collapse" style="border: 1px solid blue">
+    <ul>
+      {% for etudiant in etudiants %}
+          <li> {{etudiant.prenom}}  {{etudiant.nom}}</li>
+      {% endfor %}
+    </ul>
+
   </div>
 
 </div>
@@ -24,8 +26,17 @@
  
   <a  class="btn btn-primary" data-toggle="collapse" href="#collapse2">Inviter un etudiant</a> 
  
+      {% if etu != null %}  <p>  {{ etu.0.nom}}</p>   {% endif %}
+ 
+ 
  <div id="collapse2" class="panel-collapse collapse">
 
+   
+  <form method="post" action="">
+    <input type="text" placeholder="prenom" name="prenom">
+    <input type="text" placeholder="nom" name="nom"> 
+    <input type="submit" value="Inviter"  {% if etu==null %} onclick="alert('erreur') {% else %} onclick="alert('succés')  {% endif %} ">  
+  </form>
  
   </div>
 

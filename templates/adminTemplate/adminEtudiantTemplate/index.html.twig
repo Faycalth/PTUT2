@@ -4,11 +4,42 @@
 
 {% block body %}
     <div class="container mt-4">
-
+    {% if message!=null %}  
+        <div class="alert alert-info">
+        <strong>{{message}}</strong> 
+        </div>
+    {% endif %}
     <div class="jumbotron text-center">
         <h1>Gérer les étudiants</h1>
     </div>
 
+<-- import etudiant -->   
+<div class="col-md-3" >
+ 
+ <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Importer des étudiants</a>
+ 
+
+ <div id="collapse1" class="panel-collapse collapse" >
+    <a  class="btn btn-danger" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >IMPORTANT A LIRE AVANT D'IMPORTER!!!</a>
+    <br /> 
+     <div id="collapse2" class="panel-collapse collapse" >
+            kmlnjklnkn
+     </div>  
+    
+    <form enctype="multipart/form-data" action="" method="post">
+        <div class="input-row">
+            <input type="file"   name="file" id="file" accept=".csv">
+          
+            <br />
+            <button type="submit" id="submit" name="import" class="btn-submit">Import</button>
+            <br />
+        </div>
+    </form>
+
+  </div>
+
+</div>
+<-- fin import -->   
     {% for message in app.flashes('success') %}
         <div class = "alert alert-success">
             {{ message }}

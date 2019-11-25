@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Etudiant;
 use App\Entity\Groupe;
 use App\Form\GroupeType;
+use App\Form\ReunionType;
 use App\Entity\Professeur;
+use App\Entity\Notification;
 use App\Repository\EtudiantRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\ProfesseurRepository;
@@ -47,12 +49,59 @@ class reunionController extends AbstractController
 
         $etudiants =$stmt->fetchAll();
 
+        dump($request);
+
+    $etu=null;
+    $nom=$request->request->get('nom');
+    $prenom=$request->request->get('prenom');
+     if(($nom!==null) && ($prenom!==null)) 
+    {
+
+            $sql2 = '
+                    SELECT * FROM Etudiant etu
+                    WHERE etu.nom=:nom and etu.prenom=:prenom
+                    ';
+            $stmts = $conn->prepare($sql2);
+            $stmts->execute(['nom' => $nom,'prenom'=>$prenom]);
+            $etu =$stmts->fetchAll();
+
+     if($etu!==null){
+            $token = $this->get('security.token_storage')->getToken();
+            $user = $token->getUser();
+    
+            $idapp=$user->getId();
+            $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+            $user = $repository->find($idapp);
+            $groupe=$user->getGroupe();
+            $notification=new Notification();
+
+            $nom_groupe=$groupe->getNom();
+            $nom_etudiant=$prenom.' '.$nom;
+            
+    
+            
+            $notification->setSourceGroupe($groupe);
+            $notification->setNomDestEtudiant($nom_etudiant);
+            $notification->setNomGroupe($nom_groupe);
+            $notification->setDestEtudiant($etus);
+            $notification->setType("Demande_Groupe");
+            $notification->setCreatedAt(new \DateTime());
+
+            $manager->persist($notification);
+        
+        $manager->flush();
+
+        }
+                
+
+            
+    }
         
   
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',compact('etudiants')
+        return $this->render('reunionTemplate/myproject.html.twig',['etudiants'=>$etudiants,'etu'=>$etu]
     );
     }
 
@@ -84,7 +133,10 @@ class reunionController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             
-            $ajout->setCreatedAt(new \DateTime());
+            $ajout->setCreateAt(new \DateTime());
+            $token = $this->get('security.token_storage')->getToken();
+            $user = $token->getUser();
+            $groupe=$user->getGroups();
             $ajout->setRelation($groupe);
 
             $manager->persist($ajout);
@@ -95,7 +147,7 @@ class reunionController extends AbstractController
         }
         
         
-        return $this->render('reunionTemplate/Ajoutreunion.html.twig');
+        return $this->render('reunionTemplate/Ajoutreunion.html.twig', ['form'=>$form->createView()]);
     }
 
     /**
