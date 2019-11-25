@@ -228,7 +228,7 @@ class groupeController extends AbstractController
 
 
     /**
-     * @route("/groupe/accepter_groupe/{id}/{id_notif}", name="refuser_etudiant")
+     * @route("/groupe/accepter_groupe/{id}/{id_notif}", name="accepter_groupe")
      */
     public function accepterGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
     {

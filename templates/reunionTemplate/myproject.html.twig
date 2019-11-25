@@ -5,7 +5,13 @@
 {% block stylesheets %} <link rel="stylesheet" href="myproject.css">{% endblock %}
 
 {% block body %}
-<div> hello boy </div>
+ {% if etu != null  and  etu!= 'l' %}   
+        <div class="alert alert-success">
+        <strong> Votre demande a été envoyée avec succés</strong> 
+        </div>
+ {% elseif etu==null %}
+    <div class="alert alert-danger"> <strong> Cet etudiant n'existe pas </strong></div> 
+ {% endif %}
 
 <div class="col-md-3" >
  
@@ -22,25 +28,25 @@
 
 </div>
 
+{%   if result<6 %}
 <div class="col-md-3" >
  
   <a  class="btn btn-primary" data-toggle="collapse" href="#collapse2">Inviter un etudiant</a> 
- 
-      {% if etu != null %}  <p>  {{ etu.0.nom}}</p>   {% endif %}
- 
- 
+
  <div id="collapse2" class="panel-collapse collapse">
 
    
   <form method="post" action="">
     <input type="text" placeholder="prenom" name="prenom">
     <input type="text" placeholder="nom" name="nom"> 
-    <input type="submit" value="Inviter"  {% if etu==null %} onclick="alert('erreur') {% else %} onclick="alert('succés')  {% endif %} ">  
+    <input type="submit" value="Inviter" >  
   </form>
  
   </div>
 
 </div>
+ 
+ {% endif %}
 
 
 

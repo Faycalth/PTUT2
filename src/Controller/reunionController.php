@@ -48,15 +48,15 @@ class reunionController extends AbstractController
         $stmt->execute(['etu_groupe' => $etu_groupe]);
 
         $etudiants =$stmt->fetchAll();
+        $result=count($etudiants);
+      
 
-        dump($request);
-
-    $etu=null;
+    $etu='l';
     $nom=$request->request->get('nom');
     $prenom=$request->request->get('prenom');
      if(($nom!==null) && ($prenom!==null)) 
     {
-
+        
             $sql2 = '
                     SELECT * FROM Etudiant etu
                     WHERE etu.nom=:nom and etu.prenom=:prenom
@@ -64,8 +64,8 @@ class reunionController extends AbstractController
             $stmts = $conn->prepare($sql2);
             $stmts->execute(['nom' => $nom,'prenom'=>$prenom]);
             $etu =$stmts->fetchAll();
-
-     if($etu!==null){
+            
+     if($etu){
             $token = $this->get('security.token_storage')->getToken();
             $user = $token->getUser();
     
@@ -78,7 +78,7 @@ class reunionController extends AbstractController
             $nom_groupe=$groupe->getNom();
             $nom_etudiant=$prenom.' '.$nom;
             
-    
+            $etus=$repository->find($etu[0]['id']);
             
             $notification->setSourceGroupe($groupe);
             $notification->setNomDestEtudiant($nom_etudiant);
@@ -101,7 +101,7 @@ class reunionController extends AbstractController
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',['etudiants'=>$etudiants,'etu'=>$etu]
+        return $this->render('reunionTemplate/myproject.html.twig',['etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result]
     );
     }
 
