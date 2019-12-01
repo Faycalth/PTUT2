@@ -41,7 +41,7 @@ class reunionController extends AbstractController
         $conn =$manager->getConnection();
 
         $sql = '
-            SELECT * FROM Etudiant etu
+            SELECT * FROM etudiant etu
             WHERE etu.groupe_id=:etu_groupe 
             ';
         $stmt = $conn->prepare($sql);
@@ -123,26 +123,29 @@ class reunionController extends AbstractController
      * @Route("/reunion_ajoutReunion", name="Ajout_reunion")
      */
     public function ajoutReunion(Request $request, ObjectManager $manager)
-    {
+    {  
+            
 
         $ajout = new Reunion();
-
         $form = $this->createForm(ReunionType::class, $ajout);
-
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
             
             $ajout->setCreateAt(new \DateTime());
             $token = $this->get('security.token_storage')->getToken();
             $user = $token->getUser();
-            $groupe=$user->getGroups();
+
+            $idapp=$user->getId();
+            $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+            $etudiant = $repository->find($idapp);
+            $groupe = $etudiant->getGroupe();
+            
             $ajout->setRelation($groupe);
 
             $manager->persist($ajout);
             $manager->flush();
 
-            return $this->redirectToRoute('reunion_show');
+            return $this->redirectToRoute('reunion_historique');
 
         }
         
