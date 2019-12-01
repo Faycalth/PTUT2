@@ -39,7 +39,7 @@ class reunionController extends AbstractController
         $conn =$manager->getConnection();
 
         $sql = '
-            SELECT * FROM Etudiant etu
+            SELECT * FROM etudiant etu
             WHERE etu.groupe_id=:etu_groupe 
             ';
         $sql_invite = '
@@ -133,11 +133,8 @@ class reunionController extends AbstractController
     {
 
         $ajout = new Reunion();
-
         $form = $this->createForm(ReunionType::class, $ajout);
-
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
             
          // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
@@ -148,7 +145,7 @@ class reunionController extends AbstractController
             $manager->persist($ajout);
             $manager->flush();
 
-            return $this->redirectToRoute('reunion_show');
+            return $this->redirectToRoute('reunion_historique');
 
         }
         

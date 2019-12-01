@@ -9,14 +9,14 @@
 }
 
 body{
-  background:#fff;
+  background: #2193b0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   font-family: 'Poppins', sans-serif;
 }
 
-a{
-  text-decoration : none;
-  color: #000;
-}
+
 .big-heading{
   color:#fff;
   text-align:center;
@@ -80,7 +80,6 @@ box-shadow: 1px 8px 5px rgba(0,0,0,.2);
        font-weight:lighter;
        font-size:9pt;
       }
-    }
     .options{
       display:block;
       list-style:none;
@@ -90,18 +89,5 @@ box-shadow: 1px 8px 5px rgba(0,0,0,.2);
         color:#676462;
         text-transform:capitalize;
       }
-    }
-  }
   
-  .btn{
-      display: inline-block;
-      text-align: center;
-      width:60%;
-      height:50px;
-      background-color :#000;
-      border:none;
-      -webkit-border-radius:0px;
-       border-radius:0px;
-      -webkit-transition:.3s;
-       transition:.3s;
-    }
+ 
