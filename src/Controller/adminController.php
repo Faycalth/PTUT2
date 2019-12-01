@@ -86,7 +86,10 @@ class adminController extends AbstractController
 
            // pour importer les etudiants
            $message=null;
-           if (isset($_POST["import"])) {
+           $color=null;
+           if (isset($_POST["import"])) { 
+            
+               if (pathinfo($_FILES ["file"]["name"], PATHINFO_EXTENSION)=="csv") {
        
                $fileName = $_FILES["file"]["tmp_name"];
                
@@ -105,16 +108,23 @@ class adminController extends AbstractController
                    if (! empty($result)) {
                      $type = "success";
                      $message = "Les Données sont importées dans la base de données";
+                     $color="success";
                    } else {
                      $type = "error";
                      $message = "Problème lors de l'importation de données CSV";
+                    $color="danger";
                    }
                  }
                }
+              }else{
+                  $message="le fichier doit etre un fichier avec une extension .csv";
+                  $color="danger";
+              }
+                   
              }
    
            //fin import etudiant
-        return $this->render('adminTemplate/adminEtudiantTemplate/index.html.twig', ['etudiants'=>$etudiants, 'message'=>$message]);
+        return $this->render('adminTemplate/adminEtudiantTemplate/index.html.twig', ['color'=>$color,'etudiants'=>$etudiants, 'message'=>$message]);
     }
 
     /**

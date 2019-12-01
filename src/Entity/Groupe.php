@@ -34,6 +34,13 @@ class Groupe
     private $etudiant;
 
     /**
+    * @var string $statut
+    *
+    * @ORM\Column(name="statut", type="string", length=255)
+    */
+    private $statut;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Professeur", inversedBy="groupes")
      */
     private $professeur;
@@ -52,6 +59,8 @@ class Groupe
      * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="dest_groupe")
      */
     private $dest_groupe;
+
+    
 
     public function __construct()
     {
@@ -238,6 +247,18 @@ class Groupe
                 $destGroupe->setDestGroupe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

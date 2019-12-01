@@ -5,6 +5,8 @@
 {% block stylesheets %} <link rel="stylesheet" href="myproject.css">{% endblock %}
 
 {% block body %}
+<div style="color:gray"> PS: Le nombre maximum d'étudiants dans un groupe est de 6 </div>
+<div style="color:gray"> PS: Nous pourrez demander à un tuteur de vous encader lorsque le nombre d'étudiant dans le groupe sera au moins de 3</div>
  {% if etu != null  and  etu!= 'l' %}   
         <div class="alert alert-success">
         <strong> Votre demande a été envoyée avec succés</strong> 
@@ -37,8 +39,52 @@
 
    
   <form method="post" action="">
-    <input type="text" placeholder="prenom" name="prenom">
-    <input type="text" placeholder="nom" name="nom"> 
+      
+    
+      <select name="prenom_etudiant">    
+      <option selected >Prenom</option>
+   {% for listeetudian in listeetudiant %}
+      <option value="{{listeetudian.prenom}}"> {{listeetudian.prenom}} </option>
+
+   {% endfor %}
+ 
+   </select>
+      <select name="nom_etudiant">    
+      <option selected >Nom</option>
+   {% for listeetudian in listeetudiant %}
+      <option value="{{listeetudian.nom}}"> {{listeetudian.nom}} </option>
+
+   {% endfor %}
+ 
+   </select>
+    <input type="submit" value="Inviter" >  
+  </form>
+ 
+  </div>
+
+</div>
+ 
+ {% endif %}
+
+ {%   if result>2 %}
+<div class="col-md-3" >
+ 
+  <a  class="btn btn-primary" data-toggle="collapse" href="#collapse3">Demande Tuteur</a> 
+
+ <div id="collapse3" class="panel-collapse collapse">
+
+   
+  <form method="post" action="">
+   <select>    
+      <option selected >Prenom</option>
+   {% for professeur in professeurs %}
+      <option> {{professeur.prenom}} </option>
+
+   {% endfor %}
+ 
+   </select>
+   
+    <input type="text" placeholder="nom" name="nom_tuteur"> 
     <input type="submit" value="Inviter" >  
   </form>
  

@@ -20,10 +20,7 @@ class GroupeType extends AbstractType
         $builder
             ->add('nom')
             ->add('sujet')
-            ->add('professeur_id',EntityType::class,[
-                'class'=> Professeur::class,
-                'choice_label'=> 'username'
-            ])
+    
         ;
     }
 

@@ -11,6 +11,8 @@ use App\Repository\EtudiantRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\ProfesseurRepository;
 use App\Repository\NotificationRepository;
+use App\Service\Notifications;
+use App\Service\EtudiantConnecte;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -25,20 +27,17 @@ class groupeController extends AbstractController
    /**
     * @Route("/groupe/creation", name="groupe_creation")
     */
-    public function creation(Request $request, ObjectManager $manager,EtudiantRepository $repository)
+    public function creation(Request $request, ObjectManager $manager,EtudiantRepository $repository,EtudiantConnecte $user)
     {
         $groupe = new Groupe();
         $form = $this->createForm(GroupeType::class, $groupe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
           
-            $token = $this->get('security.token_storage')->getToken();
-            $user = $token->getUser();
+            $etudiant = $user->getUser();
             
-            $idapp=$user->getId();
-            $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-            $etudiant = $repository->find($idapp);
-            
+            $groupe->setProfesseurId(NULL);
+            $groupe->setStatut("non valide");
             $groupe->addEtudiant($etudiant);
             $etudiant->setGroupe($groupe);
             $manager->persist($groupe);
@@ -84,33 +83,21 @@ class groupeController extends AbstractController
  /**
      * @route("/groupe/rejoindre/{nom}", name="groupe_rejoindre")
      */ 
-    public function rejoindreGroupe(Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager)
+    public function rejoindreGroupe(Notifications $notifications,Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager,EtudiantConnecte $user)
     {
-       $token = $this->get('security.token_storage')->getToken();
-       $user = $token->getUser();
-       
-       $idapp=$user->getId();
-       $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-       $etudiant = $repository->find($idapp);
+         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $etudiant = $user->getUser();
        
        $id_groupe=$groupe->getId();
 
-       $notification=new Notification();
+      
 
        $nom_groupe=$groupe->getNom();
        $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();    
 
-       $notification->setNomSourceEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setSourceGroupe($groupe);
-       $notification->setSourceEtudiant($etudiant);
-       $notification->setDestGroupe($groupe);
-       $notification->setType("Demande");
-       $notification->setStatut("Non lu");
-       $notification->setCreatedAt(new \DateTime());
-       
-       $manager->persist($notification);
-       $manager->flush();
+            // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+       $notifications->etudiantEnvoiNotification( $nom_etudiant,$nom_groupe,$etudiant,$groupe,"Demande",$manager);
+
 
        return $this->redirectToRoute('groupe_liste');
     }
@@ -118,35 +105,28 @@ class groupeController extends AbstractController
  /**
      * @route("/groupe/accepter/{id}/{id_notif}", name="accepter_etudiant")
      */
-    public function accepterEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    public function accepterEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
-        $token = $this->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-        
-        $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $user = $repository->find($idapp);
-        $groupe=$user->getGroupe();
+         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $users = $user->getUser();
+        $groupe=$users->getGroupe();
         
         $etudiant->setGroupe($groupe);
 
-        $notification=new Notification();
+       
 
         $nom_groupe=$groupe->getNom();
         $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
 
-       $notification->setSourceGroupe($groupe);
-       $notification->setNomDestEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setDestEtudiant($etudiant);
-       $notification->setType("Accepter");
-       $notification->setCreatedAt(new \DateTime());
+              // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+        $notifications->groupeEnvoiNotification($nom_etudiant,$nom_groupe,$etudiant,$groupe,"Accepter",$manager );
+      
 
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
        $notifsup = $not_repository->find($id_notif);
        
        $manager->remove($notifsup);        
-       $manager->persist($notification);
+      
         $manager->persist($etudiant);
         $manager->flush();
 
@@ -157,35 +137,24 @@ class groupeController extends AbstractController
  /**
      * @route("/groupe/refuser/{id}/{id_notif}", name="refuser_etudiant")
      */
-    public function refuserEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    public function refuserEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
-        $token = $this->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-        
-        $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $user = $repository->find($idapp);
-        $groupe=$user->getGroupe();
-        
-       
-
-        $notification=new Notification();
+         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $users = $user->getUser();
+        $groupe=$users->getGroupe();
 
         $nom_groupe=$groupe->getNom();
         $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
 
-       $notification->setSourceGroupe($groupe);
-       $notification->setNomDestEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setDestEtudiant($etudiant);
-       $notification->setType("Refuser");
-       $notification->setCreatedAt(new \DateTime());
+
+              // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+        $notifications->groupeEnvoiNotification($nom_etudiant,$nom_groupe,$etudiant,$groupe,"Refuser",$manager );
 
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
        $notifsup = $not_repository->find($id_notif);
        
        $manager->remove($notifsup);        
-       $manager->persist($notification);
+       
         $manager->persist($etudiant);
         $manager->flush();
 
@@ -196,31 +165,19 @@ class groupeController extends AbstractController
  /**
      * @route("/groupe/quitter", name="quitter_groupe")
      */
-    public function quitterGroupe(EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    public function quitterGroupe(Notifications $notifications,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
-        $token = $this->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-        
-        $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $etudiant = $repository->find($idapp);
+         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $etudiant = $user->getUser();
         $groupe=$etudiant->getGroupe();
         $etudiant->setGroupe(null);
 
-        $notification=new Notification();
+        
         $nom_groupe=$groupe->getNom();
        $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();    
 
-       $notification->setNomSourceEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setSourceGroupe($groupe);
-       $notification->setSourceEtudiant($etudiant);
-       $notification->setDestGroupe($groupe);
-       $notification->setType("Quitter");
-       $notification->setCreatedAt(new \DateTime());
-       
-       $manager->persist($notification);
-       $manager->flush();
+     // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+       $notifications->etudiantEnvoiNotification( $nom_etudiant,$nom_groupe,$etudiant,$groupe,"Quitter",$manager);
         
        return $this->redirectToRoute('home');
 
@@ -230,35 +187,28 @@ class groupeController extends AbstractController
     /**
      * @route("/groupe/accepter_groupe/{id}/{id_notif}", name="accepter_groupe")
      */
-    public function accepterGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    public function accepterGroupe(Notifications $notifications,Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
-        $token = $this->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-        
-        $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $etudiant = $repository->find($idapp);
+         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $etudiant= $user->getUser();
          
         $etudiant->setGroupe($groupe);
 
-        $notification=new Notification();
-
+      
+        
         $nom_groupe=$groupe->getNom();
+
         $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
 
-        $notification->setNomSourceEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setSourceGroupe($groupe);
-       $notification->setSourceEtudiant($etudiant);
-       $notification->setDestGroupe($groupe);
-       $notification->setType("Accepter_groupe");
-       $notification->setCreatedAt(new \DateTime());
+              // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
 
+        $notifications->etudiantEnvoiNotification( $nom_etudiant,$nom_groupe,$etudiant,$groupe,"Accepter_groupe",$manager);
+ 
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
        $notifsup = $not_repository->find($id_notif);
        
        $manager->remove($notifsup);        
-       $manager->persist($notification);
+      
         $manager->persist($etudiant);
         $manager->flush();
 
@@ -268,34 +218,22 @@ class groupeController extends AbstractController
     /**
      * @route("/groupe/refuser_groupe/{id}/{id_notif}", name="refuser_groupe")
      */
-    public function refuserGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository)
+    public function refuserGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
-        $token = $this->get('security.token_storage')->getToken();
-        $user = $token->getUser();
-        
-        $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $etudiant = $repository->find($idapp);
+        // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
+        $etudiant = $user->getUser();
          
-
-        $notification=new Notification();
-
         $nom_groupe=$groupe->getNom();
         $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
 
-        $notification->setNomSourceEtudiant($nom_etudiant);
-       $notification->setNomGroupe($nom_groupe);
-       $notification->setSourceGroupe($groupe);
-       $notification->setSourceEtudiant($etudiant);
-       $notification->setDestGroupe($groupe);
-       $notification->setType("Refuser_groupe");
-       $notification->setCreatedAt(new \DateTime());
-
+         // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+        $notifications->etudiantEnvoiNotification( $nom_etudiant,$nom_groupe,$etudiant,$groupe,"Refuser_groupe",$manager);
+  
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
        $notifsup = $not_repository->find($id_notif);
        
        $manager->remove($notifsup);        
-       $manager->persist($notification);
+      
         $manager->persist($etudiant);
         $manager->flush();
 

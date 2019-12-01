@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class nbNotif  extends AbstractController
 {
 
-/*
+
     public function getNbNotif()
     {
 
@@ -38,7 +38,7 @@ class nbNotif  extends AbstractController
         $conn =$manager->getConnection();
 
         $sql = '
-            SELECT count(*) FROM Notification notif
+            SELECT * FROM Notification notif
             WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp
             Order by notif.created_at desc
             ';
@@ -47,9 +47,10 @@ class nbNotif  extends AbstractController
 
      $notificatio =$stmt->fetchAll();
 
-     $nb=count($notificatio);
+     $nbNotif=count($notificatio);
        
-
-        return $notificatio;
-    }*/
+        
+        return $nbNotif;
+    }
+    
 }

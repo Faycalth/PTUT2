@@ -24,9 +24,18 @@ class Professeur implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
+    * @var string $prenom
+    *
+    * @ORM\Column(name="prenom", type="string", length=255)
+    */
+    private $prenom;
+
+    /**
+    * @var string $nom
+    *
+    * @ORM\Column(name="nom", type="string", length=255)
+    */
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -142,6 +151,30 @@ class Professeur implements UserInterface
 
     function addRole($role) {
         $this->roles[] = $role;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
 }
