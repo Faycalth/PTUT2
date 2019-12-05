@@ -4,9 +4,10 @@
 
 {% block stylesheets %} <link rel="stylesheet" href="myproject.css">{% endblock %}
 
+
 {% block body %}
 <div style="color:gray"> PS: Le nombre maximum d'étudiants dans un groupe est de 6 </div>
-<div style="color:gray"> PS: Nous pourrez demander à un tuteur de vous encader lorsque le nombre d'étudiant dans le groupe sera au moins de 3</div>
+<div style="color:gray"> PS: Nous pourrez demander à un tuteur de vous encader lorsque le nombre d'étudiant dans le groupe sera au moins de 4</div>
  {% if etu != null  and  etu!= 'l' %}   
         <div class="alert alert-success">
         <strong> Votre demande a été envoyée avec succés</strong> 
@@ -41,23 +42,34 @@
   <form method="post" action="">
       
     
-      <select name="prenom_etudiant">    
-      <option selected >Prenom</option>
-   {% for listeetudian in listeetudiant %}
-      <option value="{{listeetudian.prenom}}"> {{listeetudian.prenom}} </option>
+   
+<div class="container">
+  <h4> Saisir le nom ou prenom </h4>
 
-   {% endfor %}
- 
-   </select>
-      <select name="nom_etudiant">    
-      <option selected >Nom</option>
-   {% for listeetudian in listeetudiant %}
-      <option value="{{listeetudian.nom}}"> {{listeetudian.nom}} </option>
 
-   {% endfor %}
- 
-   </select>
-    <input type="submit" value="Inviter" >  
+
+  <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom"  >
+  <br>
+  <ul  class="list-group" id="myList"  role="tablist">
+   {% for listeetudian in listeetudiant %}
+       <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput" onclick="document.getElementById('myInput').value = '{{listeetudian.nom}} {{listeetudian.prenom}}'" > {{listeetudian.nom}} {{listeetudian.prenom}}   </a>   </li>  
+      
+    {% endfor %}
+    
+  </ul>  
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input type="submit" value="Inviter" > 
   </form>
  
   </div>
@@ -66,7 +78,7 @@
  
  {% endif %}
 
- {%   if result>2 %}
+ {%   if result>3 %}
 <div class="col-md-3" >
  
   <a  class="btn btn-primary" data-toggle="collapse" href="#collapse3">Demande Tuteur</a> 
@@ -75,17 +87,37 @@
 
    
   <form method="post" action="">
-   <select>    
-      <option selected >Prenom</option>
-   {% for professeur in professeurs %}
-      <option> {{professeur.prenom}} </option>
-
-   {% endfor %}
- 
-   </select>
    
-    <input type="text" placeholder="nom" name="nom_tuteur"> 
-    <input type="submit" value="Inviter" >  
+      
+
+ 
+  <div class="container">
+  <h4> Saisir le nom ou prenom </h4>
+
+
+
+  <input class="form-control" id="myInput2" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom-prof"  >
+  <br>
+  <ul  class="list-group" id="myList2"  role="tablist">
+   {% for professeur in professeurs %}
+       <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput2" onclick="document.getElementById('myInput2').value = '{{professeur.nom}} {{professeur.prenom}}'" > {{professeur.nom}} {{professeur.prenom}}   </a>   </li>  
+      
+    {% endfor %}
+    
+  </ul>  
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList2 li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input type="submit" value="Inviter" >   
   </form>
  
   </div>

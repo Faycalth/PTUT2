@@ -119,7 +119,7 @@ class groupeController extends AbstractController
         $nom_etudiant=$etudiant->getPrenom().' '.$etudiant->getNom();
 
               // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
-        $notifications->groupeEnvoiNotification($nom_etudiant,$nom_groupe,$etudiant,$groupe,"Accepter",$manager );
+        $notifications->groupeEnvoiNotification($nom_etudiant,"",$nom_groupe,$etudiant,null,$groupe,"Accepter",$manager );
       
 
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
@@ -148,7 +148,7 @@ class groupeController extends AbstractController
 
 
               // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
-        $notifications->groupeEnvoiNotification($nom_etudiant,$nom_groupe,$etudiant,$groupe,"Refuser",$manager );
+        $notifications->groupeEnvoiNotification($nom_etudiant,"",$nom_groupe,$etudiant,null,$groupe,"Refuser",$manager );
 
        $not_repository = $this->getDoctrine()->getRepository(Notification::class);
        $notifsup = $not_repository->find($id_notif);

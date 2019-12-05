@@ -40,11 +40,11 @@ class reunionController extends AbstractController
 
         $sql = '
             SELECT * FROM etudiant etu
-            WHERE etu.groupe_id=:etu_groupe 
+            WHERE etu.groupe_id=:etu_groupe order by nom asc
             ';
         $sql_invite = '
             SELECT * FROM Etudiant etu
-            WHERE etu.groupe_id !=:etu_groupe or  etu.groupe_id is null
+            WHERE etu.groupe_id !=:etu_groupe or  etu.groupe_id is null order by nom asc
             ';
         $stmt = $conn->prepare($sql);
         $stmt->execute(['etu_groupe' => $etu_groupe]);
@@ -59,27 +59,25 @@ class reunionController extends AbstractController
    
     //fonctionnalité invité un etudiant 
     $etu='l';
-    $nom=$request->request->get('nom_etudiant');
-    $prenom=$request->request->get('prenom_etudiant');
-     if(($nom!==null) && ($prenom!==null)) 
+    $nom_prenom=$request->request->get('nom-prenom');
+    
+     if(($nom_prenom!==null) ) 
     {
-        
+        $pieces = explode(" ", $nom_prenom);
+        $nom=$pieces[0];
+         $prenom=$pieces[1];
             $sql2 = '
                     SELECT * FROM Etudiant etu
-                    WHERE etu.nom=:nom and etu.prenom=:prenom
+                    WHERE etu.nom=:nom and etu.prenom=:prenom 
                     ';
             $stmts = $conn->prepare($sql2);
             $stmts->execute(['nom' => $nom,'prenom'=>$prenom]);
             $etu =$stmts->fetchAll();
             
      if($etu){
-            $token = $this->get('security.token_storage')->getToken();
-            $user = $token->getUser();
-    
-            $idapp=$user->getId();
+            
             $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-            $user = $repository->find($idapp);
-            $groupe=$user->getGroupe();
+            $groupe=$etu_groupe;
             $notification=new Notification();
 
             $nom_groupe=$groupe->getNom();
@@ -88,7 +86,7 @@ class reunionController extends AbstractController
             $etus=$repository->find($etu[0]['id']);
             
                   // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
-            $notifications->groupeEnvoiNotification($nom_etudiant,$nom_groupe,$etus,$groupe,"Demande_Groupe",$manager );
+            $notifications->groupeEnvoiNotification($nom_etudiant,"",$nom_groupe,$etus,null,$groupe,"Demande_Groupe",$manager );
       
 
         }
@@ -98,10 +96,42 @@ class reunionController extends AbstractController
      //fonctionnalité demander un tuteur pour un encadrement 
         
      $sql2 = '
-     select * from `professeur` where id not in(select  professeur_id from `groupe` group by professeur_id having count(id)>2) ';
+     select * from `professeur` where id not in(select  professeur_id from `groupe` where professeur_id  is not null  group by professeur_id >2 ) order by nom asc ';
      $stmt2 = $conn->prepare($sql2);
      $stmt2->execute();
      $professeurs=$stmt2->fetchAll();
+     $etu='l';
+     $nom_prenom_prof=$request->request->get('nom-prenom-prof');
+     
+      if(($nom_prenom_prof!==null) ) 
+     {
+         $pieces = explode(" ", $nom_prenom_prof);
+         $nom_prof=$pieces[0];
+          $prenom_prof=$pieces[1];
+             $sql2 = '
+                     SELECT * FROM Professeur prof
+                     WHERE prof.nom=:nom and prof.prenom=:prenom 
+                     ';
+             $stmts = $conn->prepare($sql2);
+             $stmts->execute(['nom' => $nom_prof,'prenom'=>$prenom_prof]);
+             $etu =$stmts->fetchAll();
+             
+      if($etu){
+             
+             $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+             $groupe=$etu_groupe;
+             $notification=new Notification();
+ 
+             $nom_groupe=$groupe->getNom();
+             $nom_professeur=$prenom_prof.' '.$nom_prenom;
+             
+             $etus=$repository->find($etu[0]['id']);
+             
+                   // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+             $notifications->groupeEnvoiNotification("",$nom_professeur,$nom_groupe,null,$etus,$groupe,"Demande_Groupe",$manager );
+  
+         }
+        }
 
         
   

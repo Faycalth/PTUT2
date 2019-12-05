@@ -19,12 +19,12 @@ class Notification
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nom_source_etudiant;
-
+    private $nom_etudiant;
+ 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nom_dest_etudiant;
+    private $nom_professeur;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\etudiant", inversedBy="source_etudiant")
@@ -35,6 +35,16 @@ class Notification
      * @ORM\ManyToOne(targetEntity="App\Entity\etudiant", inversedBy="dest_etudiant")
      */
     private $dest_etudiant;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Professeur", inversedBy="source_professeur")
+     */
+    private $source_professeur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Professeur", inversedBy="dest_professeur")
+     */
+    private $dest_professeur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -187,6 +197,54 @@ class Notification
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getNomProfesseur(): ?string
+    {
+        return $this->nom_professeur;
+    }
+
+    public function setNomProfesseur(?string $nom_professeur): self
+    {
+        $this->nom_professeur = $nom_professeur;
+
+        return $this;
+    }
+
+    public function getSourceProfesseur(): ?Professeur
+    {
+        return $this->source_professeur;
+    }
+
+    public function setSourceProfesseur(?Professeur $source_professeur): self
+    {
+        $this->source_professeur = $source_professeur;
+
+        return $this;
+    }
+
+    public function getDestProfesseur(): ?Professeur
+    {
+        return $this->dest_professeur;
+    }
+
+    public function setDestProfesseur(?Professeur $dest_professeur): self
+    {
+        $this->dest_professeur = $dest_professeur;
+
+        return $this;
+    }
+
+    public function getNomEtudiant(): ?string
+    {
+        return $this->nom_etudiant;
+    }
+
+    public function setNomEtudiant(?string $nom_etudiant): self
+    {
+        $this->nom_etudiant = $nom_etudiant;
 
         return $this;
     }

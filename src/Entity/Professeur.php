@@ -54,6 +54,16 @@ class Professeur implements UserInterface
      */
     private $groupes;
 
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="source_professeur")
+     */
+    private $source_professeur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="dest_professeur")
+     */
+    private $dest_professeur;
+
 
 
 
@@ -64,6 +74,8 @@ class Professeur implements UserInterface
     public function __construct()
     {
         $this->groupes = new ArrayCollection();
+        $this->source_professeur = new ArrayCollection();
+        $this->dest_professeur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +185,68 @@ class Professeur implements UserInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getSourceProfesseur(): Collection
+    {
+        return $this->source_professeur;
+    }
+
+    public function addSourceProfesseur(Notification $sourceProfesseur): self
+    {
+        if (!$this->source_professeur->contains($sourceProfesseur)) {
+            $this->source_professeur[] = $sourceProfesseur;
+            $sourceProfesseur->setSourceProfesseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSourceProfesseur(Notification $sourceProfesseur): self
+    {
+        if ($this->source_professeur->contains($sourceProfesseur)) {
+            $this->source_professeur->removeElement($sourceProfesseur);
+            // set the owning side to null (unless already changed)
+            if ($sourceProfesseur->getSourceProfesseur() === $this) {
+                $sourceProfesseur->setSourceProfesseur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getDestProfesseur(): Collection
+    {
+        return $this->dest_professeur;
+    }
+
+    public function addDestProfesseur(Notification $destProfesseur): self
+    {
+        if (!$this->dest_professeur->contains($destProfesseur)) {
+            $this->dest_professeur[] = $destProfesseur;
+            $destProfesseur->setDestProfesseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDestProfesseur(Notification $destProfesseur): self
+    {
+        if ($this->dest_professeur->contains($destProfesseur)) {
+            $this->dest_professeur->removeElement($destProfesseur);
+            // set the owning side to null (unless already changed)
+            if ($destProfesseur->getDestProfesseur() === $this) {
+                $destProfesseur->setDestProfesseur(null);
+            }
+        }
 
         return $this;
     }
