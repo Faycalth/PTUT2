@@ -2147,3 +2147,12 @@ c50ee4,127.0.0.1,GET,http://localhost:8000/admin/myproject.css,1575544403,04246e
 a798e6,127.0.0.1,GET,http://localhost:8000/admin/choix,1575544407,,200
 8ffb75,127.0.0.1,GET,http://localhost:8000/admin/myproject.css,1575544408,687792,200
 687792,127.0.0.1,GET,http://localhost:8000/admin/myproject.css,1575544408,,404
+bbd723,127.0.0.1,GET,http://localhost:8000/,1575631739,,200
+4977d3,127.0.0.1,GET,http://localhost:8000/logout,1575631754,,302
+6ce589,127.0.0.1,GET,http://localhost:8000/,1575631755,,200
+6867fd,127.0.0.1,GET,http://localhost:8000/login,1575631757,,200
+316439,127.0.0.1,POST,http://localhost:8000/login_check,1575631764,,302
+4748d0,127.0.0.1,GET,http://localhost:8000/login,1575631764,,200
+3dae09,127.0.0.1,GET,http://localhost:8000/login,1575631838,,200
+d3d931,127.0.0.1,POST,http://localhost:8000/login_check,1575631848,,302
+3315e2,127.0.0.1,GET,http://localhost:8000/,1575631849,,200

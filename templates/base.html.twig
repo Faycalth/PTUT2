@@ -45,13 +45,7 @@ background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, F
                             <a class="nav-link" href="{{ path('fos_user_security_login')}}">Connexion</a>
                         </li>
                         {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)
-                            
-                            
-                            
-                            </a>
-                        </li>
+
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('admin_promotion')}}">Promote</a>
@@ -60,6 +54,10 @@ background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, F
                                     <a class="nav-link" href="{{ path('admin_dashboard')}}">Dashboard</a>
                        </li>
                             {% elseif is_granted('ROLE_ETUDIANT') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)
+                            </a>
+                        </li>     
                                {% if groupe.StatutGroupe ==null %}
                                     <li class="nav-item active">
                                         <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
