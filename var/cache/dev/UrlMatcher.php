@@ -22,6 +22,7 @@ return [
         '/admin/choix' => [[['_route' => 'admin_liste_etudiant', '_controller' => 'App\\Controller\\adminController::listeEtudiant'], null, null, null, false, false, null]],
         '/admin/liste_tuteur' => [[['_route' => 'admin_liste_tuteur', '_controller' => 'App\\Controller\\adminController::listeTuteur'], null, null, null, false, false, null]],
         '/admin/liste_groupe' => [[['_route' => 'admin_liste_groupe', '_controller' => 'App\\Controller\\adminController::listeGroupe'], null, null, null, false, false, null]],
+        '/admin/etudiant_create/r' => [[['_route' => 'admin_create_r_etudiant', '_controller' => 'App\\Controller\\adminController::creation_etudiant'], null, null, null, false, false, null]],
         '/etudiant/home' => [[['_route' => 'etudiant_home', '_controller' => 'App\\Controller\\etudiantController::home'], null, null, null, false, false, null]],
         '/myproject' => [[['_route' => 'myproject', '_controller' => 'App\\Controller\\etudiantController::myproject'], null, null, null, false, false, null]],
         '/groupe/creation' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\groupeController::creation'], null, null, null, false, false, null]],

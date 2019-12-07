@@ -31,6 +31,7 @@ return [
     'admin_delete_etudiant' => [['id'], ['_controller' => 'App\\Controller\\adminController::delete_etudiant'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/admin/etudiant']], [], []],
     'admin_delete_tuteur' => [['id'], ['_controller' => 'App\\Controller\\adminController::delete_tuteur'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/admin/tuteur']], [], []],
     'admin_delete_groupe' => [['id'], ['_controller' => 'App\\Controller\\adminController::delete_groupe'], [], [['variable', '', '[^/]++', 'id', true], ['text', '/admin/groupe']], [], []],
+    'admin_create_r_etudiant' => [[], ['_controller' => 'App\\Controller\\adminController::creation_etudiant'], [], [['text', '/admin/etudiant_create/r']], [], []],
     'etudiant_home' => [[], ['_controller' => 'App\\Controller\\etudiantController::home'], [], [['text', '/etudiant/home']], [], []],
     'myproject' => [[], ['_controller' => 'App\\Controller\\etudiantController::myproject'], [], [['text', '/myproject']], [], []],
     'groupe_creation' => [[], ['_controller' => 'App\\Controller\\groupeController::creation'], [], [['text', '/groupe/creation']], [], []],

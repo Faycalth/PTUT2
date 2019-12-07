@@ -5826,6 +5826,13 @@
         <argument key="groupe" type="service" id=".errored..service_locator.d9AtUDr.App\Entity\Groupe"/>
       </argument>
     </service>
+    <service id=".service_locator.czKK4py" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="encoder" type="service" id="security.user_password_encoder.generic"/>
+        <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.VjVhsh5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5919,11 +5926,12 @@
         <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.ublmcC6" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.yz1oOkx" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\NotificationController::notification" type="service" id=".service_locator.MB7eVfX"/>
         <argument key="App\Controller\NotificationController::removeNotif" type="service" id=".service_locator..81z3sz"/>
+        <argument key="App\Controller\adminController::creation_etudiant" type="service" id=".service_locator.czKK4py"/>
         <argument key="App\Controller\adminController::delete_etudiant" type="service" id=".service_locator.ddtE.O9"/>
         <argument key="App\Controller\adminController::delete_groupe" type="service" id=".service_locator.d9AtUDr"/>
         <argument key="App\Controller\adminController::delete_tuteur" type="service" id=".service_locator.jDiYOjU"/>
@@ -5947,6 +5955,7 @@
         <argument key="App\Service\Notifications::groupeEnvoiNotification" type="service" id=".service_locator.xxX8Fum"/>
         <argument key="App\Controller\NotificationController:notification" type="service" id=".service_locator.MB7eVfX"/>
         <argument key="App\Controller\NotificationController:removeNotif" type="service" id=".service_locator..81z3sz"/>
+        <argument key="App\Controller\adminController:creation_etudiant" type="service" id=".service_locator.czKK4py"/>
         <argument key="App\Controller\adminController:delete_etudiant" type="service" id=".service_locator.ddtE.O9"/>
         <argument key="App\Controller\adminController:delete_groupe" type="service" id=".service_locator.d9AtUDr"/>
         <argument key="App\Controller\adminController:delete_tuteur" type="service" id=".service_locator.jDiYOjU"/>
@@ -6434,12 +6443,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.ublmcC6"/>
+      <argument type="service" id=".service_locator.yz1oOkx"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.ublmcC6"/>
+      <argument type="service" id=".service_locator.yz1oOkx"/>
     </service>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6853,7 +6862,7 @@
     <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
     <service id="fos_user.mailer" alias="fos_user.mailer.default"/>
     <service id="fos_user.session" alias="session" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ublmcC6"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.yz1oOkx"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>
