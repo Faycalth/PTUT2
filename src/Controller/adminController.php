@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class adminController extends AbstractController
@@ -161,7 +162,19 @@ class adminController extends AbstractController
     public function edit_etudiant(Etudiant $etudiant, Request $request, ObjectManager $manager)
     {
         $this->manager = $manager;
-        $form = $this->createForm(RegistrationType::class, $etudiant);
+        $form = $this->createFormBuilder($etudiant)
+                ->add('prenom', null, [
+                    'label' => 'Prenom'
+                ])
+                ->add('nom', null, [
+                    'label' => 'nom'
+                ])
+                ->add('email', null, [
+                    'label' => 'Email'
+                ])
+                ->getform()
+            
+    ;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -170,11 +183,12 @@ class adminController extends AbstractController
             return $this->redirectToRoute('admin_liste_etudiant');
         }
         
-        return $this->render('adminTemplate/adminEtudiantTemplate/index.html.twig', [
+        return $this->render('adminTemplate/adminEtudiantTemplate/edit.html.twig', [
             'etudiant' => $etudiant,
             'form' => $form->createView()
         ]);
     }
+    
 
 
 
@@ -275,6 +289,32 @@ class adminController extends AbstractController
        //}
         return $this->redirectToRoute('admin_liste_groupe');  
     }
+   /**
+    * @Route("/admin/etudiant_create/r", name = "admin_create_r_etudiant")
+    */
+    public function creation_etudiant(Request $request, ObjectManager $manager,UserPasswordEncoderInterface $encoder)
+    {
+       
+        $etudian= new Etudiant();
+        $form = $this->createForm(RegistrationType::class,$etudian);
+   
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        
+            $hash=$encoder->encodePassword($etudian,$etudian->getPassword());
+            $manager->persist($etudian);
+            $manager->flush();
+            $this->addFlash('success', 'Etudiant créé avec succès');
+            return $this->redirectToRoute('admin_liste_etudiant');
+        }
+        
+        return $this->render('adminTemplate/adminEtudiantTemplate/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    
+    }
+
 
 
 }

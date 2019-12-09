@@ -174,7 +174,7 @@ class UserManipulator
         if ($user->hasRole($role)) {
             return false;
         }
-        $user->addRole($role);
+        $user->add($role);
         $this->userManager->updateUser($user);
 
         return true;

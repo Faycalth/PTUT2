@@ -17,7 +17,7 @@ fos_user:
         blank: 'Lūdzu ievadiet jaunu paroli.'
         short: 'Jaunā parole ir pārāk īsa.'
     current_password:
-        invalid: 'Ievadītā parole nav pareiza.'
+        invalid: 'Ievadītā pa nav pareiza.'
     group:
         blank: 'Lūdzu ievadiet nosaukumu.'
         short: 'Nosaukums ir pārāk īss.'
