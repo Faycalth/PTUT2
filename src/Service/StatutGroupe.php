@@ -23,14 +23,14 @@ class StatutGroupe  extends AbstractController
 
     public function getStatutGroupe()
     {
-           $token = $this->get('security.token_storage')->getToken();
+        $token = $this->get('security.token_storage')->getToken();
         $user = $token->getUser();
         
         $idapp=$user->getId();
-        $repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $user = $repository->find($idapp);
-        $groupe=$user->getGroupe();
+            $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+            $user = $repository->find($idapp);
+            $groupe=$user->getGroupe();
 
-        return $groupe;
+            return $groupe;
     }
 }

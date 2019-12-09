@@ -53,32 +53,33 @@ background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, F
                         <li class="nav-item active">
                                     <a class="nav-link" href="{{ path('admin_dashboard')}}">Dashboard</a>
                        </li>
-                            {% elseif is_granted('ROLE_ETUDIANT') %}
+                            {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)
                             </a>
-                        </li>     
-                               {% if groupe.StatutGroupe ==null %}
+                        </li> 
+                            {% endif %}
+                            {% if verif.isEtudiant == true %}
+                                {% if groupe.StatutGroupe ==null %}
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
+                                        </li>
+                                    {% endif %}
+                            {% elseif verif.isTuteur == true %}
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
-                                    </li>
-                                {% else %}
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{ path('monprojet')}}">Mon Projet</a>
+                                        <a class="nav-link" href="{{ path('mesgroupes')}}">Mes groupes</a>
                                     </li>
                                     <li class="nav-item active">
                                         <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
                                     </li>
-                                {% endif %}
-                            {% elseif is_granted('ROLE_TUTEUR') %}
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ path('mesgroupes')}}">Mes groupes</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
-                                </li>
-                            {% endif %}
-                            
+                            {% endif %}  
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('fos_user_security_logout')}}">Déconnexion</a>
                             </li>

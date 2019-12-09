@@ -155,10 +155,7 @@ class Professeur implements UserInterface
     public function getSalt(){}
     
     public function getRoles(){
-        if (empty($this->roles)) {
-            return ['ROLE_USER'];
-        }
-        return $this->roles;
+        return ['ROLE_TUTEUR'];
     }
 
     function addRole($role) {

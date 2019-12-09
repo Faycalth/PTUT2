@@ -23,34 +23,33 @@ class nbNotif  extends AbstractController
 
     public function getNbNotif()
     {
-
+        
         $token = $this->get('security.token_storage')->getToken();
         $user = $token->getUser();
         
         $idapp=$user->getId();
+            $manager=$this->getDoctrine()->getENtityManager();
+            $etu_repository = $this->getDoctrine()->getRepository(Etudiant::class);
+            $etudiant = $etu_repository->find($idapp);
+            
+            $etu_groupe=$etudiant->getGroupe();
+            
+            $conn =$manager->getConnection();
 
-        $manager=$this->getDoctrine()->getENtityManager();
-        $etu_repository = $this->getDoctrine()->getRepository(Etudiant::class);
-        $etudiant = $etu_repository->find($idapp);
+            $sql = '
+                SELECT * FROM Notification notif
+                WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp
+                Order by notif.created_at desc
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(['etu_groupe' => $etu_groupe, 'idapp'=>$idapp]);
+
+            $notificatio =$stmt->fetchAll();
+
+            $nbNotif=count($notificatio);
         
-        $etu_groupe=$etudiant->getGroupe();
-        
-        $conn =$manager->getConnection();
-
-        $sql = '
-            SELECT * FROM Notification notif
-            WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp
-            Order by notif.created_at desc
-            ';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(['etu_groupe' => $etu_groupe, 'idapp'=>$idapp]);
-
-     $notificatio =$stmt->fetchAll();
-
-     $nbNotif=count($notificatio);
-       
-        
-        return $nbNotif;
+            
+            return $nbNotif;
     }
     
 }

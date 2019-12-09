@@ -5,3 +5,4 @@ twig:
     globals:
         groupe: '@App\Service\StatutGroupe'
         nbNotif: '@App\Service\nbNotif'
+        verif: '@App\Service\UserService'

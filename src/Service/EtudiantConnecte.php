@@ -17,7 +17,7 @@ class EtudiantConnecte  extends AbstractController
 
     public function getUser()
     {
-           $token = $this->get('security.token_storage')->getToken();
+        $token = $this->get('security.token_storage')->getToken();
         $user = $token->getUser();
         
         $idapp=$user->getId();
