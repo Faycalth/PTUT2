@@ -29,6 +29,11 @@
              */
             protected $prenom;
 
+            /**
+             * @ORM\Column(type="string")
+             */
+            protected $type;
+
             public function __construct()
             {
                 parent::__construct();
@@ -60,6 +65,18 @@
             public function setPrenom(string $prenom): self
             {
                 $this->prenom = $prenom;
+
+                return $this;
+            }
+
+            public function getType(): ?string
+            {
+                return $this->type;
+            }
+
+            public function setType(string $type): self
+            {
+                $this->type = $type;
 
                 return $this;
             }
