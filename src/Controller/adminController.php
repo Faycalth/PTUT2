@@ -102,9 +102,10 @@ class adminController extends AbstractController
                  $adr = "@etu.univ-lyon1.fr";
                  $num = 1;
                  while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-                    
+                    $mot = "test";
+                    $mdp = password_hash($mot, PASSWORD_BCRYPT);
                    $sql = "INSERT into etudiant (nom,prenom,email,password)
-                        values ('".$column[0]."','".$column[1]."', '".$column[0]."."."".$column[1]."$adr', '$column[0]$column[1]$num')";
+                        values ('".$column[0]."','".$column[1]."', '".$column[0]."."."".$column[1]."$adr', '$mdp')";
                    $conn=$this->getDoctrine()->getManager()->getConnection();
                    
                    $stmt = $conn->prepare($sql);

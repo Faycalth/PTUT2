@@ -5946,11 +5946,7 @@
         <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-<<<<<<< HEAD
-    <service id=".service_locator.UNJ2A0i" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
-=======
-    <service id=".service_locator.yz1oOkx" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
->>>>>>> 2649aaaec3a792bd237619c9448c18a7089bd1e7
+    <service id=".service_locator.LOUUFOU" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\EmailController::mailInscription" type="service" id=".service_locator.Z_.o95M"/>
@@ -6475,20 +6471,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-<<<<<<< HEAD
-      <argument type="service" id=".service_locator.UNJ2A0i"/>
-=======
-      <argument type="service" id=".service_locator.yz1oOkx"/>
->>>>>>> 2649aaaec3a792bd237619c9448c18a7089bd1e7
+      <argument type="service" id=".service_locator.LOUUFOU"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-<<<<<<< HEAD
-      <argument type="service" id=".service_locator.UNJ2A0i"/>
-=======
-      <argument type="service" id=".service_locator.yz1oOkx"/>
->>>>>>> 2649aaaec3a792bd237619c9448c18a7089bd1e7
+      <argument type="service" id=".service_locator.LOUUFOU"/>
     </service>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6902,11 +6890,7 @@
     <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
     <service id="fos_user.mailer" alias="fos_user.mailer.default"/>
     <service id="fos_user.session" alias="session" public="false"/>
-<<<<<<< HEAD
-    <service id="argument_resolver.controller_locator" alias=".service_locator.UNJ2A0i"/>
-=======
-    <service id="argument_resolver.controller_locator" alias=".service_locator.yz1oOkx"/>
->>>>>>> 2649aaaec3a792bd237619c9448c18a7089bd1e7
+    <service id="argument_resolver.controller_locator" alias=".service_locator.LOUUFOU"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>
