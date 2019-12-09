@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class adminController extends AbstractController
 {
     /**
@@ -97,18 +98,23 @@ class adminController extends AbstractController
                  
                  $file = fopen($fileName, "r");
                  $column = fgetcsv($file, 10000, ";");
-                 while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
-                   $sql = "INSERT into personne (nom,prenom)
-                        values ('" . $column[0] . "','" . $column[1] . "')";
+                 $adr = "@etu.univ-lyon1.fr";
+                 $num = 1;
+                 while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+                    
+                   $sql = "INSERT into etudiant (nom,prenom,email,password)
+                        values ('".$column[0]."','".$column[1]."', '".$column[0]."."."".$column[1]."$adr', '$column[0]$column[1]$num')";
                    $conn=$this->getDoctrine()->getManager()->getConnection();
                    
                    $stmt = $conn->prepare($sql);
                   $result= $stmt->execute();
+                    $num = $num+1;
                    
                    if (! empty($result)) {
                      $type = "success";
                      $message = "Les Données sont importées dans la base de données";
                      $color="success";
+
                    } else {
                      $type = "error";
                      $message = "Problème lors de l'importation de données CSV";
@@ -117,7 +123,7 @@ class adminController extends AbstractController
                  }
                }
               }else{
-                  $message="le fichier doit etre un fichier avec une extension .csv";
+                  $message="Le fichier doit etre un fichier avec une extension .csv";
                   $color="danger";
               }
                    
@@ -270,7 +276,7 @@ class adminController extends AbstractController
         return $this->redirectToRoute('admin_liste_groupe');  
     }
 
-    
+
 }
 
 

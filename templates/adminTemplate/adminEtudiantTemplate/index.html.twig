@@ -12,34 +12,7 @@
     <div class="jumbotron text-center">
         <h1>Gérer les étudiants</h1>
     </div>
-
-<-- import etudiant -->   
-<div class="col-md-3" >
  
- <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Importer des étudiants</a>
- 
-
- <div id="collapse1" class="panel-collapse collapse" >
-    <a  class="btn btn-danger" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >IMPORTANT A LIRE AVANT D'IMPORTER!!!</a>
-    <br /> 
-     <div id="collapse2" class="panel-collapse collapse" >
-            kmlnjklnkn
-     </div>  
-    
-    <form enctype="multipart/form-data" action="" method="post">
-        <div class="input-row">
-            <input type="file"   name="file" id="file" accept=".csv">
-          
-            <br />
-            <button type="submit" id="submit" name="import" class="btn-submit">Import</button>
-            <br />
-        </div>
-    </form>
-
-  </div>
-
-</div>
-<-- fin import -->   
     {% for message in app.flashes('success') %}
         <div class = "alert alert-success">
             {{ message }}
@@ -73,15 +46,44 @@
                     </form>
 
                 </td>
+                <td><a href = "#" class="btn btn-primary">Envoyer un message</a></td>
                 </tr>
         {% endfor %}
         </tbody>
         </table>
-
-        <div class = "text-right">
-            <a href = "{{ path('fos_user_registration_register') }}" class="btn btn-primary" >Créer un étudiant </a>
-        </div>
+<div class="col-md-3" >
 
     </div>
+    <a  class="btn btn-primary" href="{{ path('admin_mail_inscription') }}">Envoyer mot de passe aux étudiants</a>
+ 
+ <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Importer des étudiants</a>
+ 
+
+ <div id="collapse1" class="panel-collapse collapse" >
+    <a  class="btn btn-danger" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >Cliquez ici pour voir les instructions à suivre</a>
+    <br /> 
+     <div id="collapse2" class="panel-collapse collapse" >
+            Etape 1 : Modifier le modèle en cliquant <a href="https://docs.google.com/spreadsheets/d/1wXBIXzH5gE2gb16pYGFzS-vw_zGXiMNDK1BhLgH_c4U/edit#gid=0" target="_blank">ici</a>.<br>
+            Etape 2 : Remplir les champs du modèle.<br>
+            Etape 3 : Cliquer sur "Fichier", "Téléchargement" et "Valeurs séparées par des virgules en .csv".<br>
+            Etape 4 : Cliquer sur "Importer" pour ajouter des étudiants<br>
+            NOTE IMPORTANTE : Ne pas modifier les colonnes du modèle et le fichier doit être enregistrer en ".csv".<br>
+     </div>  
+    
+    <form enctype="multipart/form-data" action="" method="post">
+        <div class="input-row">
+            <input type="file"   name="file" id="file" accept=".csv">
+          
+            <br />
+            <button type="submit" id="submit" name="import" class="btn-submit">Importer</button>
+            <br />
+        </div>
+    </form>
+
+  </div>
+
+</div>
+
+       
     
 {% endblock %}
