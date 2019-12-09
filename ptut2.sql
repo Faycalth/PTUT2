@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 09 déc. 2019 à 21:46
+-- Généré le :  lun. 09 déc. 2019 à 22:25
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `fos_user` (
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
   UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`),
@@ -113,11 +114,11 @@ CREATE TABLE IF NOT EXISTS `fos_user` (
 -- Déchargement des données de la table `fos_user`
 --
 
-INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `nom`, `prenom`) VALUES
-(1, 'samba', 'samba', 'sambadiarra2000@gmail.com', 'sambadiarra2000@gmail.com', 1, NULL, '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K', '2019-12-09 17:47:48', NULL, NULL, 'a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}', 'samba', 'Samba diarra'),
-(4, 'ravane', 'ravane', 'ravane@gmail.com', 'ravane@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 21:44:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'ravane', 'ravane'),
-(15, 'prof2', 'prof2', 'prof2@gmail.com', 'prof2@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 18:53:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'prof2', 'prof2'),
-(118, 'test', 'test', 'test.test@etu.univ-lyon1.fr', 'test.test@etu.univ-lyon1.fr', 1, NULL, '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm', '2019-12-09 15:28:50', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'test', 'test');
+INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `nom`, `prenom`, `type`) VALUES
+(1, 'samba', 'samba', 'sambadiarra2000@gmail.com', 'sambadiarra2000@gmail.com', 1, NULL, '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K', '2019-12-09 17:47:48', NULL, NULL, 'a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}', 'samba', 'Samba diarra', ''),
+(4, 'ravane', 'ravane', 'ravane@gmail.com', 'ravane@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 21:44:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'ravane', 'ravane', ''),
+(15, 'prof2', 'prof2', 'prof2@gmail.com', 'prof2@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 18:53:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'prof2', 'prof2', ''),
+(118, 'test', 'test', 'test.test@etu.univ-lyon1.fr', 'test.test@etu.univ-lyon1.fr', 1, NULL, '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm', '2019-12-09 15:28:50', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'test', 'test', '');
 
 -- --------------------------------------------------------
 
@@ -161,7 +162,8 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 ('20191104133706', '2019-11-04 13:37:27'),
 ('20191104210727', '2019-11-04 21:09:11'),
 ('20191105184053', '2019-11-05 18:41:11'),
-('20191105192207', '2019-11-05 19:22:20');
+('20191105192207', '2019-11-05 19:22:20'),
+('20191209222212', '2019-12-09 22:22:59');
 
 -- --------------------------------------------------------
 
