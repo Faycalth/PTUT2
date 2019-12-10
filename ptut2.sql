@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 09 déc. 2019 à 22:25
+-- Généré le :  mar. 10 déc. 2019 à 18:05
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -38,22 +38,24 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_717E22E37A45358C` (`groupe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `etudiant`
 --
 
 INSERT INTO `etudiant` (`id`, `groupe_id`, `nom`, `prenom`, `email`, `password`) VALUES
-(4, NULL, 'diop', 'ravane', 'ravane@gmail.com', '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS'),
-(118, NULL, 'test', 'test', 'test.test@etu.univ-lyon1.fr', '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm');
+(4, 1, 'diop', 'ravane', 'ravane@gmail.com', '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS'),
+(118, NULL, 'test', 'test', 'test.test@etu.univ-lyon1.fr', '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm'),
+(122, NULL, 'etu1', 'etu11', 'etu1.etu11@etu.univ-lyon1.fr', '$2y$10$EveIAixtU7nPg.8TaM5HXu9u66tPW4IlA/15zX6qzOIS0cZ.NjQny'),
+(126, NULL, 'yo', 'man', 'yo@gmail.com', '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K');
 
 --
 -- Déclencheurs `etudiant`
 --
 DROP TRIGGER IF EXISTS `ajout_etudiant_fosuer`;
 DELIMITER $$
-CREATE TRIGGER `ajout_etudiant_fosuer` AFTER INSERT ON `etudiant` FOR EACH ROW INSERT into `fos_user` values (new.id,new.prenom,new.prenom,new.email,new.email,1,NULL,new.password,NOW(),NULL,NULL,'a:1:{i:0;s:9:"ROLE_USER";}',new.nom,new.prenom)
+CREATE TRIGGER `ajout_etudiant_fosuer` AFTER INSERT ON `etudiant` FOR EACH ROW INSERT into `fos_user` (`username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `nom`, `prenom`, `type`) values (new.prenom,new.prenom,new.email,new.email,1,NULL,new.password,NOW(),NULL,NULL,'a:1:{i:0;s:9:"ROLE_USER";}',new.nom,new.prenom, "ETUDIANT")
 $$
 DELIMITER ;
 DROP TRIGGER IF EXISTS `suprim_groupe_update`;
@@ -108,17 +110,19 @@ CREATE TABLE IF NOT EXISTS `fos_user` (
   UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
   UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`),
   UNIQUE KEY `UNIQ_957A6479C05FB297` (`confirmation_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `fos_user`
 --
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `nom`, `prenom`, `type`) VALUES
-(1, 'samba', 'samba', 'sambadiarra2000@gmail.com', 'sambadiarra2000@gmail.com', 1, NULL, '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K', '2019-12-09 17:47:48', NULL, NULL, 'a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}', 'samba', 'Samba diarra', ''),
-(4, 'ravane', 'ravane', 'ravane@gmail.com', 'ravane@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 21:44:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'ravane', 'ravane', ''),
-(15, 'prof2', 'prof2', 'prof2@gmail.com', 'prof2@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-09 18:53:30', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'prof2', 'prof2', ''),
-(118, 'test', 'test', 'test.test@etu.univ-lyon1.fr', 'test.test@etu.univ-lyon1.fr', 1, NULL, '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm', '2019-12-09 15:28:50', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'test', 'test', '');
+(1, 'samba', 'samba', 'sambadiarra2000@gmail.com', 'sambadiarra2000@gmail.com', 1, NULL, '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K', '2019-12-10 14:50:09', NULL, NULL, 'a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}', 'samba', 'Samba diarra', ''),
+(4, 'ravane', 'ravane', 'ravane@gmail.com', 'ravane@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-10 11:34:41', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'ravane', 'ravane', 'ETUDIANT'),
+(15, 'prof2', 'prof2', 'prof2@gmail.com', 'prof2@gmail.com', 1, NULL, '$2y$13$G6Z2VB06vEJdvRhYAH2gbuO59VPlejZljKKxOytkXsryTVpFyFgzS', '2019-12-10 11:38:39', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'prof2', 'prof2', 'TUTEUR'),
+(118, 'test', 'test', 'test.test@etu.univ-lyon1.fr', 'test.test@etu.univ-lyon1.fr', 1, NULL, '$2y$10$Aqi0zHRyFhWnH.wo3.Eq5ejaU4zfedwmCRJD.R7RjmmwcNXRoHBZm', '2019-12-09 15:28:50', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'test', 'test', ''),
+(122, 'etu11', 'etu11', 'etu1.etu11@etu.univ-lyon1.fr', 'etu1.etu11@etu.univ-lyon1.fr', 1, NULL, '$2y$10$EveIAixtU7nPg.8TaM5HXu9u66tPW4IlA/15zX6qzOIS0cZ.NjQny', '2019-12-10 15:56:04', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'etu1', 'etu11', 'ETUDIANT'),
+(123, 'man', 'man', 'yo@gmail.com', 'yo@gmail.com', 1, NULL, '$2y$13$ZkA1DSMcCC3IJeZLuGLEm.b9TxWCTfT/y.OvM186Yoz5FSjG.oX4K', '2019-12-10 16:07:03', NULL, NULL, 'a:1:{i:0;s:9:\"ROLE_USER\";}', 'yo', 'man', 'ETUDIANT');
 
 -- --------------------------------------------------------
 
@@ -136,6 +140,13 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   PRIMARY KEY (`id`),
   KEY `IDX_4B98C21BAB22EE9` (`professeur_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `groupe`
+--
+
+INSERT INTO `groupe` (`id`, `professeur_id`, `nom`, `sujet`, `statut`) VALUES
+(1, NULL, 'nom1', 'sujet1', 'non valide');
 
 -- --------------------------------------------------------
 
@@ -224,7 +235,7 @@ INSERT INTO `professeur` (`id`, `prenom`, `email`, `password`, `nom`) VALUES
 --
 DROP TRIGGER IF EXISTS `ajout_professeur_fosuer`;
 DELIMITER $$
-CREATE TRIGGER `ajout_professeur_fosuer` AFTER INSERT ON `professeur` FOR EACH ROW INSERT into `fos_user` values (new.id,new.prenom,new.prenom,new.email,new.email,1,NULL,new.password,NOW(),NULL,NULL,'a:1:{i:0;s:9:"ROLE_USER";}',new.nom,new.prenom)
+CREATE TRIGGER `ajout_professeur_fosuer` AFTER INSERT ON `professeur` FOR EACH ROW INSERT into `fos_user` (`username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `nom`, `prenom`, `type`) values (new.prenom,new.prenom,new.email,new.email,1,NULL,new.password,NOW(),NULL,NULL,'a:1:{i:0;s:9:"ROLE_USER";}',new.nom,new.prenom, "TUTEUR")
 $$
 DELIMITER ;
 

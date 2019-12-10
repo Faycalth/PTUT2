@@ -34,6 +34,8 @@ class reunionController extends AbstractController
         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
         $etudiant = $user->getUser();
         //fin recuperation
+
+        
         $etu_groupe=$etudiant->getGroupe();
         
         $conn =$manager->getConnection();

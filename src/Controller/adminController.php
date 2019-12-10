@@ -100,7 +100,6 @@ class adminController extends AbstractController
                  $file = fopen($fileName, "r");
                  $column = fgetcsv($file, 10000, ";");
                  $adr = "@etu.univ-lyon1.fr";
-                 $num = 1;
                  while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
                     $mot = "test";
                     $mdp = password_hash($mot, PASSWORD_BCRYPT);
@@ -110,7 +109,6 @@ class adminController extends AbstractController
                    
                    $stmt = $conn->prepare($sql);
                   $result= $stmt->execute();
-                    $num = $num+1;
                    
                    if (! empty($result)) {
                      $type = "success";
