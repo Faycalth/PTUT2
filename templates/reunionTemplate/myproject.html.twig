@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur votre projet !{% endblock %}
+{% block title %}Votre projet !{% endblock %}
 
-{% block stylesheets %} <link rel="stylesheet" href="myproject.css">{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="css/myproject.css">
+{% endblock %}
 
 
 {% block body %}
-<div style="color:gray"> PS: Le nombre maximum d'étudiants dans un groupe est de 6 </div>
-<div style="color:gray"> PS: Nous pourrez demander à un tuteur de vous encader lorsque le nombre d'étudiant dans le groupe sera au moins de 4</div>
+<div style="color:gray"> NOTE : Le nombre d'étudiant dans le groupe doit être d'au moins de 4 (maximum 6) pour envoyer une demande aux tuteurs.</div>
+ 
  {% if etu != null  and  etu!= 'l' %}   
         <div class="alert alert-success">
         <strong> Votre demande a été envoyée avec succés</strong> 
@@ -17,45 +19,29 @@
  {% endif %}
 
 <div class="col-md-3" >
- 
- <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Liste des étudiants</a>
- 
- <div id="collapse1" class="panel-collapse collapse" style="border: 1px solid blue">
+  <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse1"  style="margin: 50px">Liste des étudiants</a>
+  <div id="collapse1" class="panel-collapse collapse">
     <ul>
       {% for etudiant in etudiants %}
-          <li> {{etudiant.prenom}}  {{etudiant.nom}}</li>
+      <li> {{etudiant.prenom}}  {{etudiant.nom}}</li>
       {% endfor %}
     </ul>
-
   </div>
-
 </div>
 
 {%   if result<6 %}
 <div class="col-md-3" >
- 
-  <a  class="btn btn-primary" data-toggle="collapse" href="#collapse2">Inviter un etudiant</a> 
-
- <div id="collapse2" class="panel-collapse collapse">
-
-   
+  <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse2" style="margin: 50px">Inviter un etudiant</a> 
+  <div id="collapse2" class="panel-collapse collapse">
   <form method="post" action="">
-      
-    
-   
-<div class="container">
+  <div class="container">
   <h4> Saisir le nom ou prenom </h4>
-
-
-
-  <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom"  >
+    <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom"  >
   <br>
   <ul  class="list-group" id="myList"  role="tablist">
-   {% for listeetudian in listeetudiant %}
-       <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput" onclick="document.getElementById('myInput').value = '{{listeetudian.nom}} {{listeetudian.prenom}}'" > {{listeetudian.nom}} {{listeetudian.prenom}}   </a>   </li>  
-      
-    {% endfor %}
-    
+  {% for listeetudian in listeetudiant %}
+  <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput" onclick="document.getElementById('myInput').value = '{{listeetudian.nom}} {{listeetudian.prenom}}'" > {{listeetudian.nom}} {{listeetudian.prenom}}   </a>   </li>
+  {% endfor %}
   </ul>  
 </div>
 
@@ -71,41 +57,30 @@ $(document).ready(function(){
 </script>
 <input type="submit" value="Inviter" > 
   </form>
- 
   </div>
-
 </div>
  
  {% endif %}
 
  {%   if result>3 %}
 <div class="col-md-3" >
- 
-  <a  class="btn btn-primary" data-toggle="collapse" href="#collapse3">Demande Tuteur</a> 
-
- <div id="collapse3" class="panel-collapse collapse">
+  <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse3">Demande Tuteur</a> 
+  <div id="collapse3" class="panel-collapse collapse">
 
    
   <form method="post" action="">
-   
-      
-
- 
   <div class="container">
-  <h4> Saisir le nom ou prenom </h4>
+    <h4> Saisir le nom ou prenom </h4>
+    <input class="form-control" id="myInput2" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom-prof"  >
+    <br>
+      <ul  class="list-group" id="myList2"  role="tablist">
+      {% for professeur in professeurs %}
+      <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput2" onclick="document.getElementById('myInput2').value = '{{professeur.nom}} {{professeur.prenom}}'" > {{professeur.nom}} {{professeur.prenom}}   </a>   </li>  
 
+      {% endfor %}
 
-
-  <input class="form-control" id="myInput2" type="text" placeholder="Search.." style="width:25%" onBlur="ForcerCaseCochee()" value="" name="nom-prenom-prof"  >
-  <br>
-  <ul  class="list-group" id="myList2"  role="tablist">
-   {% for professeur in professeurs %}
-       <li class="list-group-item list-group-item-action "  style="width:25%"> <a class="list-group-item list-group-item-action " data-toggle="list" href="#myInput2" onclick="document.getElementById('myInput2').value = '{{professeur.nom}} {{professeur.prenom}}'" > {{professeur.nom}} {{professeur.prenom}}   </a>   </li>  
-      
-    {% endfor %}
-    
-  </ul>  
-</div>
+      </ul>  
+  </div>
 
 <script>
 $(document).ready(function(){
@@ -129,11 +104,11 @@ $(document).ready(function(){
 
 
 <div class="text-right" >
-  <a href = "{{ path('quitter_groupe') }}" class="btn btn-danger" onclick="if(!confirm('Voulez vous vraiment quitter ce groupe?' )) { return false; }"> Quitter le groupe  </a>
+  <a href = "{{ path('quitter_groupe') }}" class="btn btn-outline-danger btn-sm" onclick="if(!confirm('Voulez vous vraiment quitter ce groupe?' )) { return false; }"> Quitter le groupe  </a>
 
 </div>
 
-
+{#
 
 <div class="table">
   <h2 class="heading">
@@ -212,6 +187,6 @@ $(document).ready(function(){
     </ul>
 </div>
 </div>
-
+#}
 {% endblock %}
 

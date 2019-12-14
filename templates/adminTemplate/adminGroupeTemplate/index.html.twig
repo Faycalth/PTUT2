@@ -5,9 +5,7 @@
 {% block body %}
     <div class="container mt-4">
 
-    <div class="jumbotron text-center">
-        <h1> La liste des groupes</h1>
-    </div>
+<legend style="margin-top:40px">Gérer les groupes</legend>
 
     {% for message in app.flashes('success') %}
         <div class = "alert alert-success">
@@ -28,12 +26,12 @@
             <tr>
                 <td> {{ groupes.sujet }} </td>
                 <td> 
-                    <a href="{{ path('admin_edit_groupe', {id: groupes.id}) }}" class="btn btn-secondary">Editer</a>
+                    <a href="{{ path('admin_edit_groupe', {id: groupes.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
                     
                     <form method="post" action =" {{ path ('admin_delete_groupe', {id: groupes.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un groupe !')">
                         <input type = "hidden" name = "_method" value = "DELETE">
                         <input type = "hidden" name = "_token" value = "{{ csrf_token('delete' ~ groupes.id) }}">
-                        <button class = "btn btn-danger"> Supprimer </button>
+                        <button class = "btn btn-danger btn-sm"> Supprimer </button>
                     </form>
 
                 </td>
@@ -43,7 +41,7 @@
         </table>
 
         <div class = "text-right">
-            <a href = "{{ path('fos_user_registration_register') }}" class="btn btn-primary" > Créer un groupe </a>
+            <a href = "{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-sm">Créer un groupe </a>
         </div>
 
     </div>

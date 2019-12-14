@@ -9,9 +9,8 @@
         <strong>{{message}}</strong> 
         </div>
     {% endif %}
-    <div class="jumbotron text-center">
-        <h1>Gérer les étudiants</h1>
-    </div>
+    
+<legend style="margin-top:40px">Gérer les étudiants</legend>
  
     {% for message in app.flashes('success') %}
         <div class = "alert alert-success">
@@ -37,16 +36,16 @@
                 <td>{{ etudiant.email }}</td>
                 <td>{{ etudiant.groupe }}</td>
                 <td> 
-                    <a href="{{ path('admin_edit_etudiant', {id: etudiant.id}) }}" class="btn btn-secondary">Editer</a>
+                    <a href="{{ path('admin_edit_etudiant', {id: etudiant.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
                     
                     <form method="post" action =" {{ path ('admin_delete_etudiant', {id: etudiant.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un étudiant !')">
                         <input type = "hidden" name = "_method" value = "DELETE">
                         <input type = "hidden" name = "_token" value = "{{ csrf_token('delete' ~ etudiant.id) }}">
-                        <button class = "btn btn-danger"> Supprimer </button>
+                        <button class = "btn btn-danger btn-sm"> Supprimer </button>
                     </form>
 
                 </td>
-                <td><a href = "#" class="btn btn-primary">Envoyer un message</a></td>
+                <td><a href = "#" class="btn btn-primary btn-sm">Envoyer un message</a></td>
                 </tr>
         {% endfor %}
         </tbody>
@@ -54,13 +53,12 @@
 <div class="col-md-3" >
 
     </div>
-    <a  class="btn btn-primary" href="{{ path('admin_mail_inscription') }}">Envoyer mot de passe aux étudiants</a>
  
- <a  class="btn btn-primary" data-toggle="collapse" href="#collapse1"  style="border: 1px solid blue">Importer des étudiants</a>
+ <a  class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapse1">Importer des étudiants</a>
  
 
  <div id="collapse1" class="panel-collapse collapse" >
-    <a  class="btn btn-danger" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >Cliquez ici pour voir les instructions à suivre</a>
+    <a  class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >Cliquez ici pour voir les instructions à suivre</a>
     <br /> 
      <div id="collapse2" class="panel-collapse collapse" >
             Etape 1 : Modifier le modèle en cliquant <a href="https://docs.google.com/spreadsheets/d/1wXBIXzH5gE2gb16pYGFzS-vw_zGXiMNDK1BhLgH_c4U/edit#gid=0" target="_blank">ici</a>.<br>
@@ -75,12 +73,10 @@
             <input type="file"   name="file" id="file" accept=".csv">
           
             <br />
-            <button type="submit" id="submit" name="import" class="btn-submit">Importer</button>
+            <button type="submit" id="submit" name="import" class="btn-submit btn-sm">Importer</button>
             <br />
-=======
         <div class = "text-right">
-            <a href = "#" class="btn btn-primary" >Créer un étudiant </a>
->>>>>>> 2649aaaec3a792bd237619c9448c18a7089bd1e7
+            <a href = "#" class="btn btn-primary btn-sm" >Créer un étudiant </a>
         </div>
     </form>
 

@@ -30,4 +30,14 @@ class UserService extends AbstractController
             return false;
     }
 
+    public function firstLogin(){
+        $token = $this->get('security.token_storage')->getToken();
+        $lastLog = $token->getUser()->getLastLogin();
+        if ($lastLog == null){
+            return true;
+        }
+        else 
+            return false;
+    }
+
 }

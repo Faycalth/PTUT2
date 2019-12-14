@@ -1,18 +1,71 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+<link rel="stylesheet" href="css/collapse_affichage">
+{% endblock %}
+
 {% block body %}
+    {% if not app.user %}
+    <div class="jumbotron">
+        <h1 class="display-3">Hello, world!</h1>
+        <p class="lead">Bienvenue sur MyPTUT, votre gestionnaire de PTUT qui vous aidera tout au long de vos projets.</p>
+        <hr class="my-4">
+        <p>À quoi sert MyPTUT et comment l'utiliser ?</p>
 
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#etudiant_info">Pour les étudiants</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tuteur_info">Pour les tuteurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#admin_info">Pour l'admin</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade show active" id="etudiant_info">
+                    <p>Description pour les étudiants.</p>
+                </div>
+                <div class="tab-pane fade" id="tuteur_info">
+                    <p>Description pour les tuteurs.</p>
+                </div>
+                <div class="tab-pane fade" id="admin_info">
+                    <p>Description pour l'admin.</p>
+                </div>
+            </div>
+        </div>
+    {% elseif verif.isEtudiant == true %}
+        {% if verif.firstLogin == true %}
+            <div class="jumbotron">
+                <h1 class="display-5">Bienvenue à toi Etudiant</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <hr class="my-4">
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            </div>
+        {% else %}
+            <div class="jumbotron">
+            <h1 class="display-5">Salut Etudiant</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        </div>
+        {% endif %}
 
-<h1>Bienvenue sur MyPTUT</h1>
-<img src="my ptut.png" width="300px"> 
-
-
-
-
-
-
-
-
-
-
+    {% elseif verif.isTuteur == true %}
+    <div class="jumbotron">
+        <h1 class="display-5">Bienvenue à vous Tuteur!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    </div>
+    {% elseif is_granted('ROLE_ADMIN') %}
+    <div class="jumbotron">
+        <h1 class="display-5">Bienvenue Admin!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    </div>
+    {% endif %}
 {% endblock %}

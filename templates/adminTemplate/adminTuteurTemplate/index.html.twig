@@ -5,9 +5,7 @@
 {% block body %}
     <div class="container mt-4">
     
-    <div class="jumbotron text-center">
-        <h1> Gérer les tuteurs</h1>
-    </div>
+<legend style="margin-top:40px">Gérer les tuteurs</legend>
 
     {% for message in app.flashes('success') %}
         <div class = "alert alert-success">
@@ -28,11 +26,11 @@
             <tr>
                 <td> {{ prof.username }} </td>
                 <td> 
-                    <a href="{{ path('admin_edit_tuteur', {id: prof.id}) }}" class="btn btn-secondary">Editer</a>
+                    <a href="{{ path('admin_edit_tuteur', {id: prof.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
                     <form method="post" action =" {{ path ('admin_delete_tuteur', {id: prof.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un tuteur !')">
                         <input type = "hidden" name = "_method" value = "DELETE">
                         <input type = "hidden" name = "_token" value = "{{ csrf_token('delete' ~ prof.id) }}">
-                        <button class = "btn btn-danger"> Supprimer </button>
+                        <button class = "btn btn-danger btn-sm"> Supprimer </button>
                     </form>
                 </td>
                 </tr>
@@ -41,7 +39,7 @@
         </table>
 
         <div class = "text-right">
-            <a href = "{{ path('fos_user_registration_register')}}" class="btn btn-primary" > Créer un tuteur </a>
+            <a href = "#" class="btn btn-primary btn-sm" > Créer un tuteur </a>
         </div>
     </div>
     
