@@ -50,17 +50,45 @@
         {% endfor %}
         </tbody>
         </table>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <button class="btn btn-primary" data-toggle="collapse" data-target="#content">Some text</button>
+      <div class="collapse" id="content">
+          Content
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="col-md-3" >
 
     </div>
  
- <a  class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapse1">Importer des étudiants</a>
+ <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Importer des étudiants</button>
  
 
- <div id="collapse1" class="panel-collapse collapse" >
+ <div id="collapse1" class="collapse" >
     <a  class="btn btn-danger btn-sm" data-toggle="collapse" href="#collapse2"  style="margin-top:5%;margin-bottom:5%" >Cliquez ici pour voir les instructions à suivre</a>
     <br /> 
-     <div id="collapse2" class="panel-collapse collapse" >
+     <div id="collapse2" class="collapse" >
             Etape 1 : Modifier le modèle en cliquant <a href="https://docs.google.com/spreadsheets/d/1wXBIXzH5gE2gb16pYGFzS-vw_zGXiMNDK1BhLgH_c4U/edit#gid=0" target="_blank">ici</a>.<br>
             Etape 2 : Remplir les champs du modèle.<br>
             Etape 3 : Cliquer sur "Fichier", "Téléchargement" et "Valeurs séparées par des virgules en .csv".<br>
@@ -85,5 +113,4 @@
 </div>
 
        
-    
 {% endblock %}
