@@ -40,4 +40,11 @@ class UserService extends AbstractController
             return false;
     }
 
+    public function username()
+    {
+        $token = $this->get('security.token_storage')->getToken();
+        $username = $token->getUser()->getNom();
+            return $username;
+    }
+
 }

@@ -39,27 +39,38 @@
     {% elseif verif.isEtudiant == true %}
         {% if verif.firstLogin == true %}
             <div class="jumbotron">
-                <h1 class="display-5">Bienvenue à toi Etudiant</h1>
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h1 class="display-5">Bienvenue à toi {{ verif.username }}</h1>
+                <p class="lead">Nous allons t'expliquer en quelques points le but de MyPTUT, la plateforme de gestion des projets tuteurés.</p>
                 <hr class="my-4">
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <p>Explications etudiants...</p>
+                <p>N'oublie pas de changer ton mot de passe, clique sur le lien suivant : <a href="{{ path('fos_user_change_password')}}">changer mon mot de passe</a></p>
             </div>
         {% else %}
             <div class="jumbotron">
-            <h1 class="display-5">Salut Etudiant</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <h1 class="display-5">Re-Bonjour {{ verif.username }}</h1>
+            <p class="lead">Dépend des verifs</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
         </div>
         {% endif %}
 
     {% elseif verif.isTuteur == true %}
-    <div class="jumbotron">
-        <h1 class="display-5">Bienvenue à vous Tuteur!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    </div>
+        {% if verif.firstLogin == true %}
+            <div class="jumbotron">
+                <h1 class="display-5">Bienvenue à vous {{ user.username }}</h1>
+                <p class="lead">Nous allons vous expliquer en quelques points le but de MyPTUT, la plateforme de gestion des projets tuteurés.</p>
+                <hr class="my-4">
+                <p>Explications tuteurs...</p>
+                <p>N'oublie pas de changer ton mot de passe, clique sur le lien suivant : <a href="{{ path('fos_user_change_password')}}">changer mon mot de passe</a></p>
+            </div>
+        {% else %}
+            <div class="jumbotron">
+            <h1 class="display-5">Re-Bonjour {{ user.username }}</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        </div>
+        {% endif %}
     {% elseif is_granted('ROLE_ADMIN') %}
     <div class="jumbotron">
         <h1 class="display-5">Bienvenue Admin!</h1>
