@@ -26,9 +26,9 @@ return [
         '/admin/etudiant_create/r' => [[['_route' => 'admin_create_r_etudiant', '_controller' => 'App\\Controller\\adminController::creation_etudiant'], null, null, null, false, false, null]],
         '/etudiant/home' => [[['_route' => 'etudiant_home', '_controller' => 'App\\Controller\\etudiantController::home'], null, null, null, false, false, null]],
         '/myproject' => [[['_route' => 'myproject', '_controller' => 'App\\Controller\\etudiantController::myproject'], null, null, null, false, false, null]],
-        '/groupe/creation' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\groupeController::creation'], null, null, null, false, false, null]],
-        '/groupe/liste' => [[['_route' => 'groupe_liste', '_controller' => 'App\\Controller\\groupeController::listeGroupe'], null, null, null, false, false, null]],
-        '/groupe/quitter' => [[['_route' => 'quitter_groupe', '_controller' => 'App\\Controller\\groupeController::quitterGroupe'], null, null, null, false, false, null]],
+        '/creation_groupe' => [[['_route' => 'groupe_creation', '_controller' => 'App\\Controller\\groupeController::creation'], null, null, null, false, false, null]],
+        '/liste_groupe' => [[['_route' => 'groupe_liste', '_controller' => 'App\\Controller\\groupeController::listeGroupe'], null, null, null, false, false, null]],
+        '/quitter_groupe' => [[['_route' => 'quitter_groupe', '_controller' => 'App\\Controller\\groupeController::quitterGroupe'], null, null, null, false, false, null]],
         '/monprojet' => [[['_route' => 'monprojet', '_controller' => 'App\\Controller\\reunionController::myproject'], null, null, null, false, false, null]],
         '/reunion_historique' => [[['_route' => 'reunion_historique', '_controller' => 'App\\Controller\\reunionController::reunion'], null, null, null, false, false, null]],
         '/reunion_ajoutReunion' => [[['_route' => 'Ajout_reunion', '_controller' => 'App\\Controller\\reunionController::ajoutReunion'], null, null, null, false, false, null]],
@@ -65,37 +65,40 @@ return [
                     .')'
                 .')'
                 .'|/notification/remove/([^/]++)(*:198)'
-                .'|/admin/(?'
-                    .'|etudiant([^/]++)(?'
-                        .'|(*:235)'
-                    .')'
-                    .'|tuteur([^/]++)(?'
-                        .'|(*:261)'
-                    .')'
-                    .'|groupe([^/]++)(?'
-                        .'|(*:287)'
-                    .')'
-                .')'
-                .'|/groupe/(?'
-                    .'|re(?'
-                        .'|joindre/([^/]++)(*:329)'
-                        .'|fuser(?'
-                            .'|/([^/]++)/([^/]++)(*:363)'
-                            .'|_groupe/([^/]++)/([^/]++)(*:396)'
+                .'|/a(?'
+                    .'|dmin/(?'
+                        .'|etudiant([^/]++)(?'
+                            .'|(*:238)'
+                        .')'
+                        .'|tuteur([^/]++)(?'
+                            .'|(*:264)'
+                        .')'
+                        .'|groupe([^/]++)(?'
+                            .'|(*:290)'
                         .')'
                     .')'
-                    .'|accepter(?'
-                        .'|/([^/]++)/([^/]++)(*:435)'
-                        .'|_groupe/([^/]++)/([^/]++)(*:468)'
+                    .'|ccepter_(?'
+                        .'|groupe(?'
+                            .'|/([^/]++)/([^/]++)(*:338)'
+                            .'|_groupe/([^/]++)/([^/]++)(*:371)'
+                        .')'
+                        .'|/([^/]++)/([^/]++)(*:398)'
                     .')'
                 .')'
                 .'|/re(?'
-                    .'|union/(?'
-                        .'|([^/]++)(*:501)'
-                        .'|taches(*:515)'
+                    .'|joindre_groupe/([^/]++)(*:437)'
+                    .'|fuser_(?'
+                        .'|groupe/([^/]++)/([^/]++)(?'
+                            .'|(*:481)'
+                        .')'
+                        .'|/([^/]++)/([^/]++)(*:508)'
                     .')'
-                    .'|gister/confirm/([^/]++)(*:547)'
-                    .'|setting/reset/([^/]++)(*:577)'
+                    .'|union/(?'
+                        .'|([^/]++)(*:534)'
+                        .'|taches(*:548)'
+                    .')'
+                    .'|gister/confirm/([^/]++)(*:580)'
+                    .'|setting/reset/([^/]++)(*:610)'
                 .')'
             .')/?$}sDu',
     ],
@@ -108,27 +111,31 @@ return [
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         198 => [[['_route' => 'remove_notification', '_controller' => 'App\\Controller\\NotificationController::removeNotif'], ['id'], null, null, false, true, null]],
-        235 => [
+        238 => [
             [['_route' => 'admin_edit_etudiant', '_controller' => 'App\\Controller\\adminController::edit_etudiant'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [['_route' => 'admin_delete_etudiant', '_controller' => 'App\\Controller\\adminController::delete_etudiant'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        261 => [
+        264 => [
             [['_route' => 'admin_edit_tuteur', '_controller' => 'App\\Controller\\adminController::edit_tuteur'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [['_route' => 'admin_delete_tuteur', '_controller' => 'App\\Controller\\adminController::delete_tuteur'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        287 => [
+        290 => [
             [['_route' => 'admin_edit_groupe', '_controller' => 'App\\Controller\\adminController::edit_groupe'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [['_route' => 'admin_delete_groupe', '_controller' => 'App\\Controller\\adminController::delete_groupe'], ['id'], ['DELETE' => 0], null, false, true, null],
         ],
-        329 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
-        363 => [[['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\groupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
-        396 => [[['_route' => 'refuser_groupe', '_controller' => 'App\\Controller\\groupeController::refuserGroupe'], ['id', 'id_notif'], null, null, false, true, null]],
-        435 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\groupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
-        468 => [[['_route' => 'accepter_groupe', '_controller' => 'App\\Controller\\groupeController::accepterGroupe'], ['id', 'id_notif'], null, null, false, true, null]],
-        501 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        515 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        547 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        577 => [
+        338 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\groupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
+        371 => [[['_route' => 'accepter_groupe', '_controller' => 'App\\Controller\\groupeController::accepterGroupe'], ['id', 'id_notif'], null, null, false, true, null]],
+        398 => [[['_route' => 'accepter_tuteur', '_controller' => 'App\\Controller\\groupeController::accepterTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
+        437 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
+        481 => [
+            [['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\groupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null],
+            [['_route' => 'refuser_groupe', '_controller' => 'App\\Controller\\groupeController::refuserGroupe'], ['id', 'id_notif'], null, null, false, true, null],
+        ],
+        508 => [[['_route' => 'refuser_tuteur', '_controller' => 'App\\Controller\\groupeController::refuserTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
+        534 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        548 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
+        580 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        610 => [
             [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

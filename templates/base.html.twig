@@ -32,14 +32,22 @@
 
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item active">
-                                            <a class="nav-link" href="{{ path('admin_dashboard')}}">Dashboard</a>
-                                </li>                      
-                             {% endif %}
-                          {% if verif.isEtudiant == true %} 
-                          <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('admin_promotion')}}">Promote</a>
+                                </li>
+                        <li class="nav-item active">
+                                    <a class="nav-link" href="{{ path('admin_dashboard')}}">Dashboard</a>
+                       </li>
+                            
+                       
+                            {% endif %}
+                                   <li class="nav-item">
                             <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)
                             </a>
-                        </li>      
+                        </li>
+               
+                          {% if verif.isEtudiant == true %} 
+                         
+                              
                                 {% if groupe.StatutGroupe ==null %}
                                         <li class="nav-item active">
                                             <a class="nav-link" href="{{ path('groupe_liste')}}">Rejoindre</a>
@@ -52,14 +60,11 @@
                                             <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
                                         </li>
                                     {% endif %}
+                                
                            {% elseif verif.isTuteur == true %}
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{ path('mesgroupes')}}">Mes groupes</a>
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{ path('reunion_historique')}}">Mes Réunions</a>
-                                    </li>
+                         
                             {% endif %} 
+                           
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('fos_user_profile_show')}}">Mon profil</a>
                             </li>

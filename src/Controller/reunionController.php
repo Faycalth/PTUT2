@@ -119,8 +119,8 @@ class reunionController extends AbstractController
              $etu =$stmts->fetchAll();
              
       if($etu){
-             
-             $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+              
+             $repository = $this->getDoctrine()->getRepository(Professeur::class);
              $groupe=$etu_groupe;
              $notification=new Notification();
  
@@ -130,7 +130,7 @@ class reunionController extends AbstractController
              $etus=$repository->find($etu[0]['id']);
              
                    // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
-             $notifications->groupeEnvoiNotification("",$nom_professeur,$nom_groupe,null,$etus,$groupe,"Demande_Groupe",$manager );
+             $notifications->groupeEnvoiNotification("",$nom_professeur,$nom_groupe,null,$etus,$groupe,"Demande_Tuteur",$manager );
   
          }
         }
@@ -140,7 +140,7 @@ class reunionController extends AbstractController
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',['listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
+        return $this->render('reunionTemplate/myproject.html.twig',['groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
     );
     }
 

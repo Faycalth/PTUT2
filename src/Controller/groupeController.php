@@ -13,21 +13,23 @@ use App\Repository\ProfesseurRepository;
 use App\Repository\NotificationRepository;
 use App\Service\Notifications;
 use App\Service\EtudiantConnecte;
+use App\Service\ProfesseurConnecte;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class groupeController extends AbstractController
 {
 
    /**
-    * @Route("/groupe/creation", name="groupe_creation")
+    * @Route("/creation_groupe", name="groupe_creation")
     */
-    public function creation(Request $request, ObjectManager $manager,EtudiantRepository $repository,EtudiantConnecte $user)
+    public function creation(Request $request,\Doctrine\Common\Persistence\ManagerRegistry $registry,EtudiantRepository $repository,EtudiantConnecte $user)
     {
         $groupe = new Groupe();
         $form = $this->createForm(GroupeType::class, $groupe);
@@ -54,7 +56,7 @@ class groupeController extends AbstractController
      */
     private $repository;
 
-    public function __construct(EtudiantRepository $etudiant_repository, ProfesseurRepository $prof_repository, ObjectManager $manager, GroupeRepository $groupe_repository)
+    public function __construct(EtudiantRepository $etudiant_repository, ProfesseurRepository $prof_repository, \Doctrine\Common\Persistence\ManagerRegistry $registry, GroupeRepository $groupe_repository)
     {
         $this->etudiant_repository = $etudiant_repository;
         $this->prof_repository = $prof_repository;
@@ -64,7 +66,7 @@ class groupeController extends AbstractController
     }
 
     /**
-     * @Route("/groupe/liste", name="groupe_liste")
+     * @Route("/liste_groupe", name="groupe_liste")
      */
     public function listeGroupe(ObjectManager $manager)
     {
@@ -81,7 +83,7 @@ class groupeController extends AbstractController
     }
 
  /**
-     * @route("/groupe/rejoindre/{nom}", name="groupe_rejoindre")
+     * @route("/rejoindre_groupe/{nom}", name="groupe_rejoindre")
      */ 
     public function rejoindreGroupe(Notifications $notifications,Groupe $groupe,EtudiantRepository $repository,ObjectManager $manager,EtudiantConnecte $user)
     {
@@ -103,7 +105,7 @@ class groupeController extends AbstractController
     }
 
  /**
-     * @route("/groupe/accepter/{id}/{id_notif}", name="accepter_etudiant")
+     * @route("/accepter_groupe/{id}/{id_notif}", name="accepter_etudiant")
      */
     public function accepterEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
@@ -135,7 +137,7 @@ class groupeController extends AbstractController
 
     
  /**
-     * @route("/groupe/refuser/{id}/{id_notif}", name="refuser_etudiant")
+     * @route("/refuser_groupe/{id}/{id_notif}", name="refuser_etudiant")
      */
     public function refuserEtudaint(Etudiant $etudiant,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
@@ -163,7 +165,7 @@ class groupeController extends AbstractController
 
        
  /**
-     * @route("/groupe/quitter", name="quitter_groupe")
+     * @route("/quitter_groupe", name="quitter_groupe")
      */
     public function quitterGroupe(Notifications $notifications,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
@@ -185,7 +187,7 @@ class groupeController extends AbstractController
 
 
     /**
-     * @route("/groupe/accepter_groupe/{id}/{id_notif}", name="accepter_groupe")
+     * @route("/accepter_groupe_groupe/{id}/{id_notif}", name="accepter_groupe")
      */
     public function accepterGroupe(Notifications $notifications,Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
@@ -216,7 +218,7 @@ class groupeController extends AbstractController
     }
     
     /**
-     * @route("/groupe/refuser_groupe/{id}/{id_notif}", name="refuser_groupe")
+     * @route("/refuser_groupe/{id}/{id_notif}", name="refuser_groupe")
      */
     public function refuserGroupe(Groupe $groupe,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,EtudiantConnecte $user)
     {
@@ -239,7 +241,61 @@ class groupeController extends AbstractController
 
         return $this->redirectToRoute('notification');
     }
+     
+        /**
+     * @route("/accepter_/{id}/{id_notif}", name="accepter_tuteur")
+     */
+    public function accepterTuteur(Notifications $notifications,Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,ProfesseurConnecte $user)
+    {
+        $tuteur = $user->getUser_p();
         
+        $groupe->setProfesseurId($tuteur);
+
+        $nom_groupe=$groupe->getNom();
+        $nom_tuteur=$tuteur->getPrenom().' '.$tuteur->getNom();
+
+         // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+        $notifications->tuteurEnvoiNotification( $nom_tuteur,$nom_groupe,$tuteur,$groupe,"Accepter_Tuteur",$manager);
+  
+       $not_repository = $this->getDoctrine()->getRepository(Notification::class);
+       $notifsup = $not_repository->find($id_notif);
+       
+       $manager->remove($notifsup);        
+      
+        $manager->persist($tuteur);
+        $manager->flush();
+
+        return $this->redirectToRoute('notification');
+ 
+
+        return $this->redirectToRoute('home');
+    }
+    
+    /**
+     * @route("/refuser_/{id}/{id_notif}", name="refuser_tuteur")
+     */
+    public function refuserTuteur(Groupe $groupe,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,ProfesseurConnecte $user)
+    {
+        //
+        
+        $tuteur = $user->getUser_p();
+         
+        $nom_groupe=$groupe->getNom();
+        $nom_tuteur=$tuteur->getPrenom().' '.$tuteur->getNom();
+
+         // utilisation de la fonction  qui se trouve dans le dossier service\Notifications pour generer une notification
+        $notifications->tuteurEnvoiNotification( $nom_tuteur,$nom_groupe,$tuteur,$groupe,"Refuser_Tuteur",$manager);
+  
+       $not_repository = $this->getDoctrine()->getRepository(Notification::class);
+       $notifsup = $not_repository->find($id_notif);
+       
+       $manager->remove($notifsup);        
+      
+        $manager->persist($tuteur);
+        $manager->flush();
+
+        return $this->redirectToRoute('notification');
+    }
 
         
 }

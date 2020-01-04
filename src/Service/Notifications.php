@@ -11,6 +11,7 @@ use App\Repository\GroupeRepository;
 use App\Repository\ProfesseurRepository;
 use App\Repository\NotificationRepository;
 
+
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,6 +34,18 @@ class Notifications  extends AbstractController
         $manager->persist($notification);
         $manager->flush();
 
+    }
+    public function tuteurEnvoiNotification(String $nom_tuteur,String $nom_groupe,Professeur $tuteur,Groupe $groupe,String $type,ObjectManager $manager ){
+        $notification=new Notification();
+        $notification->setNomProfesseur($nom_tuteur);
+        $notification->setNomGroupe($nom_groupe);
+        $notification->setSourceProfesseur($tuteur);
+        $notification->setDestGroupe($groupe);
+        $notification->setType($type);
+        $notification->setCreatedAt(new \DateTime());
+        
+        $manager->persist($notification);
+        $manager->flush();
     }
 
 
