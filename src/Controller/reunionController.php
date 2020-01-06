@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Taches;
 use App\Entity\Etudiant;
 use App\Entity\Groupe;
 use App\Form\GroupeType;
 use App\Form\ReunionType;
+use App\Form\TacheType;
 use App\Entity\Professeur;
 use App\Entity\Notification;
 use App\Repository\EtudiantRepository;
@@ -135,12 +136,28 @@ class reunionController extends AbstractController
          }
         }
 
+        //ajout d'une tache
+        $tache = new Taches();
+        $form = $this->createForm(TacheType::class, $tache);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $tache->setStatut("afaire");
+           
+            $tache->setGroupe($etu_groupe);
+            $tache->setCreatesAt(new \DateTime());
+            $manager->persist($tache);
+            $manager->flush();
+            return $this->redirectToRoute('monprojet');
+        }
         
+        
+
+        //fin ajout tache
   
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',['groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
+        return $this->render('reunionTemplate/myproject.html.twig',['form' => $form->createView() ,'groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
     );
     }
 
@@ -203,5 +220,8 @@ class reunionController extends AbstractController
    public function tache(){
     return $this->render('reunionTemplate/tache.html.twig');
     }
+
+
+
 
 }

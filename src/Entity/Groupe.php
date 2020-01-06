@@ -60,6 +60,11 @@ class Groupe
      */
     private $dest_groupe;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Taches", mappedBy="groupe")
+     */
+    private $taches;
+
     
 
     public function __construct()
@@ -68,6 +73,7 @@ class Groupe
         $this->reunions = new ArrayCollection();
         $this->source_groupe = new ArrayCollection();
         $this->dest_groupe = new ArrayCollection();
+        $this->taches = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,6 +265,37 @@ class Groupe
     public function setStatut(string $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Taches[]
+     */
+    public function getTaches(): Collection
+    {
+        return $this->taches;
+    }
+
+    public function addTach(Taches $tach): self
+    {
+        if (!$this->taches->contains($tach)) {
+            $this->taches[] = $tach;
+            $tach->setGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTach(Taches $tach): self
+    {
+        if ($this->taches->contains($tach)) {
+            $this->taches->removeElement($tach);
+            // set the owning side to null (unless already changed)
+            if ($tach->getGroupe() === $this) {
+                $tach->setGroupe(null);
+            }
+        }
 
         return $this;
     }

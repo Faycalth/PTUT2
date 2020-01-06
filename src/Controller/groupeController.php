@@ -47,7 +47,7 @@ class groupeController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->render('groupeTemplate/groupe_home.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView() 
         ]);
     }
 

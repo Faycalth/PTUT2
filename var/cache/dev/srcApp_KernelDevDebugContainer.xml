@@ -469,6 +469,13 @@
         <argument type="service" id=".service_locator.CDOTD6..App\Controller\NotificationController"/>
       </call>
     </service>
+    <service id="App\Controller\TachesController" class="App\Controller\TachesController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CDOTD6..App\Controller\TachesController"/>
+      </call>
+    </service>
     <service id="App\Controller\accueilController" class="App\Controller\accueilController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -532,6 +539,9 @@
     <service id="App\Form\ReunionType" class="App\Form\ReunionType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Form\TacheType" class="App\Form\TacheType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\TuteurType" class="App\Form\TuteurType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -556,6 +566,10 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -937,6 +951,7 @@
         <argument>App\Form\InviterEtudiantType</argument>
         <argument>App\Form\RegistrationType</argument>
         <argument>App\Form\ReunionType</argument>
+        <argument>App\Form\TacheType</argument>
         <argument>App\Form\TuteurType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1208,7 +1223,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.Ihfq5WV"/>
+      <argument type="service" id=".service_locator.UGrS6gG"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3527,7 +3542,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.FJEqom8"/>
+      <argument type="service" id=".service_locator.NgwvKjE"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5587,6 +5602,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\NotificationController" class="App\Controller\NotificationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\NotificationController" class="App\Controller\NotificationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\NotificationController" class="App\Controller\NotificationController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TachesController" class="App\Controller\TachesController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TachesController" class="App\Controller\TachesController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\TachesController" class="App\Controller\TachesController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\accueilController" class="App\Controller\accueilController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\accueilController" class="App\Controller\accueilController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\accueilController" class="App\Controller\accueilController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5613,6 +5631,8 @@
     <service id=".abstract.instanceof.App\Form\RegistrationType" class="App\Form\RegistrationType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ReunionType" class="App\Form\ReunionType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ReunionType" class="App\Form\ReunionType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TacheType" class="App\Form\TacheType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\TacheType" class="App\Form\TacheType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TuteurType" class="App\Form\TuteurType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\TuteurType" class="App\Form\TuteurType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\EtudiantRepository" class="App\Repository\EtudiantRepository" autowire="true" abstract="true"/>
@@ -5627,6 +5647,8 @@
     <service id=".abstract.instanceof.App\Repository\ReunionRepository" class="App\Repository\ReunionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Service\EtudiantConnecte" class="App\Service\EtudiantConnecte" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Service\EtudiantConnecte" class="App\Service\EtudiantConnecte" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Service\EtudiantConnecte" class="App\Service\EtudiantConnecte" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6110,13 +6132,14 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.Ihfq5WV" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.UGrS6gG" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\GroupeType" type="service" id="App\Form\GroupeType"/>
         <argument key="App\Form\InviterEtudiantType" type="service" id="App\Form\InviterEtudiantType"/>
         <argument key="App\Form\RegistrationType" type="service" id="App\Form\RegistrationType"/>
         <argument key="App\Form\ReunionType" type="service" id="App\Form\ReunionType"/>
+        <argument key="App\Form\TacheType" type="service" id="App\Form\TacheType"/>
         <argument key="App\Form\TuteurType" type="service" id="App\Form\TuteurType"/>
         <argument key="FOS\UserBundle\Form\Type\ChangePasswordFormType" type="service" id="fos_user.change_password.form.type"/>
         <argument key="FOS\UserBundle\Form\Type\ProfileFormType" type="service" id="fos_user.profile.form.type"/>
@@ -6135,7 +6158,7 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.FJEqom8" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.NgwvKjE" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\EtudiantRepository" type="service" id="App\Repository\EtudiantRepository"/>
@@ -6144,6 +6167,7 @@
         <argument key="App\Repository\ProfesseurRepository" type="service" id="App\Repository\ProfesseurRepository"/>
         <argument key="App\Repository\ReunionRepository" type="service" id="App\Repository\ReunionRepository"/>
         <argument key="App\Repository\TacheRepository" type="service" id="App\Repository\TacheRepository"/>
+        <argument key="App\Repository\TachesRepository" type="service" id="App\Repository\TachesRepository"/>
       </argument>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
@@ -6365,6 +6389,12 @@
     <service id=".service_locator.CDOTD6..App\Controller\NotificationController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\NotificationController"/>
       <argument>App\Controller\NotificationController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CDOTD6." method="withContext"/>
+    </service>
+    <service id=".service_locator.CDOTD6..App\Controller\TachesController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\TachesController"/>
+      <argument>App\Controller\TachesController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CDOTD6." method="withContext"/>
     </service>
