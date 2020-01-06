@@ -82,23 +82,23 @@ return [
                             .'|/([^/]++)/([^/]++)(*:338)'
                             .'|_groupe/([^/]++)/([^/]++)(*:371)'
                         .')'
-                        .'|/([^/]++)/([^/]++)(*:398)'
+                        .'|tuteur/([^/]++)/([^/]++)(*:404)'
                     .')'
                 .')'
                 .'|/re(?'
-                    .'|joindre_groupe/([^/]++)(*:437)'
+                    .'|joindre_groupe/([^/]++)(*:443)'
                     .'|fuser_(?'
                         .'|groupe/([^/]++)/([^/]++)(?'
-                            .'|(*:481)'
+                            .'|(*:487)'
                         .')'
-                        .'|/([^/]++)/([^/]++)(*:508)'
+                        .'|tuteur/([^/]++)/([^/]++)(*:520)'
                     .')'
                     .'|union/(?'
-                        .'|([^/]++)(*:534)'
-                        .'|taches(*:548)'
+                        .'|([^/]++)(*:546)'
+                        .'|taches(*:560)'
                     .')'
-                    .'|gister/confirm/([^/]++)(*:580)'
-                    .'|setting/reset/([^/]++)(*:610)'
+                    .'|gister/confirm/([^/]++)(*:592)'
+                    .'|setting/reset/([^/]++)(*:622)'
                 .')'
             .')/?$}sDu',
     ],
@@ -125,17 +125,17 @@ return [
         ],
         338 => [[['_route' => 'accepter_etudiant', '_controller' => 'App\\Controller\\groupeController::accepterEtudaint'], ['id', 'id_notif'], null, null, false, true, null]],
         371 => [[['_route' => 'accepter_groupe', '_controller' => 'App\\Controller\\groupeController::accepterGroupe'], ['id', 'id_notif'], null, null, false, true, null]],
-        398 => [[['_route' => 'accepter_tuteur', '_controller' => 'App\\Controller\\groupeController::accepterTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
-        437 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
-        481 => [
+        404 => [[['_route' => 'accepter_tuteur', '_controller' => 'App\\Controller\\groupeController::accepterTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
+        443 => [[['_route' => 'groupe_rejoindre', '_controller' => 'App\\Controller\\groupeController::rejoindreGroupe'], ['nom'], null, null, false, true, null]],
+        487 => [
             [['_route' => 'refuser_etudiant', '_controller' => 'App\\Controller\\groupeController::refuserEtudaint'], ['id', 'id_notif'], null, null, false, true, null],
             [['_route' => 'refuser_groupe', '_controller' => 'App\\Controller\\groupeController::refuserGroupe'], ['id', 'id_notif'], null, null, false, true, null],
         ],
-        508 => [[['_route' => 'refuser_tuteur', '_controller' => 'App\\Controller\\groupeController::refuserTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
-        534 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        548 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        580 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        610 => [
+        520 => [[['_route' => 'refuser_tuteur', '_controller' => 'App\\Controller\\groupeController::refuserTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
+        546 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        560 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
+        592 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        622 => [
             [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

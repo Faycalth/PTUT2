@@ -57,7 +57,7 @@
     {% elseif verif.isTuteur == true %}
         {% if verif.firstLogin == true %}
             <div class="jumbotron">
-                <h1 class="display-5">Bienvenue à vous {{ user.username }}</h1>
+                <h1 class="display-5">Bienvenue à vous {{ verif.username }}</h1>
                 <p class="lead">Nous allons vous expliquer en quelques points le but de MyPTUT, la plateforme de gestion des projets tuteurés.</p>
                 <hr class="my-4">
                 <p>Explications tuteurs...</p>
@@ -65,7 +65,7 @@
             </div>
         {% else %}
             <div class="jumbotron">
-            <h1 class="display-5">Re-Bonjour {{ user.username }}</h1>
+            <h1 class="display-5">Re-Bonjour {{ verif.username }}</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>

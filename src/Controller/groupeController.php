@@ -56,7 +56,7 @@ class groupeController extends AbstractController
      */
     private $repository;
 
-    public function __construct(EtudiantRepository $etudiant_repository, ProfesseurRepository $prof_repository, \Doctrine\Common\Persistence\ManagerRegistry $registry, GroupeRepository $groupe_repository)
+    public function __construct(EtudiantRepository $etudiant_repository, ObjectManager $manager,ProfesseurRepository $prof_repository, \Doctrine\Common\Persistence\ManagerRegistry $registry, GroupeRepository $groupe_repository)
     {
         $this->etudiant_repository = $etudiant_repository;
         $this->prof_repository = $prof_repository;
@@ -243,7 +243,7 @@ class groupeController extends AbstractController
     }
      
         /**
-     * @route("/accepter_/{id}/{id_notif}", name="accepter_tuteur")
+     * @route("/accepter_tuteur/{id}/{id_notif}", name="accepter_tuteur")
      */
     public function accepterTuteur(Notifications $notifications,Groupe $groupe,$id_notif,EtudiantRepository $repository,ObjectManager $manager,NotificationRepository $not_repository,ProfesseurConnecte $user)
     {
@@ -272,7 +272,7 @@ class groupeController extends AbstractController
     }
     
     /**
-     * @route("/refuser_/{id}/{id_notif}", name="refuser_tuteur")
+     * @route("/refuser_tuteur/{id}/{id_notif}", name="refuser_tuteur")
      */
     public function refuserTuteur(Groupe $groupe,$id_notif,EtudiantRepository $repository,Notifications $notifications,ObjectManager $manager,NotificationRepository $not_repository,ProfesseurConnecte $user)
     {

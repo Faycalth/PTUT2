@@ -498,6 +498,7 @@
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <argument type="service" id="App\Repository\EtudiantRepository"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Repository\ProfesseurRepository"/>
       <argument type="service" id="doctrine"/>
       <argument type="service" id="App\Repository\GroupeRepository"/>

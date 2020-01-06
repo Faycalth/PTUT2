@@ -28,50 +28,88 @@ class NotificationController extends AbstractController
      */
     public function notification(EtudiantRepository $etu_repository,NotificationRepository $not_repository,ObjectManager $manager,EtudiantConnecte $user_e,ProfesseurConnecte $user_p)
     {
-        $conn =$manager->getConnection();
-          $token = $this->get('security.token_storage')->getToken();
-          $user = $token->getUser();
-          
-       
-
-          $type=$user->getType();
-
-          if ($type == "ETUDIANT"){
+      $token = $this->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        $type = $token->getUser()->getType();
         
-          $etudiant = $user_e->getUser();
-          $idapp=$etudiant->getId();
-          $etu_groupe=$etudiant->getGroupe();
-          $sql = '
-              SELECT * FROM Notification notif
-              WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp 
-              Order by notif.created_at desc
-              ';
-           $stmt = $conn->prepare($sql);
-          $stmt->execute(['etu_groupe' => $etu_groupe, 'idapp'=>$idapp]);  
-          }
-          else{
-           
-            $tuteur= $user_p->getUser_p();
-            $id=$tuteur->getId();
-            $sql = '
-              SELECT distinct * FROM Notification notif
-              WHERE notif.dest_groupe_id in (select id from groupe where professeur_id=:tuteur)  or notif.dest_professeur_id=:idapp 
-              Order by notif.created_at desc
-              ';
-           $stmt = $conn->prepare($sql);
-          $stmt->execute(['tuteur' => $id, 'idapp'=>$id]);  
-          
+        
+            $manager=$this->getDoctrine()->getENtityManager();
 
+            if ($type == "ETUDIANT"){
+                $manager=$this->getDoctrine()->getENtityManager();
+                $token = $this->get('security.token_storage')->getToken();
+                $user = $token->getUser();
+                $repository = $this->getDoctrine()->getRepository(Etudiant::class);
+                
 
+                $conn =$manager->getConnection();
 
-          }
+                $sql = '
+                    SELECT * FROM etudiant etu
+                    WHERE etu.prenom=:prenom and etu.nom=:nom
+                    ';
+                $stmt_invite = $conn->prepare($sql);
+                $stmt_invite->execute(['prenom' => $user->getPrenom(),'nom' => $user->getNom()]);
+                $etudiants =$stmt_invite->fetchAll();
+
+                $user = $repository->find($etudiants[0]['id']);
+                
+                $etu_groupe=$user->getGroupe();
+                
+                $conn =$manager->getConnection();
+                $idapp=$user->getId();
+
+                $sql = '
+                    SELECT * FROM Notification notif
+                    WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp
+                    Order by notif.created_at desc
+                    ';
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(['etu_groupe' => $etu_groupe, 'idapp'=>$idapp]);
+
+                $notification =$stmt->fetchAll();
+            }
+            else{
+                $manager=$this->getDoctrine()->getENtityManager();
+                $token = $this->get('security.token_storage')->getToken();
+                $user = $token->getUser();
+                $repository = $this->getDoctrine()->getRepository(Professeur::class);
+                $idapp=$user->getId();
+        
+                $conn =$manager->getConnection();
+        
+                $sql = '
+                    SELECT * FROM Professeur etu
+                    WHERE etu.prenom=:prenom and etu.nom=:nom
+                    ';
+                $stmt_invite = $conn->prepare($sql);
+                $stmt_invite->execute(['prenom' => $user->getPrenom(),'nom' => $user->getNom()]);
+                $etudiants =$stmt_invite->fetchAll();
+        
+                $user_p = $repository->find($etudiants[0]['id']);  
+
+                $idapp=$user_p->getId();    
+                $conn =$manager->getConnection();
+              $prof_repository = $this->getDoctrine()->getRepository(Professeur::class);   
+                    $tuteur= $prof_repository->find($idapp);
+                    $sql = '
+                      SELECT * FROM Notification notif
+                      WHERE notif.dest_groupe_id in (select id from groupe where professeur_id=:tuteur)  or notif.dest_professeur_id=:idapp 
+                      Order by notif.created_at desc
+                      ';
+                   
+                   $stmt = $conn->prepare($sql);
+                  $stmt->execute(['tuteur' => $idapp, 'idapp'=>$idapp]);  
+
+                $notification =$stmt->fetchAll();
+            }
         
       
-
+  
                
          
-       $notification =$stmt->fetchAll();
-        return $this->render('notification/notification.html.twig',compact('notification'));
+    
+        return $this->render('notification/notification.html.twig',['notification'=>$notification]);
     }
 
      /**

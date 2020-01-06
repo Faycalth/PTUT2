@@ -25,7 +25,7 @@
                 <tr>
                     <td>Le groupe "{{notif.nom_groupe}}" vous invite à le rejoindre</td>
                     <td> <a href="{{ path('accepter_groupe', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-success"  onclick="if(!confirm('Voulez vous accepter cette demande ?' )) { return false; }">Accepter</a> 
-                     <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_groupe', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
+                     <a  href="{{ path('refuser_groupe', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
                      
                 </tr>
 
@@ -58,15 +58,15 @@
               <tr>
                     <td>Le gorupe "{{notif.nom_groupe}}" vous invite à le rejoindre</td>
                     <td> <a href="{{ path('accepter_tuteur', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-success"  onclick="if(!confirm('Voulez vous accepter cette demande ?' )) { return false; }">Accepter</a> 
-                     <a  data-toggle="collapse" data-target="#demo" href="{{ path('refuser_tuteur', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
+                     <a   href="{{ path('refuser_tuteur', {'id':notif.source_groupe_id , 'id_notif':notif.id} ) }}" class="btn btn-danger" style="margin-left:2%; "onclick="if(!confirm('Voulez vous refuser cette demande' )) { return false; }">Refuser</a> </td>
                      
                 </tr>
-            {% elseif notif.type=="accepter_tuteur"%}
+            {% elseif notif.type=="Accepter_Tuteur"%}
                  <tr>
                     <td colspan=2>Le professeur  {{notif.nom_professeur}} a accepté de vous encadrer </td>
                      <td> <a href={{ path('remove_notification', {'id':notif.id} ) }} class="btn btn-secondary">X</a> 
                 </tr>
-          {% elseif notif.type=="refuser_tuteur"%}
+          {% elseif notif.type=="Refuser_Tuteur"%}
                 <tr>
                     <td colspan=2 style="color:red">Le tuteur {{notif.nom_professeur}} a refusé votre demande</td>
                     <td> <a href={{ path('remove_notification', {'id':notif.id} ) }} class="btn btn-secondary">X</a>
