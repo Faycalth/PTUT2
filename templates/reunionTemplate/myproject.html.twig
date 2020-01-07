@@ -129,48 +129,37 @@ $(document).ready(function(){
 
 </div>
 
-<div class="block">
-    <ul class="options">
-       <li>
-        <a class="nav-link" href="">Tâche G</a>
-      </li>
-    </ul>
-</div>
-<div class="block">   
-    <ul class="options">
-      <li>
-        <a class="nav-link" href="">Tâche F</a>
-      </li>
-    </ul>
-</div>
+{% for tache in taches %}
+   {% if tache.statut=='afaire' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+            <a class="btn btn-outline-secondary" style="padding:0.5% ;"  href="{{ path('taches_change_statut', {'id':tache.id,'statut':'En cours' } ) }}">-->En cours</a>
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
+
 </div>
 
 <div class="table">
   <h2 class="heading">
     En cours
   </h2>
-  <div class="block"> 
-    <ul class="options">
-      <li>
-        <a class="nav-link" href="">Tâche E</a>
-      </li>
-    </ul>
-</div>
-<div class="block">
-    <ul class="options">
-      <li>
-        <a class="nav-link" href="">Tâche D</a>
-      </li>
-    </ul>
-</div>
-<div class="block">
-    <ul class="options">
-        <li>
-        <a class="nav-link" href="">Tâche C</a>
-      </li>
-    </ul>
- </p>
-</div>
+  {% for tache in taches %}
+   {% if tache.statut=='En cours' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+            <a class="btn btn-outline-secondary" style="padding:0.5% ;"  href="{{ path('taches_change_statut', {'id':tache.id,'statut':'Fait' } ) }}">-->Fait</a>
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
 </div>
 
 
@@ -180,20 +169,18 @@ $(document).ready(function(){
       Fait
     </a>
   </h2>
-  <div class="block">
-    <ul class="options">
-      <li>
-        <a class="nav-link" href="">Tâche B</a>
-      </li>
-    </ul>
-</div>
-<div class="block">
-    <ul class="options">
-      <li>
-        <a class="nav-link" href="">Tâche A</a>
-      </li>
-    </ul>
-</div>
+ {% for tache in taches %}
+   {% if tache.statut=='Fait' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+           
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
 </div>
 
 {% endblock %}

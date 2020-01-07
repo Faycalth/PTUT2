@@ -12,6 +12,7 @@ use App\Entity\Notification;
 use App\Repository\EtudiantRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\ProfesseurRepository;
+use App\Repository\TachesRepository;
 use App\Form\InviterEtudiantType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,7 @@ class reunionController extends AbstractController
     /**
      * @Route("/monprojet", name="monprojet")
      */
-    public function myproject(Request $request, EtudiantRepository $etu_repository,ObjectManager $manager, Notifications $notifications,EtudiantConnecte $user)
+    public function myproject(Request $request, EtudiantRepository $etu_repository,ObjectManager $manager, Notifications $notifications,EtudiantConnecte $user,TachesRepository $taches_Repository)
     { 
         //recuperation de l'etudiant connecté
         // utilisation de la fonction get user qui se trouve dans le dossier service\Etudiantconnecter pour recuperer le user connecter
@@ -149,15 +150,22 @@ class reunionController extends AbstractController
             $manager->flush();
             return $this->redirectToRoute('monprojet');
         }
-        
-        
 
         //fin ajout tache
+
+        //recherche et affichage des taches
+        $sql_tache = '
+         select * from `taches` ';
+         $stmt_tache = $conn->prepare($sql_tache);
+        $stmt_tache->execute();
+         $taches=$stmt_tache->fetchAll();
+
+        //fin recherche et affichage des taches
   
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',['form' => $form->createView() ,'groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
+        return $this->render('reunionTemplate/myproject.html.twig',['taches'=>$taches,'form' => $form->createView() ,'groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
     );
     }
 
@@ -215,10 +223,14 @@ class reunionController extends AbstractController
     }  
 
      /**
-    * @Route("reunion/taches", name="taches")
+    * @Route("/taches_change_statut/{id}/{statut}", name="taches_change_statut")
     */
-   public function tache(){
-    return $this->render('reunionTemplate/tache.html.twig');
+   public function tache_statut(Taches $tache,$statut,ObjectManager $manager){
+        $tache->setStatut($statut);
+        $manager->persist($tache);
+        $manager->flush();
+
+    return $this->redirectToRoute('monprojet');
     }
 
 

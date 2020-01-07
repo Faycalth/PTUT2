@@ -15,6 +15,7 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/admin/etudiant_mail_inscription' => [[['_route' => 'admin_mail_inscription', '_controller' => 'App\\Controller\\EmailController::mailInscription'], null, null, null, false, false, null]],
         '/notification' => [[['_route' => 'notification', '_controller' => 'App\\Controller\\NotificationController::notification'], null, null, null, false, false, null]],
+        '/taches' => [[['_route' => 'taches', '_controller' => 'App\\Controller\\TachesController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\accueilController::home'], null, null, null, false, false, null]],
         '/admin/home' => [[['_route' => 'admin_home', '_controller' => 'App\\Controller\\adminController::home'], null, null, null, false, false, null]],
         '/admin/promotion' => [[['_route' => 'admin_promotion', '_controller' => 'App\\Controller\\adminController::promotion'], null, null, null, false, false, null]],
@@ -93,13 +94,11 @@ return [
                         .')'
                         .'|tuteur/([^/]++)/([^/]++)(*:520)'
                     .')'
-                    .'|union/(?'
-                        .'|([^/]++)(*:546)'
-                        .'|taches(*:560)'
-                    .')'
-                    .'|gister/confirm/([^/]++)(*:592)'
-                    .'|setting/reset/([^/]++)(*:622)'
+                    .'|union/([^/]++)(*:543)'
+                    .'|gister/confirm/([^/]++)(*:574)'
+                    .'|setting/reset/([^/]++)(*:604)'
                 .')'
+                .'|/taches_change_statut/([^/]++)/([^/]++)(*:652)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -132,11 +131,11 @@ return [
             [['_route' => 'refuser_groupe', '_controller' => 'App\\Controller\\groupeController::refuserGroupe'], ['id', 'id_notif'], null, null, false, true, null],
         ],
         520 => [[['_route' => 'refuser_tuteur', '_controller' => 'App\\Controller\\groupeController::refuserTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
-        546 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        560 => [[['_route' => 'taches', '_controller' => 'App\\Controller\\reunionController::tache'], [], null, null, false, false, null]],
-        592 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        622 => [
-            [['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null],
+        543 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        574 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        604 => [[['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        652 => [
+            [['_route' => 'taches_change_statut', '_controller' => 'App\\Controller\\reunionController::tache_statut'], ['id', 'statut'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

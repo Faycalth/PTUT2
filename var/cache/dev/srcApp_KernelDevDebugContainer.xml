@@ -5967,12 +5967,13 @@
         <argument key="user" type="service" id="App\Service\ProfesseurConnecte"/>
       </argument>
     </service>
-    <service id=".service_locator.rWbxQoR" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.NPxb4QN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="etu_repository" type="service" id="App\Repository\EtudiantRepository"/>
         <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
         <argument key="notifications" type="service" id="App\Service\Notifications"/>
+        <argument key="taches_Repository" type="service" id="App\Repository\TachesRepository"/>
         <argument key="user" type="service" id="App\Service\EtudiantConnecte"/>
       </argument>
     </service>
@@ -5996,6 +5997,13 @@
         <argument key="reunion" type="service" id=".errored..service_locator.ltb0tYQ.App\Entity\Reunion"/>
       </argument>
     </service>
+    <service id=".service_locator.E6FrKaQ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="tache" type="service" id=".errored..service_locator.E6FrKaQ.App\Entity\Taches"/>
+      </argument>
+    </service>
     <service id=".service_locator.k7JBGVu" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6012,7 +6020,7 @@
         <argument key="tuteur" type="service" id=".errored..service_locator.Suh2te9.App\Entity\Professeur"/>
       </argument>
     </service>
-    <service id=".service_locator.ByAa8QZ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.dEJFfAZ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\EmailController::mailInscription" type="service" id=".service_locator.Z_.o95M"/>
@@ -6037,9 +6045,10 @@
         <argument key="App\Controller\groupeController::refuserTuteur" type="service" id=".service_locator.iL.84h1"/>
         <argument key="App\Controller\groupeController::rejoindreGroupe" type="service" id=".service_locator.dLNPMKf"/>
         <argument key="App\Controller\reunionController::ajoutReunion" type="service" id=".service_locator.nX.opv."/>
-        <argument key="App\Controller\reunionController::myproject" type="service" id=".service_locator.rWbxQoR"/>
+        <argument key="App\Controller\reunionController::myproject" type="service" id=".service_locator.NPxb4QN"/>
         <argument key="App\Controller\reunionController::reunion" type="service" id=".service_locator.3iyKRwz"/>
         <argument key="App\Controller\reunionController::show" type="service" id=".service_locator.ltb0tYQ"/>
+        <argument key="App\Controller\reunionController::tache_statut" type="service" id=".service_locator.E6FrKaQ"/>
         <argument key="App\Service\Notifications::etudiantEnvoiNotification" type="service" id=".service_locator.k7JBGVu"/>
         <argument key="App\Service\Notifications::groupeEnvoiNotification" type="service" id=".service_locator.xxX8Fum"/>
         <argument key="App\Service\Notifications::tuteurEnvoiNotification" type="service" id=".service_locator.Suh2te9"/>
@@ -6065,9 +6074,10 @@
         <argument key="App\Controller\groupeController:refuserTuteur" type="service" id=".service_locator.iL.84h1"/>
         <argument key="App\Controller\groupeController:rejoindreGroupe" type="service" id=".service_locator.dLNPMKf"/>
         <argument key="App\Controller\reunionController:ajoutReunion" type="service" id=".service_locator.nX.opv."/>
-        <argument key="App\Controller\reunionController:myproject" type="service" id=".service_locator.rWbxQoR"/>
+        <argument key="App\Controller\reunionController:myproject" type="service" id=".service_locator.NPxb4QN"/>
         <argument key="App\Controller\reunionController:reunion" type="service" id=".service_locator.3iyKRwz"/>
         <argument key="App\Controller\reunionController:show" type="service" id=".service_locator.ltb0tYQ"/>
+        <argument key="App\Controller\reunionController:tache_statut" type="service" id=".service_locator.E6FrKaQ"/>
         <argument key="App\Service\Notifications:etudiantEnvoiNotification" type="service" id=".service_locator.k7JBGVu"/>
         <argument key="App\Service\Notifications:groupeEnvoiNotification" type="service" id=".service_locator.xxX8Fum"/>
         <argument key="App\Service\Notifications:tuteurEnvoiNotification" type="service" id=".service_locator.Suh2te9"/>
@@ -6563,12 +6573,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.ByAa8QZ"/>
+      <argument type="service" id=".service_locator.dEJFfAZ"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.ByAa8QZ"/>
+      <argument type="service" id=".service_locator.dEJFfAZ"/>
     </service>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6603,6 +6613,7 @@
     <service id=".errored..service_locator.cNfquCb.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.iL.84h1.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.ltb0tYQ.App\Entity\Reunion" class="App\Entity\Reunion"/>
+    <service id=".errored..service_locator.E6FrKaQ.App\Entity\Taches" class="App\Entity\Taches"/>
     <service id=".errored..service_locator.k7JBGVu.App\Entity\Etudiant" class="App\Entity\Etudiant"/>
     <service id=".errored..service_locator.k7JBGVu.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.Suh2te9.App\Entity\Groupe" class="App\Entity\Groupe"/>
@@ -6985,7 +6996,7 @@
     <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
     <service id="fos_user.mailer" alias="fos_user.mailer.default"/>
     <service id="fos_user.session" alias="session" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ByAa8QZ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.dEJFfAZ"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>
