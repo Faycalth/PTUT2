@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre projet !{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="css/myproject.css">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-4">
+
+    <div class="jumbotron text-center" style="padding:1%">
+      
+        <h2>Nom: {{ groupe_etu.nom }}</h2>
+        <h2>Sujet: {{ groupe_etu.sujet }}</h2>
+    </div>
+ </div>   
+
+
+<div class="col-md-3" >
+  <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse1"  style="margin: 50px">Liste des étudiants</a>
+  <div id="collapse1" class="panel-collapse collapse">
+    <ul>
+      {% for etudiant in etudiants %}
+      <li> {{etudiant.prenom}}  {{etudiant.nom}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+<div class="table">
+  <h2 class="heading">
+    À faire 
+  </h2>
+
+
+{% for tache in taches %}
+   {% if tache.statut=='afaire' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+            
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
+
+</div>
+
+<div class="table">
+  <h2 class="heading">
+    En cours
+  </h2>
+  {% for tache in taches %}
+   {% if tache.statut=='En cours' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+            
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+
+
+<div class="table">
+
+  <h2 class="heading">
+      Fait
+    </a>
+  </h2>
+ {% for tache in taches %}
+   {% if tache.statut=='Fait' %}
+    <div class="block">
+        <ul class="options">
+          <li>
+            <a class="nav-link" >{{tache.description}}</a>
+           
+          </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
+
+{% endblock %}
+

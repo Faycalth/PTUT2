@@ -565,10 +565,6 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
-    </service>
     <service id="App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -599,6 +595,13 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.CDOTD6..App\Service\StatutGroupe"/>
+      </call>
+    </service>
+    <service id="App\Service\StatutGroupeProf" class="App\Service\StatutGroupeProf" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CDOTD6..App\Service\StatutGroupeProf"/>
       </call>
     </service>
     <service id="App\Service\UserService" class="App\Service\UserService" public="true" autowire="true" autoconfigure="true">
@@ -3542,7 +3545,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.NgwvKjE"/>
+      <argument type="service" id=".service_locator.NaTszOU"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4696,6 +4699,10 @@
         <argument>verif</argument>
         <argument type="service" id="App\Service\UserService"/>
       </call>
+      <call method="addGlobal">
+        <argument>groupe_prof</argument>
+        <argument type="service" id="App\Service\StatutGroupeProf"/>
+      </call>
       <configurator service="twig.configurator.environment" method="configure"/>
     </service>
     <service id="twig.app_variable" class="Symfony\Bridge\Twig\AppVariable" public="false">
@@ -5645,8 +5652,6 @@
     <service id=".abstract.instanceof.App\Repository\ProfesseurRepository" class="App\Repository\ProfesseurRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ReunionRepository" class="App\Repository\ReunionRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ReunionRepository" class="App\Repository\ReunionRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\TacheRepository" class="App\Repository\TacheRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\TachesRepository" class="App\Repository\TachesRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Service\EtudiantConnecte" class="App\Service\EtudiantConnecte" autowire="true" abstract="true"/>
@@ -5661,6 +5666,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Service\StatutGroupe" class="App\Service\StatutGroupe" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Service\StatutGroupe" class="App\Service\StatutGroupe" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Service\StatutGroupe" class="App\Service\StatutGroupe" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Service\StatutGroupeProf" class="App\Service\StatutGroupeProf" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Service\StatutGroupeProf" class="App\Service\StatutGroupeProf" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Service\StatutGroupeProf" class="App\Service\StatutGroupeProf" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Service\UserService" class="App\Service\UserService" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Service\UserService" class="App\Service\UserService" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Service\UserService" class="App\Service\UserService" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6004,6 +6012,20 @@
         <argument key="tache" type="service" id=".errored..service_locator.E6FrKaQ.App\Entity\Taches"/>
       </argument>
     </service>
+    <service id=".service_locator.g9I6c_i" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="prof" type="service" id="App\Service\ProfesseurConnecte"/>
+      </argument>
+    </service>
+    <service id=".service_locator.KhrX5zh" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="etu_groupe" type="service" id=".errored..service_locator.KhrX5zh.App\Entity\Groupe"/>
+        <argument key="manager" type="service" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.k7JBGVu" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6020,7 +6042,7 @@
         <argument key="tuteur" type="service" id=".errored..service_locator.Suh2te9.App\Entity\Professeur"/>
       </argument>
     </service>
-    <service id=".service_locator.dEJFfAZ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.AH_iV_M" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\EmailController::mailInscription" type="service" id=".service_locator.Z_.o95M"/>
@@ -6049,6 +6071,8 @@
         <argument key="App\Controller\reunionController::reunion" type="service" id=".service_locator.3iyKRwz"/>
         <argument key="App\Controller\reunionController::show" type="service" id=".service_locator.ltb0tYQ"/>
         <argument key="App\Controller\reunionController::tache_statut" type="service" id=".service_locator.E6FrKaQ"/>
+        <argument key="App\Controller\tuteurController::mesgroupes" type="service" id=".service_locator.g9I6c_i"/>
+        <argument key="App\Controller\tuteurController::projetGroupe" type="service" id=".service_locator.KhrX5zh"/>
         <argument key="App\Service\Notifications::etudiantEnvoiNotification" type="service" id=".service_locator.k7JBGVu"/>
         <argument key="App\Service\Notifications::groupeEnvoiNotification" type="service" id=".service_locator.xxX8Fum"/>
         <argument key="App\Service\Notifications::tuteurEnvoiNotification" type="service" id=".service_locator.Suh2te9"/>
@@ -6078,6 +6102,8 @@
         <argument key="App\Controller\reunionController:reunion" type="service" id=".service_locator.3iyKRwz"/>
         <argument key="App\Controller\reunionController:show" type="service" id=".service_locator.ltb0tYQ"/>
         <argument key="App\Controller\reunionController:tache_statut" type="service" id=".service_locator.E6FrKaQ"/>
+        <argument key="App\Controller\tuteurController:mesgroupes" type="service" id=".service_locator.g9I6c_i"/>
+        <argument key="App\Controller\tuteurController:projetGroupe" type="service" id=".service_locator.KhrX5zh"/>
         <argument key="App\Service\Notifications:etudiantEnvoiNotification" type="service" id=".service_locator.k7JBGVu"/>
         <argument key="App\Service\Notifications:groupeEnvoiNotification" type="service" id=".service_locator.xxX8Fum"/>
         <argument key="App\Service\Notifications:tuteurEnvoiNotification" type="service" id=".service_locator.Suh2te9"/>
@@ -6168,7 +6194,7 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.NgwvKjE" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.NaTszOU" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\EtudiantRepository" type="service" id="App\Repository\EtudiantRepository"/>
@@ -6176,7 +6202,6 @@
         <argument key="App\Repository\NotificationRepository" type="service" id="App\Repository\NotificationRepository"/>
         <argument key="App\Repository\ProfesseurRepository" type="service" id="App\Repository\ProfesseurRepository"/>
         <argument key="App\Repository\ReunionRepository" type="service" id="App\Repository\ReunionRepository"/>
-        <argument key="App\Repository\TacheRepository" type="service" id="App\Repository\TacheRepository"/>
         <argument key="App\Repository\TachesRepository" type="service" id="App\Repository\TachesRepository"/>
       </argument>
     </service>
@@ -6468,6 +6493,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CDOTD6." method="withContext"/>
     </service>
+    <service id=".service_locator.CDOTD6..App\Service\StatutGroupeProf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Service\StatutGroupeProf"/>
+      <argument>App\Service\StatutGroupeProf</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CDOTD6." method="withContext"/>
+    </service>
     <service id=".service_locator.CDOTD6..App\Service\UserService" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Service\UserService"/>
       <argument>App\Service\UserService</argument>
@@ -6573,12 +6604,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.dEJFfAZ"/>
+      <argument type="service" id=".service_locator.AH_iV_M"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.dEJFfAZ"/>
+      <argument type="service" id=".service_locator.AH_iV_M"/>
     </service>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6614,6 +6645,7 @@
     <service id=".errored..service_locator.iL.84h1.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.ltb0tYQ.App\Entity\Reunion" class="App\Entity\Reunion"/>
     <service id=".errored..service_locator.E6FrKaQ.App\Entity\Taches" class="App\Entity\Taches"/>
+    <service id=".errored..service_locator.KhrX5zh.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.k7JBGVu.App\Entity\Etudiant" class="App\Entity\Etudiant"/>
     <service id=".errored..service_locator.k7JBGVu.App\Entity\Groupe" class="App\Entity\Groupe"/>
     <service id=".errored..service_locator.Suh2te9.App\Entity\Groupe" class="App\Entity\Groupe"/>
@@ -6996,7 +7028,7 @@
     <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
     <service id="fos_user.mailer" alias="fos_user.mailer.default"/>
     <service id="fos_user.session" alias="session" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.dEJFfAZ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.AH_iV_M"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.delegating" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>

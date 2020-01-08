@@ -40,10 +40,7 @@
                             
                        
                             {% endif %}
-                                   <li class="nav-item">
-                            <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)
-                            </a>
-                        </li>
+                       
                
                           {% if verif.isEtudiant == true %} 
                          
@@ -62,7 +59,13 @@
                                     {% endif %}
                                 
                            {% elseif verif.isTuteur == true %}
-                         
+                               
+                                  {% if groupe_prof.StautGroupeProf   !=null %}  
+                                <li class="nav-item">
+                                <a class="nav-link" href="{{ path('mesgroupes')}}">MES GROUPES</a>
+                                </li>
+                              {% endif %}  
+
                             {% endif %} 
                            
                             <li class="nav-item">

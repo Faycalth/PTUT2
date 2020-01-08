@@ -12,12 +12,23 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Semestre</th>
+  
             <th>Nom</th>
             <th>Sujet</th>
         </tr>
         </thead>
         <tbody>
+        
+        {% for groupe in groupes %}
+            <tr>
+                <td>{{ groupe.nom }}</td>
+                <td>{{ groupe.sujet }}</td>
+                <td> 
+                    <a href="{{ path('projetGroupe', {'id':groupe.id } ) }}" class="btn btn-outline-primary"  >Consulter</a>
+                </td>
+                </tr>
+               
+        {% endfor %}
 
         </tbody>
         </table>

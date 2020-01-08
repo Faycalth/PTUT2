@@ -41,7 +41,7 @@ class reunionController extends AbstractController
         $etu_groupe=$etudiant->getGroupe();
         
         $conn =$manager->getConnection();
-
+        //la liste des étudiants présents dans le groupe 
         $sql = '
             SELECT * FROM etudiant etu
             WHERE etu.groupe_id=:etu_groupe order by nom asc
@@ -59,6 +59,7 @@ class reunionController extends AbstractController
         $listeetudiant= $stmt_invite->fetchAll();
         $etudiants =$stmt->fetchAll();
         $result=count($etudiants);
+        //fin la liste des étudiants présents dans le groupe
       
    
     //fonctionnalité invité un etudiant 
@@ -155,9 +156,9 @@ class reunionController extends AbstractController
 
         //recherche et affichage des taches
         $sql_tache = '
-         select * from `taches` ';
+         select * from `taches` where groupe_id=:groupe ';
          $stmt_tache = $conn->prepare($sql_tache);
-        $stmt_tache->execute();
+        $stmt_tache->execute(['groupe'=>$etu_groupe]);
          $taches=$stmt_tache->fetchAll();
 
         //fin recherche et affichage des taches
