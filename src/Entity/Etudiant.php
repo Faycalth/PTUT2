@@ -61,6 +61,11 @@ class Etudiant implements UserInterface
      */
     private $dest_etudiant;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $num_etudiant;
+
     public function __construct()
     {
         $this->id=$id;
@@ -206,6 +211,18 @@ class Etudiant implements UserInterface
                 $destEtudiant->setDestEtudiant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumEtudiant(): ?int
+    {
+        return $this->num_etudiant;
+    }
+
+    public function setNumEtudiant(int $num_etudiant): self
+    {
+        $this->num_etudiant = $num_etudiant;
 
         return $this;
     }

@@ -81,7 +81,7 @@ class adminController extends AbstractController
     /**
      * @Route("/admin/choix", name = "admin_liste_etudiant")
      */
-    public function listeEtudiant()
+    public function listeEtudiant(\Swift_Mailer $mailer)
     {   
         
         $etudiants = $this->etudiant_repository->findAll();
@@ -98,14 +98,16 @@ class adminController extends AbstractController
                if ($_FILES["file"]["size"] > 0) {
                  
                  $file = fopen($fileName, "r");
-                 $column = fgetcsv($file, 10000, ";");
+                 $column = fgetcsv($file, 10000, ",");
                  $adr = "@etu.univ-lyon1.fr";
                  while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
-                    $mot = "test";
+                    $mot = $column[2];
                     $mdp = password_hash($mot, PASSWORD_BCRYPT);
-                   $sql = "INSERT into etudiant (nom,prenom,email,password)
-                        values ('".$column[0]."','".$column[1]."', '".$column[0]."."."".$column[1]."$adr', '$mdp')";
+                   $sql = "INSERT into etudiant (nom,prenom,email,password, num_etudiant)
+                        values ('".$column[0]."','".$column[1]."', '".$column[1]."."."".$column[0]."$adr', '$mdp', '$column[2]')";
                    $conn=$this->getDoctrine()->getManager()->getConnection();
+
+                   $adr_comp = "$column[1].$column[0]$adr";
                    
                    $stmt = $conn->prepare($sql);
                   $result= $stmt->execute();
@@ -114,6 +116,21 @@ class adminController extends AbstractController
                      $type = "success";
                      $message = "Les Données sont importées dans la base de données";
                      $color="success";
+                     $adresse="127.0.0.1:8000/login";
+                     $mail = (new \Swift_Message('Hello Email'))
+                        ->setFrom('myptut@gmail.com')
+                        ->setTo($adr_comp)
+                        ->setBody(
+                            $this->renderView(
+                                // templates/hello/email.txt.twig
+                                'emails/email_inscription.html.twig',
+                                ['adresse_login' => $adresse,
+                                'name' => $column[1],
+                                'mdp' => $mot,
+                                ] )
+                        )
+                    ;
+                    $mailer->send($mail);
 
                    } else {
                      $type = "error";
