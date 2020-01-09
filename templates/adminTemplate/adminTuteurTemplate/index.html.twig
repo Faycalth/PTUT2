@@ -16,15 +16,18 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Titre</th>
-            <th>Actions</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
         
         {% for prof in professeur %}
             <tr>
-                <td> {{ prof.username }} </td>
+                <td> {{ prof.prenom }} </td>
+                <td>{{ prof.prenom }}</td>
+                <td>{{ prof.email }}</td>
                 <td> 
                     <a href="{{ path('admin_edit_tuteur', {id: prof.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
                     <form method="post" action =" {{ path ('admin_delete_tuteur', {id: prof.id }) }}" style  = "display: inline-block" onsubmit = "return confirm ('Vous allez supprimer un tuteur !')">
