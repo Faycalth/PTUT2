@@ -174,9 +174,16 @@ class reunionController extends AbstractController
     /**
      * @Route("/reunion_historique", name="reunion_historique")
      */
-    public function reunion(ReunionRepository $repo)
+    public function reunion(ObjectManager $manager,EtudiantConnecte $user)
     {
-        $reunions = $repo->findAll();
+        $conn =$manager->getConnection();
+        $etudiant = $user->getUser();
+        $etu_groupe= $etudiant->getGroupe();
+        $sql_tache = '
+         select * from `reunion` where relation_id=:groupe ';
+         $stmt_tache = $conn->prepare($sql_tache);
+        $stmt_tache->execute(['groupe'=>$etu_groupe]);
+         $reunions=$stmt_tache->fetchAll();
         
         return $this->render('reunionTemplate/reunion.html.twig', [
             'controller_name' => 'reunionController',

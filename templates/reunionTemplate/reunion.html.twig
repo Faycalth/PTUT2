@@ -10,7 +10,7 @@
     {% for reunion in reunions %}
         <article>
             <h2>{{ reunion.titre }}</h2>
-                <div class="metadata">Ecrit le {{ reunion.createAt | date('d/m/Y') }} à {{ reunion.createAt | date('H:i') }}</div>
+                <div class="metadata">Ecrit le {{ reunion.create_at | date('d/m/Y') }} à {{ reunion.create_at | date('H:i') }}</div>
                 <div class="content">
                     <a href="{{ path('reunion_show', {'id': reunion.id }) }}" class="btn btn-primary">Lire la suite</a>
                 </div>
