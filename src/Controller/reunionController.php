@@ -47,7 +47,7 @@ class reunionController extends AbstractController
             WHERE etu.groupe_id=:etu_groupe order by nom asc
             ';
         $sql_invite = '
-            SELECT * FROM Etudiant etu
+            SELECT * FROM etudiant etu
             WHERE etu.groupe_id !=:etu_groupe or  etu.groupe_id is null order by nom asc
             ';
         $stmt = $conn->prepare($sql);
@@ -72,7 +72,7 @@ class reunionController extends AbstractController
         $nom=$pieces[0];
          $prenom=$pieces[1];
             $sql2 = '
-                    SELECT * FROM Etudiant etu
+                    SELECT * FROM etudiant etu
                     WHERE etu.nom=:nom and etu.prenom=:prenom 
                     ';
             $stmts = $conn->prepare($sql2);
@@ -114,7 +114,7 @@ class reunionController extends AbstractController
          $nom_prof=$pieces[0];
           $prenom_prof=$pieces[1];
              $sql2 = '
-                     SELECT * FROM Professeur prof
+                     SELECT * FROM professeur prof
                      WHERE prof.nom=:nom and prof.prenom=:prenom 
                      ';
              $stmts = $conn->prepare($sql2);

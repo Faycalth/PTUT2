@@ -26,7 +26,7 @@ class ProfesseurConnecte  extends AbstractController
         $conn =$manager->getConnection();
 
         $sql = '
-            SELECT * FROM Professeur etu
+            SELECT * FROM professeur etu
             WHERE etu.prenom=:prenom and etu.nom=:nom
             ';
         $stmt_invite = $conn->prepare($sql);

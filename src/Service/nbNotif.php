@@ -58,7 +58,7 @@ class nbNotif  extends AbstractController
                 $idapp=$user->getId();
 
                 $sql = '
-                    SELECT * FROM Notification notif
+                    SELECT * FROM notification notif
                     WHERE notif.dest_groupe_id=:etu_groupe or notif.dest_etudiant_id=:idapp
                     Order by notif.created_at desc
                     ';
@@ -77,7 +77,7 @@ class nbNotif  extends AbstractController
                 $conn =$manager->getConnection();
         
                 $sql = '
-                    SELECT * FROM Professeur etu
+                    SELECT * FROM professeur etu
                     WHERE etu.prenom=:prenom and etu.nom=:nom
                     ';
                 $stmt_invite = $conn->prepare($sql);
@@ -91,7 +91,7 @@ class nbNotif  extends AbstractController
               $prof_repository = $this->getDoctrine()->getRepository(Professeur::class);   
                     $tuteur= $prof_repository->find($idapp);
                     $sql = '
-                      SELECT * FROM Notification notif
+                      SELECT * FROM notification notif
                       WHERE notif.dest_groupe_id in (select id from groupe where professeur_id=:tuteur)  or notif.dest_professeur_id=:idapp 
                       Order by notif.created_at desc
                       ';

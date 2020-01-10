@@ -43,7 +43,9 @@
                        
                
                           {% if verif.isEtudiant == true %} 
-                         
+                          <li class="nav-item">
+                        <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)</a>
+                        </li>
                               
                                 {% if groupe.StatutGroupe ==null %}
                                         <li class="nav-item active">
@@ -59,7 +61,10 @@
                                     {% endif %}
                                 
                            {% elseif verif.isTuteur == true %}
-                               
+                                <li class="nav-item">
+                             <a class="nav-link" href="{{ path('notification')}}">Notification(<span   style="color:red">{{nbNotif.getnbNotif}}</span>)</a>
+                        </li>
+
                                   {% if groupe_prof.StautGroupeProf   !=null %}  
                                 <li class="nav-item">
                                 <a class="nav-link" href="{{ path('mesgroupes')}}">MES GROUPES</a>

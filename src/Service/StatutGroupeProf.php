@@ -26,7 +26,7 @@ class StatutGroupeProf extends AbstractController
         $conn =$manager->getConnection();
 
         $sql = '
-        select * from groupe where professeur_id=(SELECT id FROM Professeur etu
+        select * from groupe where professeur_id=(SELECT id FROM professeur etu
             WHERE etu.prenom=:prenom and etu.nom=:nom)
             ';
         $stmt_invite = $conn->prepare($sql);
