@@ -29,6 +29,7 @@
   </div>
 </div>
 
+ {% if groupe_prof == null %} 
 {%   if result<6 %}
 <div class="col-md-3" >
   <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse2" style="margin: 50px">Inviter un etudiant</a> 
@@ -102,14 +103,14 @@ $(document).ready(function(){
  
  {% endif %}
 
-
+ 
 
 <div class="text-right" >
   <a href = "{{ path('quitter_groupe') }}" class="btn btn-outline-danger btn-sm" onclick="if(!confirm('Voulez vous vraiment quitter ce groupe?' )) { return false; }"> Quitter le groupe  </a>
 
 </div>
 
-
+{% else %}
 
 <div class="table">
   <h2 class="heading">
@@ -123,7 +124,7 @@ $(document).ready(function(){
                        {{ form_row(form.description) }}
                 </li>
               </ul>
-            <input class="btn btn-secondary active"" type="submit" value="add">
+            <input class="btn btn-secondary active" type="submit" value="add">
          {{ form_end(form) }}
     </div>
 
@@ -183,5 +184,6 @@ $(document).ready(function(){
 {% endfor %}
 </div>
 
+{% endif %}
 {% endblock %}
 

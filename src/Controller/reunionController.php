@@ -163,10 +163,11 @@ class reunionController extends AbstractController
 
         //fin recherche et affichage des taches
   
+        $groupe_tuteur = $etu_groupe->getProfesseurId();
 
 
 
-        return $this->render('reunionTemplate/myproject.html.twig',['taches'=>$taches,'form' => $form->createView() ,'groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
+        return $this->render('reunionTemplate/myproject.html.twig',['groupe_prof'=>$groupe_tuteur, 'taches'=>$taches,'form' => $form->createView() ,'groupe_etu'=>$etu_groupe,'listeetudiant'=>$listeetudiant,'etudiants'=>$etudiants,'etu'=>$etu,'result'=>$result,'professeurs'=>$professeurs]
     );
     }
 
