@@ -66,6 +66,24 @@ class tuteurController extends AbstractController
         return $this->render('tuteurTemplate/tuteur_mesgroupes_projet.html.twig',['groupe_etu'=>$etu_groupe,'taches'=>$taches,'etudiants'=>$etudiants]);
     }
 
+         /**
+    * @Route("/reunionGroupe/{id}", name="reunionGroupe")
+    */
+
+    public function reunionGroupe(Groupe $etu_groupe,ObjectManager $manager)
+    {
+        $conn =$manager->getConnection();
+       
+       
+        $sql_tache = '
+         select * from `reunion` where relation_id=:groupe ';
+         $stmt_tache = $conn->prepare($sql_tache);
+        $stmt_tache->execute(['groupe'=>$etu_groupe]);
+         $reunions=$stmt_tache->fetchAll();
+
+        return $this->render('tuteurTemplate/tuteur_reunion.html.twig',['reunions' => $reunions,'groupe_etu'=>$etu_groupe,]);
+    }
+
 
 
 }

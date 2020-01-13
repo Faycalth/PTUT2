@@ -21,6 +21,7 @@
 
 <div class="col-md-3" >
   <a  class="btn btn-outline-secondary" data-toggle="collapse" href="#collapse1"  style="margin: 50px">Liste des étudiants</a>
+  <a  class="btn btn-outline-secondary"  href="{{ path('reunionGroupe', {'id': groupe_etu.id }) }}"  style="margin: 50px">Consulter Les Reunions</a>
   <div id="collapse1" class="panel-collapse collapse">
     <ul>
       {% for etudiant in etudiants %}

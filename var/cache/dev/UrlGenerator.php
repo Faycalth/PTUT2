@@ -54,6 +54,7 @@ return [
     'tuteur_home' => [[], ['_controller' => 'App\\Controller\\tuteurController::home'], [], [['text', '/tuteur/home']], [], []],
     'mesgroupes' => [[], ['_controller' => 'App\\Controller\\tuteurController::mesgroupes'], [], [['text', '/mesgroupes']], [], []],
     'projetGroupe' => [['id'], ['_controller' => 'App\\Controller\\tuteurController::projetGroupe'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/projetGroupe']], [], []],
+    'reunionGroupe' => [['id'], ['_controller' => 'App\\Controller\\tuteurController::reunionGroupe'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/reunionGroupe']], [], []],
     'fos_user_security_login' => [[], ['_controller' => 'fos_user.security.controller:loginAction'], [], [['text', '/login']], [], []],
     'fos_user_security_check' => [[], ['_controller' => 'fos_user.security.controller:checkAction'], [], [['text', '/login_check']], [], []],
     'fos_user_security_logout' => [[], ['_controller' => 'fos_user.security.controller:logoutAction'], [], [['text', '/logout']], [], []],

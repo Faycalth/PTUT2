@@ -94,12 +94,15 @@ return [
                         .')'
                         .'|tuteur/([^/]++)/([^/]++)(*:520)'
                     .')'
-                    .'|union/([^/]++)(*:543)'
-                    .'|gister/confirm/([^/]++)(*:574)'
-                    .'|setting/reset/([^/]++)(*:604)'
+                    .'|union(?'
+                        .'|/([^/]++)(*:546)'
+                        .'|Groupe/([^/]++)(*:569)'
+                    .')'
+                    .'|gister/confirm/([^/]++)(*:601)'
+                    .'|setting/reset/([^/]++)(*:631)'
                 .')'
-                .'|/taches_change_statut/([^/]++)/([^/]++)(*:652)'
-                .'|/projetGroupe/([^/]++)(*:682)'
+                .'|/taches_change_statut/([^/]++)/([^/]++)(*:679)'
+                .'|/projetGroupe/([^/]++)(*:709)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -132,11 +135,12 @@ return [
             [['_route' => 'refuser_groupe', '_controller' => 'App\\Controller\\groupeController::refuserGroupe'], ['id', 'id_notif'], null, null, false, true, null],
         ],
         520 => [[['_route' => 'refuser_tuteur', '_controller' => 'App\\Controller\\groupeController::refuserTuteur'], ['id', 'id_notif'], null, null, false, true, null]],
-        543 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
-        574 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
-        604 => [[['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        652 => [[['_route' => 'taches_change_statut', '_controller' => 'App\\Controller\\reunionController::tache_statut'], ['id', 'statut'], null, null, false, true, null]],
-        682 => [
+        546 => [[['_route' => 'reunion_show', '_controller' => 'App\\Controller\\reunionController::show'], ['id'], null, null, false, true, null]],
+        569 => [[['_route' => 'reunionGroupe', '_controller' => 'App\\Controller\\tuteurController::reunionGroupe'], ['id'], null, null, false, true, null]],
+        601 => [[['_route' => 'fos_user_registration_confirm', '_controller' => 'fos_user.registration.controller:confirmAction'], ['token'], ['GET' => 0], null, false, true, null]],
+        631 => [[['_route' => 'fos_user_resetting_reset', '_controller' => 'fos_user.resetting.controller:resetAction'], ['token'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        679 => [[['_route' => 'taches_change_statut', '_controller' => 'App\\Controller\\reunionController::tache_statut'], ['id', 'statut'], null, null, false, true, null]],
+        709 => [
             [['_route' => 'projetGroupe', '_controller' => 'App\\Controller\\tuteurController::projetGroupe'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
