@@ -153,11 +153,76 @@ class adminController extends AbstractController
     /**
      * @Route("/admin/liste_tuteur", name = "admin_liste_tuteur")
      */
-    public function listeTuteur()
+    public function listeTuteur(\Swift_Mailer $mailer)
     {
         $professeur = $this->prof_repository->findAll();
-        return $this->render('adminTemplate/adminTuteurTemplate/index.html.twig', compact('professeur'));
-    }
+
+        // pour importer les tuteurs
+        $message=null;
+        $color=null;
+        if (isset($_POST["import"])) { 
+         $messages[]='hello';
+         print_r($messages);
+            if (pathinfo($_FILES ["file"]["name"], PATHINFO_EXTENSION)=="csv") {
+    
+            $fileName = $_FILES["file"]["tmp_name"];
+            
+            if ($_FILES["file"]["size"] > 0) {
+              
+              $file = fopen($fileName, "r");
+              $column = fgetcsv($file, 10000, ",");
+              $adr = "@univ-lyon1.fr";
+              while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+                 $mot = $column[2];
+                 $mdp = password_hash($mot, PASSWORD_BCRYPT);
+                $sql = "INSERT into professeur (nom,prenom,email,password)
+                     values ('".$column[0]."','".$column[1]."', '".$column[1]."."."".$column[0]."$adr', '$mdp')";
+                $conn=$this->getDoctrine()->getManager()->getConnection();
+
+                $adr_comp = "$column[1].$column[0]$adr";
+                
+                $stmt = $conn->prepare($sql);
+               $result= $stmt->execute();
+                
+                if (! empty($result)) {
+                  $type = "success";
+                  $message = "Les données ont été importées avec succès";
+                  $color="success";
+                  $adresse="127.0.0.1:8000/login";
+                  $mail = (new \Swift_Message('Hello Email'))
+                     ->setFrom('myptut@gmail.com')
+                     ->setTo($adr_comp)
+                     ->setBody(
+                         $this->renderView(
+                             // templates/hello/email.txt.twig
+                             'emails/email_inscription.html.twig',
+                             ['adresse_login' => $adresse,
+                             'name' => $column[1],
+                             'mdp' => $mot,
+                             ] )
+                     )
+                 ;
+                 $mailer->send($mail);
+
+                } else {
+                  $type = "error";
+                  $message = "Problème lors de l'importation de données CSV";
+                 $color="danger";
+                }
+              }
+            }
+           }else{
+               $message="Le fichier doit etre un fichier avec une extension .csv";
+               $color="danger";
+           }
+                
+          }
+
+        //fin import etudiant
+     return $this->render('adminTemplate/adminTuteurTemplate/index.html.twig', ['color'=>$color,'professeur'=>$professeur, 'message'=>$message]);
+ }
+
+
 
     /**
      * @Route("/admin/liste_groupe", name = "admin_liste_groupe")
@@ -227,7 +292,8 @@ class adminController extends AbstractController
         
         return $this->render('adminTemplate/adminTuteurTemplate/index.html.twig', [
             'professeur' => $professeur,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => null
         ]);
     }
 

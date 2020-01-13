@@ -20,19 +20,13 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#tuteur_info">Pour les tuteurs</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#admin_info">Pour l'admin</a>
-                </li>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade show active" id="etudiant_info">
-                    <p>Description pour les étudiants.</p>
+                    <p>Les étudiants de l’IUT : l’application leur permettra de mieux s’organiser dans leur travail et donc d’être plus productif et faire avancer le projet plus rapidement.</p>
                 </div>
                 <div class="tab-pane fade" id="tuteur_info">
-                    <p>Description pour les tuteurs.</p>
-                </div>
-                <div class="tab-pane fade" id="admin_info">
-                    <p>Description pour l'admin.</p>
+                    <p>Les tuteurs (professeurs) : ils pourront suivre l’avancée et avoir le récapitulatif de chaque réunion de leurs différents groupes. En effet, le tuteur peut avoir plusieurs groupes et aura un tableau de bord qui récapitulera le projet de chacun de ses groupes.</p>
                 </div>
             </div>
         </div>
@@ -50,7 +44,7 @@
             <h1 class="display-5">Re-Bonjour {{ verif.username }}</h1>
             <p class="lead">Dépend des verifs</p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p></p>
         </div>
         {% endif %}
 
@@ -66,17 +60,17 @@
         {% else %}
             <div class="jumbotron">
             <h1 class="display-5">Re-Bonjour {{ verif.username }}</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <p class="lead"></p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <p></p>
         </div>
         {% endif %}
     {% elseif is_granted('ROLE_ADMIN') %}
     <div class="jumbotron">
         <h1 class="display-5">Bienvenue Admin!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p class="lead"></p>
         <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p></p>
     </div>
     {% endif %}
 {% endblock %}
